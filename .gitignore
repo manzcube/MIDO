@@ -1,0 +1,5 @@
+/MIDO_backend/node_modules
+/MIDO_frontend/node_modules
+
+/MIDO_backend/.env
+/MIDO_frontend/.env

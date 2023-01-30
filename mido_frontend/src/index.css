@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.Toastify__toast--error {
+  font-size: small;
+  border: none;
+  color: #ac2727 !important;
+  border-radius: 5px !important;
+  background: #FAE1E2 !important;
+}
+
+.Toastify__toast--success {
+  font-size: small;
+  border: none;
+  color: #259634 !important;
+  border-radius: 5px !important;
+  background: #e7fae1 !important;
+}
+
+.Toastify__toast--warning {
+  font-size: small;
+  border: none;
+  color: #85862a !important;
+  border-radius: 5px !important;
+  background: #f1fcb4 !important;
+}
