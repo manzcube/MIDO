@@ -6,17 +6,18 @@ import {ToastContainer, Zoom} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 
 import HomePage from "./views/HomePage.jsx";
-import SingleActivity from "./views/SingleActivity";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Root/Navbar";
 import Login from "./views/Login"
 import Register from "./views/Register"
 import Today from "./views/Today"
-import Workers from "./views/Workers"
+import Workers from "./views/Workers";
+import EditWorker from "./views/EditWorker";
 import Activities from "./views/Activities"
+import EditActivity from "./views/EditActivity";
 import Bookings from "./views/Bookings"
 import Notifications from "./views/Notifications"
 import Roles from "./views/Roles"
-import Footer from "./components/Footer"
+import Footer from "./components/Root/Footer"
 import Dashboard from "./views/Dashboard";
 
 
@@ -45,11 +46,11 @@ function App() {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
           <Route path="/home" element={<HomePage />} />
-          <Route path="/activities/:id" element={<SingleActivity />} />
+          <Route path="/activities/edit/:id" element={<EditActivity />} />
           <Route path="/activities" element={<Activities />} />
-          <Route path="/today" element={<Today />} />
           <Route path="/workers" element={<Workers />} />
-          <Route path="/workers/:id" element={<SingleWorker />} />
+          <Route path="/workers/edit/:id" element={<EditWorker />} />
+          <Route path="/today" element={<Today />} />
           <Route path="/roles" element={<Roles />} />
           <Route path="/bookings" element={<Bookings />} />
           <Route path="/notifications" element={<Notifications />} />

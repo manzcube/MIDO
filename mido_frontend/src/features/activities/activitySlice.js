@@ -12,6 +12,7 @@ export const activitySlice = apiSlice.injectEndpoints({
           Authorization: token,
         },
       }),
+      providesTags: ["whenActivityListChanges"],
     }),
     getOneActivity: builder.query({
       query: (id) => ({
@@ -31,6 +32,7 @@ export const activitySlice = apiSlice.injectEndpoints({
           Authorization: token,
         },
       }),
+      invalidatesTags: ["whenActivityListChanges"],
     }),
     updateActivity: builder.mutation({
       query: ({ updatedData, id }) => ({
@@ -41,6 +43,7 @@ export const activitySlice = apiSlice.injectEndpoints({
           Authorization: token,
         },
       }),
+      invalidatesTags: ["whenActivityListChanges"],
     }),
     deleteActivity: builder.mutation({
       query: (id) => ({
@@ -50,6 +53,7 @@ export const activitySlice = apiSlice.injectEndpoints({
           Authorization: token,
         },
       }),
+      invalidatesTags: ["whenActivityListChanges"],
     }),
   }),
 });

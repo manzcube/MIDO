@@ -5,8 +5,7 @@ export const getOneActivity = async (req, res) => {
     const oneActivity = await Activity.findById(req.params.id);
     res.status(200).json(oneActivity);
   } catch (err) {
-    res.status(500);
-    throw new Error(err.message);
+    res.status(400).json("Activity not found.");
   }
 };
 
@@ -15,8 +14,7 @@ export const getActivities = async (req, res) => {
     const data = await Activity.find();
     res.status(200).json(data);
   } catch (err) {
-    res.status(500);
-    throw new Error(err.message);
+    res.status(500).json("Cannot get activities");
   }
 };
 
@@ -30,16 +28,15 @@ export const setActivity = async (req, res) => {
           title: req.body.title,
           duration: req.body.duration,
           price: req.body.price,
+          color: req.body.color,
         });
         res.status(200).json(`Activity ${data.name} created`);
       })
       .catch((err) => {
-        res.status(400);
         throw new Error(err.message);
       });
   } catch (err) {
-    res.status(500);
-    throw new Error(err.message);
+    res.status(500).json(err.message);
   }
 };
 
@@ -47,8 +44,7 @@ export const updateActivity = async (req, res) => {
   try {
     const data = await Activity.findById(req.params.id);
     if (!data) {
-      res.status(400);
-      throw new Error("Activity not found");
+      throw new Error("Activity not found.");
     } else {
       const updatedActivity = await Activity.findByIdAndUpdate(
         req.params.id,
@@ -56,6 +52,7 @@ export const updateActivity = async (req, res) => {
           title: req.body.title,
           duration: req.body.duration,
           price: req.body.price,
+          color: req.body.color,
         },
         { new: true }
       );
@@ -65,7 +62,7 @@ export const updateActivity = async (req, res) => {
       });
     }
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json(err.message);
   }
 };
 
@@ -73,14 +70,12 @@ export const deleteActivity = async (req, res) => {
   try {
     const data = await Activity.findById(req.params.id);
     if (!data) {
-      res.status(400);
       throw new Error("The Activity you wanna delete doesn't exist");
     } else {
       await Activity.findByIdAndDelete(req.params.id);
       res.status(200).json("Activity deleted");
     }
   } catch (err) {
-    res.status(500);
-    throw new Error(err.message);
+    res.status(500).json(err.message);
   }
 };

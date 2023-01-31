@@ -5,8 +5,7 @@ export const getOneWorker = async (req, res) => {
     const oneWorker = await Worker.findById(req.params.id);
     res.status(200).json(oneWorker);
   } catch (err) {
-    res.status(500);
-    throw new Error(err.message);
+    res.status(400).json("Worker not found");
   }
 };
 
@@ -15,32 +14,28 @@ export const getWorkers = async (req, res) => {
     const data = await Worker.find();
     res.status(200).json(data);
   } catch (err) {
-    res.status(500);
-    throw new Error(err.message);
+    res.status(500).json("Cannot get Activities");
   }
 };
 
 export const setWorker = async (req, res) => {
   try {
-    console.log(req);
     const newWorker = new Worker(req.body);
     newWorker
       .validate()
       .then(async () => {
         const data = await Worker.create({
           name: req.body.name,
-          address: req.body.address,
-          age: req.body.age,
+          title: req.body.title,
+          picture: req.body.picture,
         });
         res.status(200).json(`Worker ${data.name} created`);
       })
       .catch((err) => {
-        res.status(400);
         throw new Error(err.message);
       });
   } catch (err) {
-    res.status(500);
-    throw new Error(err.message);
+    res.status(500).json(err.message);
   }
 };
 
@@ -48,15 +43,14 @@ export const updateWorker = async (req, res) => {
   try {
     const data = await Worker.findById(req.params.id);
     if (!data) {
-      res.status(400);
       throw new Error("Worker not found");
     } else {
       const updatedWorker = await Worker.findByIdAndUpdate(
         req.params.id,
         {
           name: req.body.name,
-          address: req.body.address,
-          age: req.body.age,
+          title: req.body.title,
+          picture: req.body.picture,
         },
         { new: true }
       );
@@ -66,7 +60,7 @@ export const updateWorker = async (req, res) => {
       });
     }
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json(err.message);
   }
 };
 
@@ -74,14 +68,12 @@ export const deleteWorker = async (req, res) => {
   try {
     const data = await Worker.findById(req.params.id);
     if (!data) {
-      res.status(400);
       throw new Error("The Worker you wanna delete doesn't exist");
     } else {
       await Worker.findByIdAndDelete(req.params.id);
       res.status(200).json("Worker deleted");
     }
   } catch (err) {
-    res.status(500);
-    throw new Error(err.message);
+    res.status(500).json(err.message);
   }
 };

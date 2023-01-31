@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { removeUser, setUser } from '../features/auth/userSlice';
+import { removeUser, setUser } from '../../features/auth/userSlice';
 
 
 const Navbar = () => {
     console.log("NAVBAR")
     const userFromStorage = localStorage.getItem("user")
     const dispatch = useDispatch()    
+    const navigate = useNavigate()
     const [dropDown, setDropDown] = useState(false)
     const user = useSelector(state => state.user.user)
     
@@ -23,6 +24,7 @@ const Navbar = () => {
     const logout = () => {
         localStorage.clear()
         dispatch(removeUser())
+        navigate("/")
         toast.success("Logged out!")
     }
 

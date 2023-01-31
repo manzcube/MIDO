@@ -12,6 +12,7 @@ export const workerSlice = apiSlice.injectEndpoints({
           Authorization: token,
         },
       }),
+      providesTags: ["whenWorkerListChanged", "whenLogin"],
     }),
     getOneWorker: builder.query({
       query: (id) => ({
@@ -31,6 +32,7 @@ export const workerSlice = apiSlice.injectEndpoints({
           Authorization: token,
         },
       }),
+      invalidatesTags: ["whenWorkerListChanged"],
     }),
     updateWorker: builder.mutation({
       query: ({ updatedData, id }) => ({
@@ -41,6 +43,7 @@ export const workerSlice = apiSlice.injectEndpoints({
           Authorization: token,
         },
       }),
+      invalidatesTags: ["whenWorkerListChanged"],
     }),
     deleteWorker: builder.mutation({
       query: (id) => ({
@@ -50,6 +53,7 @@ export const workerSlice = apiSlice.injectEndpoints({
           Authorization: token,
         },
       }),
+      invalidatesTags: ["whenWorkerListChanged"],
     }),
   }),
 });

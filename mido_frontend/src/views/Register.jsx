@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
-import RegisterForm from '../components/RegisterForm'
+import RegisterForm from '../components/Auth/RegisterForm'
 import { useRegisterMutation } from '../features/auth/authSlice'
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { setUser } from '../features/auth/userSlice'
 
 
 const Register = () => {
     console.log('register')
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [Register, {isLoading}] = useRegisterMutation()
     const [formData, setFormData] = useState({
         name: '',
@@ -30,12 +32,9 @@ const Register = () => {
           try {
             const result = await Register(formData)
             if (result.data.token) {
-              localStorage.setItem("user", JSON.stringify({
-                name: result.data.name,
-                email: result.data.name,
-                id: result.data._id,
-                token: result.data.token,
-              }))
+              localStorage.setItem("token", `Bearer ${result.data.token}`)
+              localStorage.setItem("user", `${result.data.email}`)
+              dispatch(setUser(result.data.email))
               navigate("/today")
               toast.success(`Welcome ${result.data.name}`)
             }

@@ -1,12 +1,11 @@
 import React, { memo, useState, useCallback } from 'react'
-import WorkersList from '../components/WorkersList'
 import { useSetPersonMutation } from '../features/api/apiSlice'
 import { useMemo } from 'react'
 import { toast } from 'react-toastify'
 
 
 // To avoid child re-rendering on input values change
-const MemoizedWorkersList = memo(WorkersList)
+// const MemoizedWorkersList = memo(WorkersList)
 
 const Home = () => {
     console.log('RENDERING HOME')
@@ -51,7 +50,7 @@ const Home = () => {
             <input type="number" onChange={onChange} value={age} name='age' required />
             <button onClick={createPerson}>create worker</button>
         </form>  */}
-        <MemoizedWorkersList />
+        {/* <MemoizedWorkersList /> */}
     </>
   )
 }
