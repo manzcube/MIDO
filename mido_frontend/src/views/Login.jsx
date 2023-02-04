@@ -26,7 +26,7 @@ const Login = () => {
       try {
         const result = await Login(formData)
         if (result.data.token) {
-          localStorage.setItem("token", `Bearer ${result.data.token}`)
+          localStorage.setItem("token", result.data.token)
           localStorage.setItem("user", `${result.data.email}`)
           dispatch(setUser(result.data.email))
           navigate("/today")

@@ -4,6 +4,8 @@ import {useCreateActivityMutation, useGetActivitiesQuery} from "../features/acti
 import { toast } from 'react-toastify'
 import ActivitiesList from '../components/Activity/ActivitiesList'
 import { useEffect } from 'react'
+import SignInBadge from "../components/Root/SignInBadge"
+import { useSelector } from 'react-redux'
 
 const MemoizedActivitiesList = memo(ActivitiesList)
 const MemoizedActivityForm = memo(ActivityForm)
@@ -11,13 +13,14 @@ const MemoizedActivityForm = memo(ActivityForm)
 const Activities = () => {
   console.log('ACTIVITIES PAGE')
   const token = localStorage.getItem("token")
+  const user = useSelector(state => state.user.user)
   const [dropForm, setDropForm] = useState(false)
   const [createActivity, { isLoading }] = useCreateActivityMutation()
   const [formData, setFormData] = useState({
     title: '',
     duration: '',
     price: '',
-    color: 'bg-sky-100',
+    color: 'bg-sky-200',
   })
   const { title, duration, price, color } = formData
   const canSubmit = [title, duration, price, color].every(Boolean) && !isLoading;
@@ -70,7 +73,7 @@ const Activities = () => {
         <MemoizedActivitiesList />
       </div>    
     </div>
-  )
+  ) 
 }
 
 export default Activities

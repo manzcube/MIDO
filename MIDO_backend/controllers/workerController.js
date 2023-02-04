@@ -46,7 +46,7 @@ export const updateWorker = async (req, res) => {
       throw new Error("Worker not found");
     } else {
       const updatedWorker = await Worker.findByIdAndUpdate(
-        req.params.id,
+        data.id,
         {
           name: req.body.name,
           title: req.body.title,

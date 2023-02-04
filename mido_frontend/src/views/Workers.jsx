@@ -3,15 +3,17 @@ import WorkerForm from '../components/Worker/WorkerForm'
 import {useCreateWorkerMutation} from '../features/workers/workerSlice'
 import { toast } from 'react-toastify'
 import WorkersList from '../components/Worker/WorkersList'
+import { useSelector } from 'react-redux'
+import SignInBadge from "../components/Root/SignInBadge"
+import { Navigate } from 'react-router-dom'
 
 
 const MemoizedWorkersList = memo(WorkersList)
 const MemoizedWorkerForm = memo(WorkerForm)
 
 const Workers = () => {
-  console.log("WORKERS")
-  const token = localStorage.getItem("token")
   const [dropForm, setDropForm] = useState(false)
+  const user = useSelector(state => state.user.user)
   const [createWorker, { isLoading }] = useCreateWorkerMutation()
   const [formData, setFormData] = useState({
     title: '',
@@ -30,10 +32,6 @@ const Workers = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault()
-    if (!token) {
-      toast.error("You're not authorized!")
-      return;
-    }
     if (canSubmit) {
       try {
         await createWorker({ title, name, picture }).unwrap()
@@ -42,19 +40,18 @@ const Workers = () => {
           name: '',
           picture: '',
         })
-        toast.success(`Worker created`)        
+        toast.success(`Worker created`)    
       } catch (err) {
-        toast.error(err.message)
-      }
-        
-    }    
+        toast.error(err.data)
+      }        
+    } else {
+      toast.error(`Something is wrong with your request`)
+    }
   }
 
-  
-
-  return (
-    <div className='w-full p-20 grid grid-cols-2'>
-      <div className="pr-20">
+  return user ? (
+    <div className='w-full p-10 flex flex-col md:flex-row'>
+      <div className="lg:w-1/5 w-full mb-10">
         <button className="flex items-center justify-between bg-gray-800 text-white text-sm rounded-lg p-2 my-6 w-32 hover:scale-105 active:scale-95" onClick={() => setDropForm(!dropForm)}>
           <span>Add Worker</span>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 ml-1">
@@ -63,12 +60,12 @@ const Workers = () => {
         </button>
         <MemoizedWorkerForm onChange={onChange} onSubmit={onSubmit} inputProps={{ title, name, picture, dropForm }} />
       </div>
-      <div>
+      <div className='lg:w-4/5 w-full'>
         <h4 className='text-xl font-bold text-gray-700'>Workers</h4>
         <MemoizedWorkersList />
       </div>    
     </div>
-  )
+  ) : <Navigate to="/" />
 }
 
 export default Workers

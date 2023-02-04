@@ -32,7 +32,7 @@ const Register = () => {
           try {
             const result = await Register(formData)
             if (result.data.token) {
-              localStorage.setItem("token", `Bearer ${result.data.token}`)
+              localStorage.setItem("token", result.data.token)
               localStorage.setItem("user", `${result.data.email}`)
               dispatch(setUser(result.data.email))
               navigate("/today")

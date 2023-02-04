@@ -11,7 +11,7 @@ export const connectDB = async () => {
       useUnifiedTopology: true,
     });
     console.log(
-      `Connected to main database: ${UsersDBConnection.connection.host}`
+      `Connected to main database: ${UsersDBConnection.connection.readyState}`
     );
   } catch (err) {
     console.log(err);

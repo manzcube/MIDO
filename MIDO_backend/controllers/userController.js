@@ -3,9 +3,9 @@ import User from "../models/userSchema.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-// JWT token generation func
+// JWT token generation func, remember to { expiresIn: "1d" } or renew token
 const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+  return jwt.sign({ id }, process.env.JWT_SECRET);
 };
 
 export const registerUser = async (req, res) => {

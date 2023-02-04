@@ -8,9 +8,6 @@ export const activitySlice = apiSlice.injectEndpoints({
       query: () => ({
         url: "/activities",
         method: "GET",
-        headers: {
-          Authorization: token,
-        },
       }),
       providesTags: ["whenActivityListChanges"],
     }),
@@ -18,9 +15,6 @@ export const activitySlice = apiSlice.injectEndpoints({
       query: (id) => ({
         url: `/activities/${id}`,
         method: "GET",
-        headers: {
-          Authorization: token,
-        },
       }),
     }),
     createActivity: builder.mutation({
@@ -28,9 +22,6 @@ export const activitySlice = apiSlice.injectEndpoints({
         url: "/activities",
         method: "POST",
         body,
-        headers: {
-          Authorization: token,
-        },
       }),
       invalidatesTags: ["whenActivityListChanges"],
     }),
@@ -39,9 +30,6 @@ export const activitySlice = apiSlice.injectEndpoints({
         url: `/activities/${id}`,
         method: "PUT",
         body: updatedData,
-        headers: {
-          Authorization: token,
-        },
       }),
       invalidatesTags: ["whenActivityListChanges"],
     }),
@@ -49,9 +37,6 @@ export const activitySlice = apiSlice.injectEndpoints({
       query: (id) => ({
         url: `/activities/${id}`,
         method: "DELETE",
-        headers: {
-          Authorization: token,
-        },
       }),
       invalidatesTags: ["whenActivityListChanges"],
     }),

@@ -25,12 +25,11 @@ const EditWorker = () => {
 
     useEffect(() => {
         if (isSuccess) {
-            setFormData(prevState => ({
-                ...prevState,
+            setFormData({
                 title: worker.title,
                 name: worker.name,
                 picture: worker.picture,
-            }))
+            })
         }
     }, [isSuccess])
 

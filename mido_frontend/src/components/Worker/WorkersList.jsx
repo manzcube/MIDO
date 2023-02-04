@@ -1,29 +1,20 @@
 import React, { memo, useEffect } from 'react';
-import { toast } from "react-toastify";
 import { useGetWorkersQuery } from "../../features/workers/workerSlice.js";
 import SingleWorker from './SingleWorker.jsx';
+import SignInBadge from "../Root/SignInBadge.jsx"
 
 const MemoizedSingleWorker = memo(SingleWorker)
 
 const WorkersList = () => {
-  console.log('WORKERS LIST')
-  const token = localStorage.getItem("token")
-  const { data: workers, isLoading, isSuccess, isError, error, refetch } = useGetWorkersQuery()
+  const { data: workers, isLoading, isSuccess, isError } = useGetWorkersQuery()
   let content;
-  console.log(token)
-  useEffect(() => {
-    refetch()
-  }, [token])
-
   if (isLoading) {
-    content = <p>Loading...</p>
+    content = <SignInBadge />
   } else if (isSuccess) {
     content = workers.map(worker => <MemoizedSingleWorker key={worker._id} worker={worker} />)
   } else if (isError) {
-    content = "No Content";
-    return toast.error(error.data)
+    content = "Sign in please";
   }
-  
     
   return (
     <div className='flex flex-wrap'>

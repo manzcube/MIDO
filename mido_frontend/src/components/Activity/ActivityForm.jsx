@@ -35,12 +35,12 @@ const ActivityForm = ({ onChange, onSubmit, inputProps }) => {
             value={inputProps.color} 
             onChange={onChange} 
         >
-          <option className='text-gray-800' value="bg-sky-100">blue</option>
-          <option className='text-gray-800' value="bg-purple-100">purple</option>
-          <option className='text-gray-800' value="bg-green-100">green</option>
-          <option className='text-gray-800' value="bg-yellow-100">yellow</option>
-          <option className='text-gray-800' value="bg-red-100">red</option>
-          <option className='text-gray-800' value="bg-orange-100">orange</option>
+          <option className='text-gray-800' value="bg-sky-200">blue</option>
+          <option className='text-gray-800' value="bg-purple-200">purple</option>
+          <option className='text-gray-800' value="bg-green-200">green</option>
+          <option className='text-gray-800' value="bg-yellow-200">yellow</option>
+          <option className='text-gray-800' value="bg-red-200">red</option>
+          <option className='text-gray-800' value="bg-orange-200">orange</option>
         </select>
         <button onClick={onSubmit} className='p-2 bg-gray-800 text-white rounded-md mt-3'>Save</button>
       </form>

@@ -1,67 +1,97 @@
 import Today from "../models/todaySchema.js";
+import Activity from "../models/activitySchema.js";
 
 export const getToday = async (req, res) => {
   try {
-    const oneDay = await Today.findById(req.params.id);
-    res.status(200).json(oneDay);
+    const oneDay = await Today.findOne({ date: req.params.date });
+    if (oneDay) {
+      res.status(200).json(oneDay);
+    } else {
+      const newToday = await Today.create({
+        date: req.params.date,
+        activities: [],
+      });
+      if (newToday) {
+        console.log(newToday);
+        res.status(200).json(newToday);
+      } else {
+        throw new Error("there is no new today");
+      }
+    }
   } catch (err) {
-    res.status(500);
-    throw new Error(err.message);
-  }
-};
-
-export const getAllDays = async (req, res) => {
-  try {
-    const data = await Today.find();
-    res.status(200).json(data);
-  } catch (err) {
-    res.status(500);
-    throw new Error(err.message);
+    res.status(400).json(err.message);
   }
 };
 
 export const setToday = async (req, res) => {
   try {
-    const newToday = new Today(req.body);
-    newToday
-      .validate()
-      .then(async () => {
-        const data = await Today.create({
-          date: req.body.date,
+    const todayExists = await Today.findOne({ date: req.body.date });
+    if (todayExists) {
+      res.status(200).json({ message: "Day already exists" });
+    } else {
+      const newToday = new Today(req.body);
+      newToday
+        .validate()
+        .then(async () => {
+          const data = await Today.create({
+            date: req.body.date,
+            activities: req.body.activities,
+          });
+          res.status(200).json(`Day ${data.date} created`);
+        })
+        .catch((err) => {
+          throw new Error(err.message);
         });
-        res.status(200).json(`Day ${data.date} created`);
-      })
-      .catch((err) => {
-        res.status(400);
-        throw new Error(err.message);
-      });
+    }
   } catch (err) {
-    res.status(500);
-    throw new Error(err.message);
+    res.status(500).json(err.message);
   }
 };
 
 export const updateToday = async (req, res) => {
   try {
-    const data = await Today.findById(req.params.id);
-    if (!data) {
-      res.status(400);
-      throw new Error("Day not found");
-    } else {
-      const updatedToday = await Today.findByIdAndUpdate(
+    const { type, newEntry } = req.body;
+
+    if (type === "activity") {
+      const { color, title, duration, workers } = newEntry;
+      await Today.findByIdAndUpdate(
         req.params.id,
         {
-          date: req.body.date,
+          $push: { activities: { color, title, duration, workers: [] } },
         },
         { new: true }
-      );
-      res.status(200).json({
-        message: "Today updated!",
-        result: updatedToday,
-      });
+      )
+        .then((result) => {
+          res.status(200).json({
+            message: "Day updated!",
+          });
+        })
+        .catch((err) => {
+          throw new Error(err.message);
+        });
+    } else if (type === "worker") {
+      console.log("type worker read");
+      const { name, title, picture } = newEntry;
+      console.log(name, title, picture);
+      await Today.findByIdAndUpdate(
+        req.params.id,
+        {
+          $push: { "activities.$[activity].workers": { name, title, picture } },
+        },
+        { arrayFilters: [{ "activity._id": req.body.activityId }], new: true }
+      )
+        .then((result) => {
+          res.status(200).json({
+            message: "Day updated!",
+            result,
+          });
+        })
+        .catch((err) => {
+          throw new Error(err.message);
+        });
     }
   } catch (err) {
-    res.status(500).json(err);
+    console.log(err.message);
   }
 };
 

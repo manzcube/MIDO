@@ -8,6 +8,7 @@ export const authSlice = apiSlice.injectEndpoints({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["onLogin"],
     }),
     register: builder.mutation({
       query: (body) => ({

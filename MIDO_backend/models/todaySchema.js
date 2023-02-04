@@ -8,8 +8,10 @@ const todaySchema = Schema(
     },
     activities: [
       {
-        type: Schema.Types.ObjectId,
-        ref: "Activity",
+        title: String,
+        duration: String,
+        color: String,
+        workers: [],
       },
     ],
   },

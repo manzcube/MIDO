@@ -6,6 +6,10 @@ const roleSchema = Schema(
       type: String,
       required: true,
     },
+    language: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true, toJSON: { virtuals: true } }
 );

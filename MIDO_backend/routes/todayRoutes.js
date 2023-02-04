@@ -1,7 +1,6 @@
 import { Router } from "express";
 import {
   getToday,
-  getAllDays,
   setToday,
   updateToday,
   deleteToday,
@@ -9,11 +8,8 @@ import {
 import { protect } from "../middleware/authMiddleware.js";
 const router = Router();
 
-router.route("/").get(protect, getAllDays).post(protect, setToday);
-router
-  .route("/:id")
-  .get(protect, getToday)
-  .put(protect, updateToday)
-  .delete(protect, deleteToday);
+router.route("/").post(protect, setToday);
+router.route("/one/:date").get(protect, getToday);
+router.route("/:id").put(protect, updateToday).delete(protect, deleteToday);
 
 export default router;

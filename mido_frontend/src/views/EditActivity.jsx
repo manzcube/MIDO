@@ -31,7 +31,6 @@ const EditActivity = () => {
                 title: activity.title,
                 duration: activity.duration,
                 price: activity.price,
-                color: activity.color,
             }))
         }
     }, [isSuccess])

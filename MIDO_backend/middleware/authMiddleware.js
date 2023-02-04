@@ -3,6 +3,7 @@ import User from "../models/userSchema.js";
 
 export const protect = async (req, res, next) => {
   let token;
+
   try {
     if (
       req.headers.authorization &&
@@ -20,6 +21,8 @@ export const protect = async (req, res, next) => {
       } catch (err) {
         throw new Error("You're not authorized");
       }
+    } else {
+      throw new Error("There is no authorization");
     }
   } catch (err) {
     res.status(401).json(err.message);

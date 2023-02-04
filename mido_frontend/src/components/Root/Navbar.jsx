@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { removeUser, setUser } from '../../features/auth/userSlice';
+import { apiSlice } from '../../features/api/apiSlice';
 
 
 const Navbar = () => {
-    console.log("NAVBAR")
     const userFromStorage = localStorage.getItem("user")
     const dispatch = useDispatch()    
     const navigate = useNavigate()
@@ -15,7 +15,6 @@ const Navbar = () => {
     const user = useSelector(state => state.user.user)
     
     useEffect(() => {
-        console.log('navabr eff')
         if (userFromStorage) {
             dispatch(setUser(userFromStorage))
         }
@@ -23,6 +22,7 @@ const Navbar = () => {
 
     const logout = () => {
         localStorage.clear()
+        dispatch(apiSlice.util.resetApiState())
         dispatch(removeUser())
         navigate("/")
         toast.success("Logged out!")
@@ -44,8 +44,6 @@ const Navbar = () => {
                         <Link to="/today" className='mx-3 p-2 rounded-lg hover:bg-gray-800 hover:text-white focus:underline'>Today</Link>
                         <Link to="/activities" className='mx-3 p-2 rounded-lg hover:bg-gray-800 hover:text-white focus:underline'>Activities</Link>
                         <Link to="/workers" className='mx-3 p-2 rounded-lg hover:bg-gray-800 hover:text-white focus:underline'>Workers</Link>
-                        <Link to="/bookings" className='mx-3 p-2 rounded-lg hover:bg-gray-800 hover:text-white focus:underline'>Bookings</Link>
-                        <Link to="/roles" className='mx-3 p-2 rounded-lg hover:bg-gray-800 hover:text-white focus:underline'>Roles</Link>
                         <Link to="/notifications" className='mx-3 p-2 rounded-lg hover:bg-gray-800 hover:text-white focus:underline'>Notifications</Link>
                         
                         {user ? (
@@ -65,8 +63,6 @@ const Navbar = () => {
                 <Link to="/today" className='py-2 px-5 w-full text-end rounded hover:bg-gray-500 hover:text-white'>Today</Link>
                 <Link to="/activities" className='py-2 px-5 w-full text-end rounded hover:bg-gray-500 hover:text-white'>Activities</Link>
                 <Link to="/workers" className='py-2 px-5 w-full text-end rounded hover:bg-gray-500 hover:text-white'>Workers</Link>
-                <Link to="/bookings" className='py-2 px-5 w-full text-end rounded hover:bg-gray-500 hover:text-white'>Bookings</Link>
-                <Link to="/roles" className='py-2 px-5 w-full text-end rounded hover:bg-gray-500 hover:text-white'>Roles</Link>
                 <Link to="/notifications" className='py-2 px-5 w-full text-end rounded hover:bg-gray-500 hover:text-white'>Notifications</Link>
                 {user ? (
                     <button onClick={logout} className='py-2 px-5 w-full text-end rounded hover:bg-gray-500 hover:text-white'>Logout</button>

@@ -1,5 +1,4 @@
 
-import EditWorkerForm from "./views/EditWorkerForm";
 import SingleWorker from "./views/SingleWorker.jsx"
 import {Routes, Route} from "react-router-dom"
 import {ToastContainer, Zoom} from 'react-toastify'
@@ -14,9 +13,7 @@ import Workers from "./views/Workers";
 import EditWorker from "./views/EditWorker";
 import Activities from "./views/Activities"
 import EditActivity from "./views/EditActivity";
-import Bookings from "./views/Bookings"
 import Notifications from "./views/Notifications"
-import Roles from "./views/Roles"
 import Footer from "./components/Root/Footer"
 import Dashboard from "./views/Dashboard";
 
@@ -26,7 +23,7 @@ function App() {
 
 
   return (
-    <div className="App h-screen flex flex-col">
+    <div className="App h-screen overflow-hidden flex flex-col">
       <div>
         <ToastContainer        
           limit={1}
@@ -51,10 +48,7 @@ function App() {
           <Route path="/workers" element={<Workers />} />
           <Route path="/workers/edit/:id" element={<EditWorker />} />
           <Route path="/today" element={<Today />} />
-          <Route path="/roles" element={<Roles />} />
-          <Route path="/bookings" element={<Bookings />} />
           <Route path="/notifications" element={<Notifications />} />
-          <Route path="/edit/:id" element={<EditWorkerForm />} />
         </Routes>
       </main>
       <Footer />

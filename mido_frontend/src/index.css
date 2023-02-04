@@ -39,3 +39,20 @@ code {
   border-radius: 5px !important;
   background: #f1fcb4 !important;
 }
+
+.grabbingColumns {
+  max-height: 50rem;
+}
+
+.grabbingColumns::-webkit-scrollbar {
+  width: 2px;
+}
+
+#dropDiv {
+  height: 70ch;
+}
+
+#dropDiv::-webkit-scrollbar {
+  width: 4px;
+  background: rgb(116, 116, 116);
+}

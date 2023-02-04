@@ -20,7 +20,7 @@ const SingleActivity = ({activity}) => {
     }
 
     return (
-        <div className={`${activity.color} flex flex-col justify-between p-3 rounded-md my-4 max-w-md`}>
+        <div className={`${activity.color} flex flex-col justify-between p-3 rounded-md my-4 max-w-md shadow-md`}>
             <div className='flex justify-between items-center mb-2'>
                 <p className='p-1 uppercase font-bold text-gray-800'>{activity.title}</p>
                 <span className='space-x-3 flex items-center'>
@@ -46,8 +46,8 @@ const SingleActivity = ({activity}) => {
                 </span>
             </div>
             <div className='flex justify-between'>
-                <p className='p-1 m-2 text-sm font-bold text-gray-600'>Duration: {activity.duration}</p>
-                <p className='p-1 m-2 text-sm font-bold text-gray-600' >Price: {activity.price} euros</p>
+                <p className='p-1 m-2 text-sm text-gray-600'>Duration: {activity.duration}</p>
+                <p className='p-1 m-2 text-sm text-gray-600' >Price: {activity.price} euros</p>
             </div>
         </div>
     )

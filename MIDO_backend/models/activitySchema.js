@@ -18,15 +18,11 @@ const activitySchema = Schema(
       type: String,
       required: true,
     },
-    languages: [
-      {
-        type: String,
-      },
-    ],
     workers: [
       {
-        type: Schema.Types.ObjectId,
-        ref: "Worker",
+        name: String,
+        title: String,
+        picture: String,
       },
     ],
   },
