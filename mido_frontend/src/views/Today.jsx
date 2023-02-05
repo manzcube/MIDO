@@ -1,69 +1,30 @@
-import React, { useState } from 'react'
+// Lib
+import React, { useState, memo } from 'react'
+import { useSelector } from 'react-redux'
+import { Navigate } from 'react-router-dom'
+
+// Endpoint
+import { useGetTodayQuery, useUpdateDayMutation } from '../features//today/todaySlice'
+
+// Toast
+import { toast } from 'react-toastify'
+
+// Components
+import Column from '../components/Today/Column'
+import Input from '../components/Root/Input'
 import Roles from '../components/Role/Roles'
 import TodaysWorkersList from '../components/Worker/TodaysWorkersList'
+import Entry from '../components/Today/Entry'
 import TodaysActivitiesList from '../components/Activity/TodaysActivitiesList'
-import { useCreateDayMutation, useGetTodayQuery, useUpdateDayMutation } from '../features//today/todaySlice'
-import { useEffect } from 'react'
-import { toast } from 'react-toastify'
-import SignInBadge from '../components/Root/SignInBadge'
 
-export const SmallWorker = ({ worker }) => {
-  const default_pic = "https://imgs.search.brave.com/UOHewl77s_cOrxcg1FpDaocIjjuonwgezaN4DtbAPp4/rs:fit:800:800:1/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9zZWFo/b3JzZS1pY29uLXNl/YWhvcnNlLW9jZWFu/LWFuaW1hbC1vdXRs/aW5lLWljb24tbG9n/by12ZWN0b3ItaWxs/dXN0cmF0aW9uLTE4/MTQ4Mjg2OS5qcGc"
 
-  return (
-      <div className="border p-3 rounded-xl m-4 w-42 h-50 shadow-md bg-slate-700 cursor-grab">
-          <div className='w-full flex justify-center mb-2'>
-              <img src={worker.picture ? worker.picture : default_pic}
-                  alt="" 
-                  className='flex rounded-full w-20 h-20' 
-              />
-          </div>
-          <div className='flex flex-col items-start overflow-clip'>
-              <p className='uppercase text-xs text-white'>{worker.name}</p>
-              <p className='text-xs text-gray-300'>{worker.title}</p>
-          </div>                
-      </div>
-  )
-}
 
-const Entry = ({activity, dayId}) => {
-  const [updateDay, {isLoading: isUpdateLoading }] = useUpdateDayMutation()
-  let content;
-  console.log(activity._id, dayId)
-  async function drop(e) {
-    e.preventDefault()
-    let data = e.dataTransfer.getData("text") 
-    const parsedData = JSON.parse(data)
-    if (parsedData.type === "worker") {
-      const { name, title, picture } = parsedData
-      if (!isUpdateLoading) {
-        const updatedDayResponse = await updateDay({ id: dayId, body: { type: "worker", activityId: activity._id, newEntry: { title, name, picture, roles:[] }}})
-        console.log("UPDATED ACTIVITY", updatedDayResponse)
-      }
-    }
-  }
-  return (
-      <div className={`${activity.color} flex justify-between p-3 rounded-md my-4 w-full shadow-md`}>
-        <div className='w-1/5'>
-          <p className='p-1 uppercase font-bold text-gray-800'>{activity.title}</p>
-          <p className='p-1 m-2 text-sm text-gray-600'>Duration: {activity.duration}</p>
-        </div>
-        <div 
-          onDrop={e => drop(e)} 
-          onDragOver={e => e.preventDefault()}  
-          className='w-4/5 ml-5 border flex flex-wrap border-white rounded-md focus:border-gray-800'>
-            {activity.workers?.map(worker => (
-              
-          <SmallWorker key={activity.workers.indexOf(worker)} worker={worker} />
-        ))}
-        </div>
-        
-      </div>
-  )
-}
+const MemoizedDayActivitiesList = memo(TodaysActivitiesList)
+const MemoizedDayWorkersList = memo(TodaysWorkersList)
+const MemoizedDayRolesList = memo(Roles)
 
 const Today = () => {
-  console.log("TODAY COMPONENT RENDERING")
+  const user = localStorage.getItem("user")
   const date = new Date().toISOString().split("T")[0]
   const [chooseDate, setChooseDate] = useState(date)
   const { data: oneDay, isLoading: isOneDayLoading, isSuccess, isError, error } = useGetTodayQuery(chooseDate)
@@ -73,72 +34,79 @@ const Today = () => {
     toast.error(error.data)
   } 
 
+  // Handle update when dropping activity
   async function drop(e) {
     e.preventDefault()
     let data = e.dataTransfer.getData("text") 
     const parsedData = JSON.parse(data)
     if (parsedData.type === "activity") {
-      const { title, duration, color } = parsedData
+      const { title, duration, color, schedule } = parsedData
       if (!isUpdateLoading && !isOneDayLoading) {
-        const updatedDayResponse = await updateDay({ id: oneDay._id, body: { type: "activity", newEntry: { title, color, duration, workers: [] }}})
-        console.log("UPDATED ONE", updatedDayResponse)
+        try {
+          await updateDay({ 
+            id: oneDay._id, 
+            body: { 
+              type: "activity", 
+              newEntry: { 
+                activityTitle: title, 
+                color, 
+                duration, 
+                schedule, 
+              }
+            }
+          })
+          toast.success("Activity added")
+        } catch (err) {
+          toast.error(err.data)
+        }
       }
-    }     
+    }   
   }
 
-  return (
+ 
+  return user ? (
+    // Dropping Stuff
     <div className="flex">
       <div className='p-10 flex flex-col w-4/6'>
-        <input 
-          className='bg-gray-200 p-2 w-40 rounded focus:outline-none'
-          type="date" 
-          value={chooseDate} 
-          onChange={e => setChooseDate(e.target.value)} 
-          />
+        <div className='flex items-center space-x-2'>
+          <Input value={chooseDate} onChange={e => setChooseDate(e.target.value)} type="date" />
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 animate-ping">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zM12 2.25V4.5m5.834.166l-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243l-1.59-1.59" />
+          </svg>
+        </div>
         <div 
           id='dropDiv' 
           onDrop={e => drop(e)} 
           onDragOver={e => e.preventDefault()} 
-          className='w-4/6 rounded-md border mt-5 flex flex-col items-center p-5 overflow-y-scroll'
+          className='w-50 rounded-lg border mt-5 flex flex-col items-center p-5 overflow-y-scroll bg-gray-50'
         >
           <span>{oneDay?.date}</span> 
-          {oneDay?.activities.map(act => (
+          {oneDay?.activities.length ? (oneDay?.activities.map(act => (
             <Entry key={act._id} activity={act} dayId={oneDay.id} />
-          ))}
+          ))) : (
+          <span className='mt-20 text-gray-800 border border-dashed border-gray-700 rounded-md p-10 flex flex-col items-center'>
+            Drop an Activity
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </span>
+          )}
         </div>
       </div>
 
 
       {/* Grabbing stuff */}
-      <div className='flex flex-col items-center absolute right-96'>
-        <span className='my-4 font-bold'>Activities</span>
-        <div className='overflow-y-scroll grabbingColumns'>
-          <TodaysActivitiesList />
-        </div>       
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-black mt-3 animate-bounce">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
-        </svg>
-      </div>
-      <div className='flex flex-col items-center absolute right-56'>
-        <span className='my-4 font-bold'>Workers</span>
-        <div className='overflow-y-scroll grabbingColumns'>
-          <TodaysWorkersList />
-        </div>       
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-black mt-3 animate-bounce">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
-        </svg>
-      </div>
-      <div className='flex flex-col items-center absolute right-10'>
-      <span className='my-4 font-bold'>Roles</span>
-        <div className='overflow-y-scroll grabbingColumns'>
-          <Roles />
-        </div>       
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-black mt-3 animate-bounce">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
-        </svg>
-      </div>
+      <Column title="Activities" rightMargin="right-96">
+        <MemoizedDayActivitiesList />
+      </Column>
+      <Column title="Workers" rightMargin="right-52">
+        <MemoizedDayWorkersList />
+      </Column>
+      <Column title="Roles" rightMargin="right-8">
+        <MemoizedDayRolesList />
+      </Column>
     </div>
-  )
+  ) : <Navigate to="/" />
 }
 
 export default Today

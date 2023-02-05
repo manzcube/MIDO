@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
-import { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+
+// Toast 
 import { toast } from 'react-toastify';
+
+// Endpoint
 import { removeUser, setUser } from '../../features/auth/userSlice';
 import { apiSlice } from '../../features/api/apiSlice';
 
@@ -20,6 +23,7 @@ const Navbar = () => {
         }
     }, [dispatch])
 
+    // Handle log out function
     const logout = () => {
         localStorage.clear()
         dispatch(apiSlice.util.resetApiState())
@@ -44,7 +48,7 @@ const Navbar = () => {
                         <Link to="/today" className='mx-3 p-2 rounded-lg hover:bg-gray-800 hover:text-white focus:underline'>Today</Link>
                         <Link to="/activities" className='mx-3 p-2 rounded-lg hover:bg-gray-800 hover:text-white focus:underline'>Activities</Link>
                         <Link to="/workers" className='mx-3 p-2 rounded-lg hover:bg-gray-800 hover:text-white focus:underline'>Workers</Link>
-                        <Link to="/notifications" className='mx-3 p-2 rounded-lg hover:bg-gray-800 hover:text-white focus:underline'>Notifications</Link>
+                        <Link to="/notes" className='mx-3 p-2 rounded-lg hover:bg-gray-800 hover:text-white focus:underline'>Notes</Link>
                         
                         {user ? (
                             <button onClick={logout} className='p-2'>Logout</button>
@@ -63,7 +67,7 @@ const Navbar = () => {
                 <Link to="/today" className='py-2 px-5 w-full text-end rounded hover:bg-gray-500 hover:text-white'>Today</Link>
                 <Link to="/activities" className='py-2 px-5 w-full text-end rounded hover:bg-gray-500 hover:text-white'>Activities</Link>
                 <Link to="/workers" className='py-2 px-5 w-full text-end rounded hover:bg-gray-500 hover:text-white'>Workers</Link>
-                <Link to="/notifications" className='py-2 px-5 w-full text-end rounded hover:bg-gray-500 hover:text-white'>Notifications</Link>
+                <Link to="/notes" className='py-2 px-5 w-full text-end rounded hover:bg-gray-500 hover:text-white'>Notes</Link>
                 {user ? (
                     <button onClick={logout} className='py-2 px-5 w-full text-end rounded hover:bg-gray-500 hover:text-white'>Logout</button>
                 ) : (

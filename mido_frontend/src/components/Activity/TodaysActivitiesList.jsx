@@ -1,41 +1,35 @@
-import React from 'react'
+// Lib
+import React, { memo } from 'react';
+
+// Endpoint
 import { useGetActivitiesQuery } from '../../features/activities/activitySlice';
-import SignInBadge from '../Root/SignInBadge';
 
-const SmallSingleActivity = ({activity}) => {
-    const dataToDrag = {
-      type: "activity",
-      id: activity._id,
-      title: activity.title,
-      color: activity.color,
-      duration: activity.duration,
-    }
+// Components
+import SignInBadge from "../Root/SignInBadge.jsx"
+import SmallActivity from "./SmallActivity";
 
-    const onGrab = (e) => {
-      e.dataTransfer.setData("text", JSON.stringify(dataToDrag))
-    }
-
-    return (
-        <div id={activity._id} draggable onDragStart={e => onGrab(e)} className={`${activity.color} flex flex-col justify-between p-3 rounded-md my-4 max-w-md shadow-md cursor-grab`}>
-            <div className='flex justify-between items-center mb-2'>
-                <p className='p-1 uppercase font-bold text-gray-800'>{activity.title}</p>
-                
-            </div>
-            <div className='flex justify-between'>
-                <p className='p-1 m-2 text-sm text-gray-600'>Duration: {activity.duration}</p>
-            </div>
-        </div>
-    )
-}
+// Memo
+const MemoizedSmallActivity = memo(SmallActivity)
 
 const ActivitiesList = () => {
+  // Query
   const { data: activities, isLoading, isSuccess, isError } = useGetActivitiesQuery()
   let content;
 
   if (isLoading) {
     content = <SignInBadge />
   } else if (isSuccess) {
-    content = activities.map(act => <SmallSingleActivity key={act._id} activity={act} />)
+    const sorted = [...activities]
+    sorted.sort(function(a, b) {
+      if (a.color < b.color) {
+        return -1;
+      }
+      if (a.color > b.color) {
+        return 1;
+      }
+      return 0;
+    });
+    content = sorted.map(act => <MemoizedSmallActivity key={act._id} activity={act} />)
   } else if (isError) {
     content = "Sign in please"
   }

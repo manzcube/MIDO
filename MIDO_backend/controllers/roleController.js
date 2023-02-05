@@ -1,14 +1,5 @@
 import Role from "../models/roleSchema.js";
 
-export const getOneRole = async (req, res) => {
-  try {
-    const oneRole = await Role.findById(req.params.id);
-    res.status(200).json(oneRole);
-  } catch (err) {
-    res.status(400).json("Role not found");
-  }
-};
-
 export const getRoles = async (req, res) => {
   try {
     const data = await Role.find();
@@ -33,30 +24,6 @@ export const setRole = async (req, res) => {
       .catch((err) => {
         throw new Error(err.message);
       });
-  } catch (err) {
-    res.status(500).json(err.message);
-  }
-};
-
-export const updateRole = async (req, res) => {
-  try {
-    const data = await Role.findById(req.params.id);
-    if (!data) {
-      throw new Error("Worker not found");
-    } else {
-      const updatedRole = await Role.findByIdAndUpdate(
-        req.params.id,
-        {
-          name: req.body.name,
-          language: req.body.language,
-        },
-        { new: true }
-      );
-      res.status(200).json({
-        message: "Role updated!",
-        result: updatedRole,
-      });
-    }
   } catch (err) {
     res.status(500).json(err.message);
   }

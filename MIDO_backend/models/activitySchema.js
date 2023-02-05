@@ -10,11 +10,11 @@ const activitySchema = Schema(
       type: Number,
       required: true,
     },
-    duration: {
+    color: {
       type: String,
       required: true,
     },
-    color: {
+    schedule: {
       type: String,
       required: true,
     },

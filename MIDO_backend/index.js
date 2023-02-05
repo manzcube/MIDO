@@ -15,7 +15,7 @@ import userRoutes from "./routes/userRoutes.js";
 import todayRoutes from "./routes/todayRoutes.js";
 import activityRoutes from "./routes/activityRoutes.js";
 import roleRoutes from "./routes/roleRoutes.js";
-import bookingRoutes from "./routes/bookingRoutes.js";
+import noteRoutes from "./routes/noteRoutes.js";
 import cors from "cors";
 
 // Port configuration
@@ -44,7 +44,7 @@ app.use("/workers", workerRoutes);
 app.use("/activities", activityRoutes);
 app.use("/roles", roleRoutes);
 app.use("/today", todayRoutes);
-app.use("/bookings", bookingRoutes);
+app.use("/notes", noteRoutes);
 
 // Error handling middleware at the end to catch any error thrown by the routes or other middleware
 app.use(errorHandler);

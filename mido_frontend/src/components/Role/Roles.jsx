@@ -1,19 +1,22 @@
 import React, { memo, useState } from 'react'
-import WorkerForm from '../Worker/WorkerForm'
-import {useCreateRoleMutation} from '../../features/roles/roleSlice'
+
+// Toast
 import { toast } from 'react-toastify'
-import RolesList from "./RolesList"
-import { useSelector } from 'react-redux'
-import SignInBadge from "../Root/SignInBadge"
-import { Navigate } from 'react-router-dom'
+
+// Components
 import RoleForm from './RoleForm'
+import RolesList from "./RolesList"
+ // Endpoint
+import {useCreateRoleMutation} from '../../features/roles/roleSlice'
 
+// Utils
+import { onChange } from '../../utils/utilities'
 
+// Memo
 const MemoizedRolesList = memo(RolesList)
 const MemoizedRoleForm = memo(RoleForm)
 
 const Roles = () => {
-  const user = useSelector(state => state.user.user)
   const [createRole, { isLoading }] = useCreateRoleMutation()
   const [formData, setFormData] = useState({
     language: '',
@@ -22,12 +25,7 @@ const Roles = () => {
   const { name, language} = formData
   const canSubmit = [language, name].every(Boolean) && !isLoading;
 
-  const onChange = (e) => {
-    setFormData((prevState) => ({
-        ...prevState,
-        [e.target.name]: e.target.value
-    })
-  )}
+  const handleChange = onChange(setFormData)
 
   const onSubmit = async (e) => {
     e.preventDefault()
@@ -49,7 +47,7 @@ const Roles = () => {
 
   return (
     <div className='flex flex-col items-center'>
-      <MemoizedRoleForm onChange={onChange} onSubmit={onSubmit} inputProps={{ name, language }} />
+      <MemoizedRoleForm onChange={handleChange} onSubmit={onSubmit} inputProps={{ name, language }} />
       <MemoizedRolesList />
     </div>
   )

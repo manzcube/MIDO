@@ -1,13 +1,20 @@
+// lib
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useDeleteActivityMutation } from '../../features/activities/activitySlice'
+
+// Toast
 import { toast } from 'react-toastify'
+
+// Endpoint
+import { useDeleteActivityMutation } from '../../features/activities/activitySlice'
+
 
 const SingleActivity = ({activity}) => {
     const [sureToDelete, setSureToDelete] = useState(false)
     const [deleteActivity, { isLoading }] = useDeleteActivityMutation()
     const canDelete = activity?._id && !isLoading;
 
+    // Handle activity deletion
     const onDeleteActivty = async() => {
         if(canDelete) {
             try {
@@ -20,9 +27,11 @@ const SingleActivity = ({activity}) => {
     }
 
     return (
-        <div className={`${activity.color} flex flex-col justify-between p-3 rounded-md my-4 max-w-md shadow-md`}>
+        <div className={`${activity.color} flex flex-col justify-between p-3 rounded-md my-4 max-w-lg shadow-md`}>
             <div className='flex justify-between items-center mb-2'>
-                <p className='p-1 uppercase font-bold text-gray-800'>{activity.title}</p>
+                <div className='flex items-center'>
+                    <p className='p-1 uppercase font-bold text-gray-800'>{activity.title}</p>
+                </div>
                 <span className='space-x-3 flex items-center'>
                     <Link to={`/activities/edit/${activity._id}`}>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
@@ -42,12 +51,11 @@ const SingleActivity = ({activity}) => {
                             </button>
                         )
                     }
-                    
                 </span>
             </div>
             <div className='flex justify-between'>
-                <p className='p-1 m-2 text-sm text-gray-600'>Duration: {activity.duration}</p>
-                <p className='p-1 m-2 text-sm text-gray-600' >Price: {activity.price} euros</p>
+                <p className='p-1 m-2 text-sm text-gray-600'>{activity.schedule}</p>
+                <p className='p-1 m-2 text-sm text-gray-600'>Price: {activity.price} euros</p>
             </div>
         </div>
     )

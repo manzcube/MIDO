@@ -1,32 +1,38 @@
 import React from 'react'
 
+// Components
+import Input from '../Root/Input'
+import Button from '../Root/Button'
+
 const ActivityForm = ({ onChange, onSubmit, inputProps }) => {
   console.log('activity form')
   return (
-    <form className={`${inputProps.dropForm ? 'flex flex-col' : "hidden"} border rounded py-5 px-8 max-w-lg`}>
-        <input 
-            className='py-2 px-4 my-3 bg-gray-50 text-sm text-gray-700 border border-gray-300 rounded-md leading-tight focus:bg-white focus:outline-none'
-            placeholder='Title'
-            type="text" 
-            name='title' 
-            value={inputProps.title} 
-            onChange={onChange} 
+    <form className="flex flex-col border rounded py-5 px-8 max-w-lg" >
+        <Input
+          type="text"
+          value={inputProps.title}
+          onChange={onChange}
+          placeholder="Title"
+          name="title"
         />
-        <input 
-            className='py-2 px-4 my-3 bg-gray-50 text-sm text-gray-700 border border-gray-300 rounded-md leading-tight focus:bg-white focus:outline-none'
-            placeholder='Duration'
-            type="text" 
-            name='duration' 
-            value={inputProps.duration} 
-            onChange={onChange} 
+        <Input
+          value={inputProps.price}
+          onChange={onChange}
+          placeholder='Price'
+          type="number" 
+          name="price"
         />
-        <input 
-            className='py-2 px-4 my-3 bg-gray-50 text-sm text-gray-700 border border-gray-300 rounded-md leading-tight focus:bg-white focus:outline-none'
-            placeholder='Price'
-            type="number" 
-            name='price' 
-            value={inputProps.price} 
-            onChange={onChange} 
+        <Input
+          value={inputProps.schedule1}
+          onChange={onChange}
+          type="time" 
+          name="schedule1"
+        />
+        <Input
+          value={inputProps.schedule2}
+          onChange={onChange}
+          type="time" 
+          name="schedule2"
         />
         <select 
             className='py-2 px-3 my-3 bg-gray-50 text-sm text-gray-700 border border-gray-300 rounded-md leading-tight focus:bg-gray-100 focus:outline-none'
@@ -42,7 +48,7 @@ const ActivityForm = ({ onChange, onSubmit, inputProps }) => {
           <option className='text-gray-800' value="bg-red-200">red</option>
           <option className='text-gray-800' value="bg-orange-200">orange</option>
         </select>
-        <button onClick={onSubmit} className='p-2 bg-gray-800 text-white rounded-md mt-3'>Save</button>
+        <Button onSubmit={onSubmit}>Save Activity</Button>
       </form>
   )
 }

@@ -8,6 +8,17 @@ const SingleRole = ({ role }) => {
     const [deleteRole, { isLoading }] = useDeleteRoleMutation()
     const canDelete = role?._id && !isLoading;
 
+    const dataToDrag = {
+        type: "role",
+        id: role.id,
+        name: role.name,
+        language: role.language,
+    }
+    
+    const onGrab = (e) => {
+        e.dataTransfer.setData("text", JSON.stringify(dataToDrag))
+    }
+
     const onDeleteRole= async() => {
         if(canDelete) {
             try {
@@ -20,9 +31,13 @@ const SingleRole = ({ role }) => {
     }
 
     return (
-        <div className="border p-3 rounded-xl my-3 w-28 shadow-md bg-gray-800 cursor-grab">
+        <div 
+        draggable
+        onDragStart={e => onGrab(e)} 
+        className="border p-3 rounded-xl my-3 w-28 shadow-md bg-gray-800 cursor-grab"
+        >
             <div className='flex flex-col items-start overflow-clip mb-2'>
-                <p className='uppercase text-sm text-white'>{role.name}</p>
+                <p className='uppercase text-xs mb-2 text-white'>{role.name}</p>
                 <p className='uppercase text-xs text-gray-300'>{role.language}</p>
             </div>                
             <div className='flex justify-end'>

@@ -50,48 +50,110 @@ export const setToday = async (req, res) => {
 
 export const updateToday = async (req, res) => {
   try {
-    const { type, newEntry } = req.body;
-
-    if (type === "activity") {
-      const { color, title, duration, workers } = newEntry;
-      await Today.findByIdAndUpdate(
-        req.params.id,
-        {
-          $push: { activities: { color, title, duration, workers: [] } },
-        },
-        { new: true }
-      )
-        .then((result) => {
-          res.status(200).json({
-            message: "Day updated!",
+    const { type } = req.body;
+    switch (type) {
+      case "activity":
+        const { color, activityTitle, duration, schedule } = req.body.newEntry;
+        await Today.findByIdAndUpdate(
+          req.params.id,
+          {
+            $push: {
+              activities: {
+                color,
+                title: activityTitle,
+                schedule,
+                duration,
+                workers: [],
+              },
+            },
+          },
+          { new: true }
+        )
+          .then((response) => res.status(200).json(response))
+          .catch((err) => {
+            throw new Error(err.message);
           });
-        })
-        .catch((err) => {
-          throw new Error(err.message);
-        });
-    } else if (type === "worker") {
-      console.log("type worker read");
-      const { name, title, picture } = newEntry;
-      console.log(name, title, picture);
-      await Today.findByIdAndUpdate(
-        req.params.id,
-        {
-          $push: { "activities.$[activity].workers": { name, title, picture } },
-        },
-        { arrayFilters: [{ "activity._id": req.body.activityId }], new: true }
-      )
-        .then((result) => {
-          res.status(200).json({
-            message: "Day updated!",
-            result,
+        break;
+      case "worker":
+        const { name, title, picture } = req.body.newEntry;
+        await Today.findByIdAndUpdate(
+          req.params.id,
+          {
+            $push: {
+              "activities.$[activity].workers": {
+                name,
+                title,
+                picture,
+                roles: [],
+              },
+            },
+          },
+          { arrayFilters: [{ "activity._id": req.body.activityId }], new: true }
+        )
+          .then((response) => res.status(200).json(response))
+          .catch((err) => {
+            throw new Error(err.message);
           });
-        })
-        .catch((err) => {
-          throw new Error(err.message);
-        });
+        break;
+      case "role":
+        console.log(req.body);
+        await Today.findByIdAndUpdate(
+          req.params.id,
+          {
+            $push: {
+              "activities.$[activity].workers.$[worker].roles": {
+                name: req.body.newEntry.name,
+                language: req.body.newEntry.language,
+              },
+            },
+          },
+          {
+            arrayFilters: [
+              { "activity._id": req.body.activityId },
+              { "worker._id": req.body.workerId },
+            ],
+            new: true,
+          }
+        )
+          .then((response) => res.status(200).json(response))
+          .catch((err) => {
+            throw new Error(err.message);
+          });
+        break;
+      case "comments":
+        const { comments } = req.body.newEntry;
+        await Today.findByIdAndUpdate(
+          req.params.id,
+          {
+            $set: { "activities.$[activity].comments": comments },
+          },
+          { arrayFilters: [{ "activity._id": req.body.activityId }], new: true }
+        )
+          .then((response) => res.status(200).json(response))
+          .catch((err) => {
+            throw new Error(err.message);
+          });
+        break;
+      case "deleteActivity":
+        const { activityId } = req.body;
+        await Today.findByIdAndUpdate(
+          req.params.id,
+          {
+            $pull: { activities: { _id: activityId } },
+          },
+          { new: true }
+        )
+          .then((response) => res.status(200).json(response))
+          .catch((err) => {
+            throw new Error(err.message);
+          });
+        break;
+      default:
+        console.log("something is not reading properly");
+        break;
     }
   } catch (err) {
-    console.log(err.message);
+    res.status(500).json(err.message);
   }
 };
 

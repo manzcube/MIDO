@@ -1,28 +1,43 @@
-import React, { useState, memo } from 'react'
-import { useGetOneWorkerQuery, useUpdateWorkerMutation } from '../features/workers/workerSlice'
-import WorkerForm from '../components/Worker/WorkerForm'
-import { toast } from 'react-toastify'
-import { useNavigate, Link, useParams } from 'react-router-dom'
-import { useEffect } from 'react'
+// Lib
+import React, { useState, memo, useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 
+// Utils
+import { onChange } from '../utils/utilities'
+
+// Toast
+import { toast } from 'react-toastify'
+
+// Endpoint
+import { useGetOneWorkerQuery, useUpdateWorkerMutation } from '../features/workers/workerSlice'
+
+// Components
+import WorkerForm from '../components/Worker/WorkerForm'
+import SignInBadge from '../components/Root/SignInBadge'
+
+// Memo
 const MemoizedWorkerForm = memo(WorkerForm)
 
 const EditWorker = () => {
-    console.log('EDI WORKER')
     const navigate = useNavigate()
     const params = useParams()
     const workerId = params.id
+
     const { data: worker, isSuccess, isError, isLoading, error } = useGetOneWorkerQuery(workerId)
     const [updateWorker, { isLoading: isUpdateLoading }] = useUpdateWorkerMutation()
+    
     const [formData, setFormData] = useState({
         title: '',
         name: '',
         picture: '',
     })
     const { title, name, picture } = formData
+
+    const handleChange = onChange(setFormData)
     const canSubmit = [title, name].every(Boolean) && !isUpdateLoading;
     let content;
 
+    // Re-render for data
     useEffect(() => {
         if (isSuccess) {
             setFormData({
@@ -33,6 +48,7 @@ const EditWorker = () => {
         }
     }, [isSuccess])
 
+    // Handle update
     const onSubmit = async(e) => {
         e.preventDefault()
         if (canSubmit) {
@@ -40,25 +56,21 @@ const EditWorker = () => {
                 const updatedData = { title, name, picture }
                 await updateWorker({ updatedData, id: workerId }).unwrap()
                 navigate("/workers")
+                toast.success("Worker updated")
             } catch (err) {
                 toast.error(err.data)
             }
+        } else {
+            toast.error("Check inputs")
         }
     }
 
-    const onChange = (e) => {
-        setFormData(prevState => ({
-            ...prevState,
-            [e.target.name]: e.target.value
-        }))
-    }
-
     if (isLoading) {
-        content = <div>Loading...</div>
+        content = <SignInBadge />
     } else if (isSuccess) {
-        content = <MemoizedWorkerForm onChange={onChange} onSubmit={onSubmit} inputProps={{ title, name, picture, dropForm: true }}  />
+        content = <MemoizedWorkerForm onChange={handleChange} onSubmit={onSubmit} inputProps={{ title, name, picture }}  />
     } else if (isError) {
-        content = <div>{error.data}</div>
+        content = "Sign in please"
     }
 
   return (

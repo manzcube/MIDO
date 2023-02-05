@@ -11,7 +11,16 @@ const todaySchema = Schema(
         title: String,
         duration: String,
         color: String,
-        workers: [],
+        workers: [
+          {
+            name: String,
+            title: String,
+            picture: String,
+            roles: [],
+          },
+        ],
+        comments: String,
+        schedule: String,
       },
     ],
   },

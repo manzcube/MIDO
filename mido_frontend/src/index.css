@@ -56,3 +56,14 @@ code {
   width: 4px;
   background: rgb(116, 116, 116);
 }
+
+.notesCanvas {
+  padding-left: 10ch;
+  height: 70ch;
+  overflow-y: scroll;
+}
+
+.notesCanvas::-webkit-scrollbar {
+  width: 4px;
+  border-radius: 10px;
+}

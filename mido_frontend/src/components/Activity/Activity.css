@@ -1,0 +1,8 @@
+.activitiesList {
+    height: 70ch;
+}
+.activitiesList::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 10px;
+    background: #575757;
+}

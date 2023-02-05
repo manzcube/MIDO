@@ -1,41 +1,36 @@
 import React from 'react'
-import { Link } from "react-router-dom"
+import Input from '../Root/Input'
 
 const RegisterForm = ({ onChange, onSubmit, inputProps }) => {
-    console.log('regisetr form')
   return (
     <form onSubmit={onSubmit} className='flex flex-col p-5 rounded border'>
-        <input 
-            className='py-2 px-4 my-3 bg-gray-50 text-sm text-gray-700 border border-gray-300 rounded-md leading-tight focus:bg-white focus:outline-none'
+        <Input
             placeholder='Your name'
             type="text" 
             name='name' 
             value={inputProps.name} 
             onChange={onChange} 
         />
-        <input 
-            className='py-2 px-4 my-3 bg-gray-50 text-sm text-gray-700 border border-gray-300 rounded-md leading-tight focus:bg-white focus:outline-none'
+        <Input
             placeholder='Your email'
             type="email" 
             name='email' 
             value={inputProps.email} 
             onChange={onChange} 
         />
-        <input 
-            className='py-2 px-4 my-3 bg-gray-50 text-sm text-gray-700 border border-gray-300 rounded-md leading-tight focus:bg-white focus:outline-none'
+        <Input
             placeholder='Your password'
             type="password" 
             name='password' 
             value={inputProps.password} 
             onChange={onChange} 
         />
-        <input 
-            className='py-2 px-4 my-3 bg-gray-50 text-sm text-gray-700 border border-gray-300 rounded-md leading-tight focus:bg-white focus:outline-none'
+        <Input
             placeholder='Confirm password'
             type="password" 
             name='confirm_password' 
             value={inputProps.confirm_password} 
-            onChange={onChange} 
+            onChange={onChange}
         />
         <button className='p-2 bg-gray-800 text-white rounded-md mt-3'>Register</button>
       </form>

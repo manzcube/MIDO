@@ -1,14 +1,25 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { useDeleteWorkerMutation } from '../../features/workers/workerSlice'
-import { toast } from 'react-toastify'
+// Lib
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
+// Utils
+import { default_pic } from '../../utils/utilities';
+
+// Toast
+import { toast } from 'react-toastify';
+
+ // Endpoint
+import { useDeleteWorkerMutation } from '../../features/workers/workerSlice';
 
 const SingleWorker = ({ worker }) => {
+    // State
     const [sureToDelete, setSureToDelete] = useState(false)
+
+    // Mutation
     const [deleteWorker, { isLoading }] = useDeleteWorkerMutation()
     const canDelete = worker?._id && !isLoading;
-    const default_pic = "https://imgs.search.brave.com/UOHewl77s_cOrxcg1FpDaocIjjuonwgezaN4DtbAPp4/rs:fit:800:800:1/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9zZWFo/b3JzZS1pY29uLXNl/YWhvcnNlLW9jZWFu/LWFuaW1hbC1vdXRs/aW5lLWljb24tbG9n/by12ZWN0b3ItaWxs/dXN0cmF0aW9uLTE4/MTQ4Mjg2OS5qcGc"
 
+    // Handle worker deletion
     const onDeleteWorker= async() => {
         if(canDelete) {
             try {
@@ -17,7 +28,9 @@ const SingleWorker = ({ worker }) => {
             } catch (err) {
                 toast.error(err.data)
             }
-        }        
+        } else {
+            toast.error("Cannot delete worker")
+        }       
     }
 
     return (
@@ -25,7 +38,7 @@ const SingleWorker = ({ worker }) => {
             <div className='w-full flex justify-center mb-2'>
                 <img src={worker.picture ? worker.picture : default_pic}
                     alt="" 
-                    className='flex rounded-full w-32 h-32' 
+                    className='flex rounded-full w-32 h-32 object-cover' 
                 />
             </div>
             <div className='flex flex-col items-start overflow-clip'>
@@ -35,10 +48,19 @@ const SingleWorker = ({ worker }) => {
             <div className='flex justify-end'>
                 {sureToDelete ? (
                     <>
-                        <button onClick={onDeleteWorker} className='py-1 px-2 rounded-md bg-red-500 text-white text-xs'  onBlur={() => setSureToDelete(false)} >
+                        <button 
+                            onClick={onDeleteWorker} 
+                            className='py-1 px-2 rounded-md bg-red-500 text-white text-xs'  
+                            onBlur={() => setSureToDelete(false)} 
+                        >
                             Sure?
                         </button>
-                        <button className='py-1 px-2 ml-1 rounded-md bg-gray-500 text-white text-xs' onClick={() => setSureToDelete(false)}>cancel</button>
+                        <button 
+                            className='py-1 px-2 ml-1 rounded-md bg-gray-500 text-white text-xs' 
+                            onClick={() => setSureToDelete(false)}
+                        >
+                            cancel
+                        </button>
                     </>
                         
                     ) : (
