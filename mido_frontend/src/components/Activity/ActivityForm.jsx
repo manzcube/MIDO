@@ -5,10 +5,11 @@ import Input from '../Root/Input'
 import Button from '../Root/Button'
 
 const ActivityForm = ({ onChange, onSubmit, inputProps }) => {
-  console.log('activity form')
   return (
     <form className="flex flex-col border rounded py-5 px-8 max-w-lg" >
+        
         <Input
+          label="Title"
           type="text"
           value={inputProps.title}
           onChange={onChange}
@@ -16,6 +17,7 @@ const ActivityForm = ({ onChange, onSubmit, inputProps }) => {
           name="title"
         />
         <Input
+          label="Price"
           value={inputProps.price}
           onChange={onChange}
           placeholder='Price'
@@ -23,21 +25,25 @@ const ActivityForm = ({ onChange, onSubmit, inputProps }) => {
           name="price"
         />
         <Input
+          label="Start time"
           value={inputProps.schedule1}
           onChange={onChange}
           type="time" 
           name="schedule1"
         />
         <Input
+          label="Finish time"
           value={inputProps.schedule2}
           onChange={onChange}
           type="time" 
           name="schedule2"
         />
+        <label htmlFor="color" className='text-sm text-gray-700'>Color</label>
         <select 
             className='py-2 px-3 my-3 bg-gray-50 text-sm text-gray-700 border border-gray-300 rounded-md leading-tight focus:bg-gray-100 focus:outline-none'
             placeholder='Color' 
             name="color" 
+            id="color" 
             value={inputProps.color} 
             onChange={onChange} 
         >

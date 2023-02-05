@@ -11,19 +11,19 @@ const WorkerForm = ({ onChange, onSubmit, inputProps }) => {
           type="text"
           value={inputProps.name}
           onChange={onChange}
-          placeholder="Name"
+          placeholder="Name*"
           name="name"
         />
         <Input
           type="text"
           value={inputProps.title}
           onChange={onChange}
-          placeholder="Title"
+          placeholder="Title*"
           name="title"
         />
         <input 
             className='py-2 px-4 my-3 bg-gray-50 text-sm text-gray-700 border border-gray-300 rounded-md leading-tight focus:bg-white focus:outline-none'
-            placeholder='Picture'
+            placeholder='Picture url'
             type="text" 
             name='picture' 
             value={inputProps.picture} 

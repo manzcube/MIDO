@@ -38,7 +38,6 @@ const EditActivity = () => {
     const handleChange = onChange(setFormData)
     const canSubmit = [title, color, schedule1, schedule2].every(Boolean) && !isUpdateLoading;
     let content
-    console.log(activity.schedule.split("-")[0])
     // Re-render for data
     useEffect(() => {
         if (isSuccess) {

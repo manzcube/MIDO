@@ -8,7 +8,6 @@ import { setUser } from '../features/auth/userSlice'
 
 
 const Register = () => {
-    console.log('register')
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [Register, {isLoading}] = useRegisterMutation()

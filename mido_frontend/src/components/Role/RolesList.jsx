@@ -12,7 +12,6 @@ const MemoizedSingleRole = memo(SingleRole)
 const RolesList = () => {
   const { data: roles, isLoading, isSuccess, isError, error } = useGetRolesQuery()
   let content;
-  console.log(error)
   if (isLoading) {
     content = <SignInBadge />
   } else if (isSuccess) {

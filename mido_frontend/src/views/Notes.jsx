@@ -1,33 +1,38 @@
 import React, { useState } from 'react'
 import { Navigate } from "react-router-dom"
-import Note from '../components/Notes/Note'
-import { useCreateNoteMutation, useGetNotesQuery } from '../features/Notes/noteSlice'
-import SignInBadge from "../components/Root/SignInBadge";
-import Input from "../components/Root/Input"
 import "../index.css"
+
+
+// Toast 
+import { toast } from 'react-toastify'
+
+ // Endpoint
+import { useCreateNoteMutation, useGetNotesQuery } from '../features/Notes/noteSlice'
+
+// Components
+import Note from '../components/Notes/Note'
+import SignInBadge from "../components/Root/SignInBadge";
 
 const Notes = () => {
   const user = localStorage.getItem("user")
-  const token = localStorage.getItem("token")
   const [note, setNote] = useState("")
   const [ createNote, { isLoading: isCreateNoteLoading }] = useCreateNoteMutation()
   const { data: notes, isLoading, isSuccess, isError, error } = useGetNotesQuery()
   let content;
-  console.log("THIS IS THE RRIRR", error)
+
   const submitNote = async (e) => {
     e.preventDefault()
     try {
       if (!isCreateNoteLoading) {
         await createNote({ text: note, author: user })
-        .then((response) => {
-          console.log(response)
+        .then(() => {
           setNote("")
         }).catch(err => {
-          throw new Error(err.message)
+          throw new Error("Note cannot be created")
         })
       }
     } catch (err) {
-      console.log("THIS IS THE RRIRR", err)
+      toast.error(err.message)
     }
   } 
 
@@ -40,10 +45,10 @@ const Notes = () => {
   } else if (isError) {
     content = "Something is wrong"
   }
-  return (user && token) ? (
+  return user ? (
     <div className='flex flex-col items-center'>
       <div className='border flex m-7 p-3 w-full'>
-        <div className='w-1/2 notesCanvas'>
+        <div className='w-1/2 notesCanvas p-5'>
           {content}
         </div>
         <div className='w-1/2'>
@@ -59,9 +64,6 @@ const Notes = () => {
           <button onClick={submitNote} className='py-1 px-2 bg-gray-800 rounded-md text-sm text-white'>create note</button>
         </div>       
       </div>
-      {/* <div className='flex items-end space-x-3'>
-        
-      </div> */}
     </div>
   ) : <Navigate to="/" />
 }

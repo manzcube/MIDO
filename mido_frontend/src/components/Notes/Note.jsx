@@ -1,22 +1,27 @@
 import React, { useState } from 'react'
 import { useDeleteNoteMutation } from '../../features/Notes/noteSlice'
+import { toast } from 'react-toastify'
 
 const Note = ({ note }) => {
     const [done, setDone] = useState(false)
     const [deleteNote, { isLoading }] = useDeleteNoteMutation()
-
+    const canDelete = note._id && !isLoading
+    
     const onDelete = async () => {
-        if (!isLoading) {
-            await deleteNote(note._id)
-            .then((response) => console.log(response))
-            .catch(err => console.log(err))
+        if (canDelete) {
+            try {
+                await deleteNote(note._id).unwrap()
+                toast.success("note deleted")
+            } catch (err) {
+                toast.error(err.message)
+            }
         }
     }
 
   return (
-    <div className='flex space-x-3 items-center my-5'>
-        <input type="checkbox" className='w-5 h-5' onChange={() => setDone(!done)} />
-        <div className='border p-3 rounded-md bg-gray-800 text-white'>
+    <div className='flex space-x-3 items-center my-5 max-w-4xl'>
+        <input type="checkbox" className='w-4 h-4' onChange={() => setDone(!done)} />
+        <div className='border p-2 rounded-md bg-gray-800 text-white'>
             <p className='text-muted text-sm text-gray-400 mb-2'>{note.author}</p>
             <div className={`${done ? "line-through" : ""} flex flex-col`}>{note.text}</div>
             
