@@ -34,9 +34,10 @@ const Login = () => {
         }    
       } catch (err) {
         toast.error(err.message)
-      }
-        
-    }    
+      }        
+    } else {
+      toast.err("Wrong credentials")
+    }  
   }
 
   const onChange = (e) => {

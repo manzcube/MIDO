@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import workerReducer from "../features/workers/workerSlice.js";
 import userReducer from "../features/auth/userSlice.js";
 import { apiSlice } from "../features/api/apiSlice.js";
 
@@ -11,4 +10,5 @@ export default configureStore({
   //This enables caching, invalidation, polling, etc.
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
+  devTools: process.env.REACT_APP_NODE_ENV == "development",
 });
