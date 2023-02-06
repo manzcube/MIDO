@@ -40,7 +40,7 @@ function App() {
       <Navbar />
       <main>
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/*" element={<Dashboard />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
           <Route path="/activities" element={<Activities />} />
