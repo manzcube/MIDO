@@ -9,7 +9,6 @@ dotenv.config();
 import express, { json, urlencoded } from "express";
 import { connectDB } from "./config/db/db.js";
 import { errorHandler } from "./middleware/errorHandler.js";
-import { setHeaders } from "./middleware/corsMiddleware.js";
 
 import workerRoutes from "./routes/workerRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
@@ -28,10 +27,8 @@ connectDB();
 // App initialization
 const app = express();
 
-app.use(setHeaders);
-
 const corsOptions = {
-  origin: "https://mido.onrender.com",
+  origin: "*",
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 app.use(cors(corsOptions));
@@ -53,7 +50,7 @@ app.use("/roles", roleRoutes);
 app.use("/today", todayRoutes);
 app.use("/notes", noteRoutes);
 app.use("/healthz", (req, res) => {
-  res.status(200);
+  res.status(204);
 });
 
 // Error handling middleware at the end to catch any error thrown by the routes or other middleware
