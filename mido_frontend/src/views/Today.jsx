@@ -96,13 +96,13 @@ const Today = () => {
 
 
       {/* Grabbing stuff */}
-      <Column title="Activities" rightMargin="right-96">
+      <Column title="Activities" >
         <MemoizedDayActivitiesList />
       </Column>
-      <Column title="Workers" rightMargin="right-52">
+      <Column title="Workers" >
         <MemoizedDayWorkersList />
       </Column>
-      <Column title="Roles" rightMargin="right-8">
+      <Column title="Roles" >
         <MemoizedDayRolesList />
       </Column>
     </div>
