@@ -28,7 +28,7 @@ connectDB();
 const app = express();
 
 const corsOptions = {
-  origin: "*",
+  origin: "https://mido.onrender.com",
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 app.use(cors(corsOptions));
@@ -50,7 +50,7 @@ app.use("/roles", roleRoutes);
 app.use("/today", todayRoutes);
 app.use("/notes", noteRoutes);
 app.use("/healthz", (req, res) => {
-  res.status(204);
+  res.send("ok").status(204);
 });
 
 // Error handling middleware at the end to catch any error thrown by the routes or other middleware
