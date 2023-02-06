@@ -16,12 +16,9 @@ const DroppedWorker = ({ worker, dayId, activityId }) => {
         if (parsedData.type === "role") {
             const { name, language } = parsedData
             if (!isLoading) {
-                await updateDay({ id: dayId, body: { type: "role", activityId, workerId: worker._id, newEntry: { name, language }}})
-                .then((response) => {
-                console.log(response)
-                }).catch(err => console.log(err.data))
+                return await updateDay({ id: dayId, body: { type: "role", activityId, workerId: worker._id, newEntry: { name, language }}}).unwrap()
             } else {
-                toast.error("Something is wrong, try again in a minute")
+                toast.error("Something is loading, wait a minute")
             }
         } 
     } 

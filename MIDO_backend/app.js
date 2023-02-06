@@ -27,10 +27,11 @@ connectDB();
 // App initialization
 const app = express();
 
-// const corsOptions = {
-//   origin: "https://mido.onrender.com",
-//   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-// };
+const corsOptions = {
+  origin: "https://mido.onrender.com",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
 app.use(cors());
 // We want all transmited data in json before being read
 app.use(json());

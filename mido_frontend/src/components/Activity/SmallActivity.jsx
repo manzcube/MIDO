@@ -17,7 +17,7 @@ const SmallActivity = ({activity}) => {
             id={activity._id} 
             draggable 
             onDragStart={e => onGrab(e)} 
-            className={`${activity.color} flex flex-col justify-between p-3 rounded-md my-4 max-w-md shadow-md cursor-grab`}
+            className={`${activity.color} flex flex-col justify-between p-3 rounded-md my-4 max-w-xs shadow-md cursor-grab`}
         >
             <div className='flex justify-between items-center mb-2'>
                 <p className='p-1 uppercase font-bold text-gray-800'>{activity.title}</p>
