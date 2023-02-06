@@ -1,6 +1,6 @@
 // Lib
 import React, { useState, memo, useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
 // Utils
 import { onChange } from '../utils/utilities'
@@ -19,6 +19,7 @@ import SignInBadge from '../components/Root/SignInBadge'
 const MemoizedActivityForm = memo(ActivityForm)
 
 const EditActivity = () => {
+    const user = localStorage.getItem("user")
     const navigate = useNavigate()
     const params = useParams()
     const activityId = params.id
@@ -79,11 +80,11 @@ const EditActivity = () => {
         content = "Sign in please"
     }
 
-  return (
+  return user ? (
     <div className='mt-44 flex justify-center items-center'>
         {content}
     </div>
-  )
+  ) : <Navigate to="/" />
 }
 
 export default EditActivity
