@@ -29,10 +29,11 @@ const app = express();
 
 const corsOptions = {
   origin: "https://mido.onrender.com",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  methods: ["GET", "PUT", "POST", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  optionsSuccessStatus: 200, // status for preflights
 };
-app.use(cors());
+app.use(cors(corsOptions));
 // We want all transmited data in json before being read
 app.use(json());
 
