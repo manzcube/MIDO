@@ -11,6 +11,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body::-webkit-scrollbar {
+  width: 0;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -48,12 +52,14 @@ code {
   width: 2px;
 }
 
-#dropDiv {
-  height: 70ch;
-}
-
 #dropDiv::-webkit-scrollbar {
   width: 4px;
+  background: rgb(116, 116, 116);
+}
+
+#actList::-webkit-scrollbar {
+  width: 0;
+  height: 0;
   background: rgb(116, 116, 116);
 }
 

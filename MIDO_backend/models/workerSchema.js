@@ -10,15 +10,6 @@ const workerSchema = Schema(
       type: String,
       required: true,
     },
-    picture: {
-      type: String,
-    },
-    roles: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Role",
-      },
-    ],
   },
   { timestamps: true, toJSON: { virtuals: true } }
 );

@@ -2,7 +2,7 @@ import React from 'react'
 
 const Column = ({ children, rightMargin, title }) => {
   return (
-    <div className={`flex flex-col items-center`}>
+    <div className="p-2 m-10 flex flex-col items-center">
         <span className='my-4 font-bold'>{title}</span>
         <div className='overflow-y-scroll grabbingColumns'>
           {children}

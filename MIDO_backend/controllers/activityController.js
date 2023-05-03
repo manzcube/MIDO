@@ -26,10 +26,7 @@ export const setActivity = async (req, res) => {
       .then(async () => {
         const data = await Activity.create({
           title: req.body.title,
-          duration: req.body.duration,
-          price: req.body.price,
           color: req.body.color,
-          schedule: req.body.schedule,
         });
         res.status(200).json(`Activity ${data.name} created`);
       })
@@ -51,10 +48,7 @@ export const updateActivity = async (req, res) => {
         req.params.id,
         {
           title: req.body.title,
-          duration: req.body.duration,
-          price: req.body.price,
           color: req.body.color,
-          schedule: req.body.schedule,
         },
         { new: true }
       );

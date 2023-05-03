@@ -24,19 +24,23 @@ const Login = () => {
     e.preventDefault()
     if (canSubmit) {
       try {
-        const result = await Login(formData)
-        if (result.data.token) {
-          localStorage.setItem("token", result.data.token)
-          localStorage.setItem("user", `${result.data.email}`)
-          dispatch(setUser(result.data.email))
-          navigate("/today")
-          toast.success(`Welcome back ${result.data.name}`)
-        }    
+        await Login(formData)
+        .then((result) => {
+          if (result.data.token) {
+            localStorage.setItem("token", result.data.token)
+            localStorage.setItem("user", `${result.data.email}`)
+            dispatch(setUser(result.data.email))
+            navigate("/today")
+            toast.success(`Welcome back ${result.data.name}`)
+          } 
+        }).catch(err => {
+          throw new Error(err.message)
+        })
       } catch (err) {
-        toast.error(err.message)
+        toast.error(err)
       }        
     } else {
-      toast.err("Wrong credentials")
+      toast.error("Wrong credentials")
     }  
   }
 

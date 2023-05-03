@@ -23,18 +23,10 @@ const SmallWorker = ({ worker }) => {
         draggable
         onDragStart={e => onGrab(e)}
         id={worker.id} 
-        className="smallWorker flex flex-col border p-3 rounded-xl m-4 shadow-md bg-slate-700 cursor-grab"
+        className="w-20 h-20 flex flex-col justify-center p-2 rounded-xl m-2 shadow-sm hover:shadow-xl hover:scale-105 transition-all duration-200 bg-slate-800 cursor-grab"
         >
-            <div className='w-full flex justify-center mb-2'>
-                <img src={worker.picture ? worker.picture : default_pic}
-                    alt="" 
-                    className='flex rounded-full w-20 h-20 object-cover' 
-                />
-            </div>
-            <div className='items-start'>
-                <p className='uppercase text-xs text-white'>{worker.name}</p>
-                <p className='text-xs text-gray-300 overflow-x-clip'>{worker.title}</p>
-            </div>                
+            <p className='uppercase text-4xl text-center font-bold text-white'>{worker.name[0]}</p>
+            <p className='text-xs text-gray-300 overflow-x-clip'>{worker.title}</p>              
         </div>
     )
 }

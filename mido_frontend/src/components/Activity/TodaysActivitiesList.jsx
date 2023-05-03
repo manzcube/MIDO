@@ -1,6 +1,9 @@
 // Lib
 import React, { memo } from 'react';
 
+//Style 
+import "./Activity.css"
+
 // Endpoint
 import { useGetActivitiesQuery } from '../../features/activities/activitySlice';
 
@@ -33,11 +36,9 @@ const ActivitiesList = () => {
   } else if (isError) {
     content = "Sign in please"
   }
-  
-    
   return (
-    <div className='flex flex-col'>
-        {content}
+    <div className='flex fixed top-24 z-10 w-full border-b-2 bg-white grabbable'>
+      {content}
     </div>
   )
 }

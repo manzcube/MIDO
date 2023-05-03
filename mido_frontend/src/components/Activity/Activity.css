@@ -6,3 +6,11 @@
     border-radius: 10px;
     background: #575757;
 }
+
+.grabbable {
+    overflow-x: scroll;
+}
+
+.grabbable::-webkit-scrollbar {
+    height: 5px;
+}

@@ -1,11 +1,15 @@
 
+import { getTextColor } from "../../utils/utilities"
+
 const SmallActivity = ({activity}) => {
+
+    const textColor = getTextColor(activity.color)
+
     const dataToDrag = {
       type: "activity",
       id: activity._id,
       title: activity.title,
       color: activity.color,
-      schedule: activity.schedule,
     }
 
     const onGrab = (e) => {
@@ -17,15 +21,9 @@ const SmallActivity = ({activity}) => {
             id={activity._id} 
             draggable 
             onDragStart={e => onGrab(e)} 
-            className={`${activity.color} flex flex-col justify-between p-3 rounded-md my-4 max-w-xs shadow-md cursor-grab`}
+            className={`${activity.color} w-32 flex flex-col justify-between p-1 rounded-md m-4 shadow-md cursor-grab hover:shadow-xl hover:scale-105 transition-all duration-200`}
         >
-            <div className='flex justify-between items-center mb-2'>
-                <p className='p-1 uppercase font-bold text-gray-800'>{activity.title}</p>
-                
-            </div>
-            <div className='flex justify-between'>
-            <p className='p-1 text-gray-800'>{activity.schedule}</p>
-            </div>
+            <p className={`p-1 uppercase text ${textColor}`}>{activity.title}</p>
         </div>
     )
 }

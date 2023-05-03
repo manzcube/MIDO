@@ -1,51 +1,36 @@
 import React from 'react'
 
 // Utils
-import { default_pic } from '../../utils/utilities'
 import { useUpdateDayMutation } from '../../features/today/todaySlice'
 import { toast } from 'react-toastify'
 
 const DroppedWorker = ({ worker, dayId, activityId }) => {  
     const [updateDay, { isLoading }] = useUpdateDayMutation()
-
+    console.log(worker)
     // Handling drop
-    async function drop(e) {
-        e.preventDefault()
-        let data = e.dataTransfer.getData("text") 
-        const parsedData = JSON.parse(data)
-        if (parsedData.type === "role") {
-            const { name, language } = parsedData
-            if (!isLoading) {
-                return await updateDay({ id: dayId, body: { type: "role", activityId, workerId: worker._id, newEntry: { name, language }}}).unwrap()
-            } else {
-                toast.error("Something is loading, wait a minute")
-            }
-        } 
-    } 
+    async function submitChange(type) {
+        if (!isLoading) {
+            await updateDay({ id: dayId, body: { type, actId: activityId, workerId: worker._id}})
+            .then((response) => {
+              toast.success(response)
+            }).catch(err => toast.error(err.data))
+        } else {
+            toast.error("Something is wrong, try again in a minute")
+        }
+    }
 
     return (
-        <div draggable={false} className="flex space-x-3 border p-3 rounded-xl m-4 shadow-md bg-slate-700">
-            <div>
-                <div className='w-full flex justify-center mb-2'>
-                    <img src={worker.picture ? worker.picture : default_pic}
-                        alt="" 
-                        draggable={false}
-                        className='flex rounded-full w-20 h-20 cursor-not-allowed object-cover' 
-                    />
-                </div>
-                <div className='flex flex-col items-start overflow-clip'>
-                    <p className='uppercase text-xs text-white'>{worker.name}</p>
-                    <p className='text-xs text-gray-300'>{worker.title}</p>
-                </div>  
-            </div>   
-            <div onDrop={e => drop(e)} onDragOver={e => e.preventDefault()} className='border p-2 border-dashed w-28' >
-                {worker.roles.map(role => (
-                    <div key={worker.roles.indexOf(role)} className='p-1 bg-white text-gray-800 rounded-md text-xs m-1'>
-                        <p className='font-bold'>{role.name}</p>
-                        <p>{role.language}</p>
-                    </div>
-                ))}
-            </div>           
+        <div draggable={false} className="w-24 h-24 flex flex-col justify-between p-2 rounded-xl m-3 bg-slate-800">
+            <p className='text-end'>
+                <button onClick={() => submitChange("deleteWorker")} className="text-white hover:bg-white rounded-full hover:text-gray-700 transition-all duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </p>
+            
+            <p className='uppercase text-4xl text-center -mt-4 font-bold text-white'>{worker.name[0]}</p>
+            <p className='text-xs text-gray-300 overflow-x-clip'>{worker.title}</p>              
         </div>
     )
   }

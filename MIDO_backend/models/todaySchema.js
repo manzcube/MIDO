@@ -9,18 +9,15 @@ const todaySchema = Schema(
     activities: [
       {
         title: String,
-        duration: String,
         color: String,
+        comments: String,
+        schedule: String,
         workers: [
           {
             name: String,
             title: String,
-            picture: String,
-            roles: [],
           },
         ],
-        comments: String,
-        schedule: String,
       },
     ],
   },

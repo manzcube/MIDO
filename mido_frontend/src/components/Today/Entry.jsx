@@ -4,7 +4,7 @@ import React, { useState, memo } from 'react'
 // Toast
 import { toast } from 'react-toastify';
 // Utils
-import { getBgColor } from '../../utils/utilities';
+import { getBgColor, getTextColor } from '../../utils/utilities';
 
 // Endpoint
 import { useUpdateDayMutation } from '../../features/today/todaySlice'
@@ -19,6 +19,7 @@ const Entry = ({activity, dayId}) => {
     const [changing, setChanging] = useState(false)
     const [commentsData, setCommentsData] = useState(activity.comments)
     const [updateDay, {isLoading: isUpdateLoading }] = useUpdateDayMutation()
+    const textColor = getTextColor(activity.color)
   
     const onChange = (e) => {
       setChanging(true)
@@ -43,9 +44,9 @@ const Entry = ({activity, dayId}) => {
       let data = e.dataTransfer.getData("text") 
       const parsedData = JSON.parse(data)
         if (parsedData.type === "worker") {
-            const { name, title, picture } = parsedData
+            const { name, title } = parsedData
             if (!isUpdateLoading) {
-                await updateDay({ id: dayId, body: { type: "worker", activityId: activity._id, newEntry: { title, name, picture }}})
+                await updateDay({ id: dayId, body: { type: "worker", activityId: activity._id, newEntry: { title, name }}})
                 .then(() => {
                     setChanging(false)
                 }).catch(err => toast.error(err.data))
@@ -58,13 +59,9 @@ const Entry = ({activity, dayId}) => {
   
     return (
         <div className='flex w-full items-center'>
-            <div className='text-black mr-3 flex'>
-                {activity.schedule}
-            </div>
-            <div className={`${activity.color} flex justify-between p-3 rounded-md my-4 w-full max-w-5xl shadow-md`}>
+            <div className={`${activity.color} flex justify-between p-3 rounded-md my-4 w-full shadow-md`}>
                 <div className='w-1/5'>
-                    <p className='p-1 uppercase font-bold text-gray-800'>{activity.title}</p>
-                    <p className='p-1 mx-2 text-sm text-gray-600'>Duration: {activity.duration}</p>
+                    <p className={`p-1 uppercase font-bold ${textColor}`}>{activity.title}</p>
                     <MemoizedComments 
                         onSave={() => submitChange("comments")} 
                         value={commentsData}
@@ -75,16 +72,21 @@ const Entry = ({activity, dayId}) => {
                 <div 
                     onDrop={e => drop(e)} 
                     onDragOver={e => e.preventDefault()}  
-                    className={`w-4/5 ml-5 border flex flex-wrap rounded-md my-2 mr-3 focus:border-gray-800 ${getBgColor(activity.color)}`}
+                    className={`w-4/5 ml-5 border flex flex-wrap items-center rounded-md my-2 mr-3 border-white ${getBgColor(activity.color)}`}
                 >
                     {activity.workers?.map(worker => (
                     <DroppedWorker dayId={dayId} activityId={activity._id} key={activity.workers.indexOf(worker)} worker={worker} />
                     ))}
                 </div>
+                <div className=''>
+                <button onClick={() => submitChange("deleteActivity")} className={`text-sm ${textColor} hover:bg-red-400 rounded-full hover:text-white transition-all duration-200`}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                </div>
             </div>
-            <button onClick={() => submitChange("deleteActivity")} className='mx-3 bg-red-600 text-sm text-white p-1 rounded-md'>
-                delete
-            </button>
+            
         </div>
     )
 }

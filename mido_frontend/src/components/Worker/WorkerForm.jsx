@@ -6,7 +6,15 @@ import Input from '../Root/Input';
 
 const WorkerForm = ({ onChange, onSubmit, inputProps }) => {
   return (
-    <form className="flex flex-col border rounded py-5 px-8 max-w-sm" >
+    <>
+      
+      <form className="flex flex-col border shadow-xl rounded-md py-5 px-8 max-w-sm" >
+        <p className="flex items-center justify-center font-bold text-gray-800 text-sm">
+          <span>Add Worker</span>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 ml-1">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
+          </svg>
+        </p>
         <Input
           type="text"
           value={inputProps.name}
@@ -21,16 +29,10 @@ const WorkerForm = ({ onChange, onSubmit, inputProps }) => {
           placeholder="Title*"
           name="title"
         />
-        <input 
-            className='py-2 px-4 my-3 bg-gray-50 text-sm text-gray-700 border border-gray-300 rounded-md leading-tight focus:bg-white focus:outline-none'
-            placeholder='Picture url'
-            type="text" 
-            name='picture' 
-            value={inputProps.picture} 
-            onChange={onChange} 
-        />
         <Button onSubmit={onSubmit}>Save Worker</Button>
       </form>
+    </>
+    
   )
 }
 

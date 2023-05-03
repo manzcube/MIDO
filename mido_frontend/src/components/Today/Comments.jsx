@@ -3,8 +3,7 @@ import React from 'react'
 const Comments = ({ value, onChange, changing, onSave }) => {
   return (
     <>
-        <label htmlFor="commmnets" className='text-sm text-gray-700'>Comments</label>
-        <textarea name="comments" value={value} id='comments' cols="22" rows="3" onChange={onChange} className='bg-gray-50 p-2 rounded-md focus:outline-none text-gray-800 text-sm' />
+        <textarea name="comments" placeholder='Comments' value={value} id='comments' cols="22" rows="5" onChange={onChange} className='bg-gray-50 p-2 rounded-md focus:outline-none text-gray-800 text-sm' />
         <span className='flex items-center space-x-2'>
             <button className='bg-sky-600 rounded-md text-white p-1 text-sm' onClick={onSave}>save</button>
             {changing ? (

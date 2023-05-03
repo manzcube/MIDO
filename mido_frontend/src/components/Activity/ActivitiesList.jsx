@@ -34,11 +34,7 @@ const ActivitiesList = () => {
     content = "Sign in please"
   }
     
-  return (
-    <div className='flex flex-col overflow-y-scroll activitiesList border rounded-md p-4'>
-        {content}
-    </div>
-  )
+  return content
 }
 
 export default ActivitiesList

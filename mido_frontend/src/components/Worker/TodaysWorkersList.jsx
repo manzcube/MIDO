@@ -25,7 +25,7 @@ const TodaysWorkersList = () => {
   }
     
   return (
-    <div className='flex flex-col items-center'>
+    <div className='flex fixed top-44 -mt-1 z-10 w-full shadow-md bg-white'>
       {content}
     </div>
   )

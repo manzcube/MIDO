@@ -27,7 +27,6 @@ export const setWorker = async (req, res) => {
         const data = await Worker.create({
           name: req.body.name,
           title: req.body.title,
-          picture: req.body.picture,
         });
         res.status(200).json(`Worker ${data.name} created`);
       })
@@ -50,7 +49,6 @@ export const updateWorker = async (req, res) => {
         {
           name: req.body.name,
           title: req.body.title,
-          picture: req.body.picture,
         },
         { new: true }
       );

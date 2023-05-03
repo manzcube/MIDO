@@ -6,25 +6,10 @@ const activitySchema = Schema(
       type: String,
       required: true,
     },
-    price: {
-      type: Number,
-      required: true,
-    },
     color: {
       type: String,
       required: true,
     },
-    schedule: {
-      type: String,
-      required: true,
-    },
-    workers: [
-      {
-        name: String,
-        title: String,
-        picture: String,
-      },
-    ],
   },
   { timestampsh: true, toJSON: { virtuals: true } }
 );

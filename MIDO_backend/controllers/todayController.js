@@ -49,11 +49,14 @@ export const setToday = async (req, res) => {
 };
 
 export const updateToday = async (req, res) => {
+  console.log(req.body);
   try {
     const { type } = req.body;
     switch (type) {
       case "activity":
-        const { color, activityTitle, duration, schedule } = req.body.newEntry;
+        const { color, activityTitle, schedule } = req.body.newEntry;
+        console.log(color, activityTitle, schedule);
+        console.log("params", req.params.id);
         await Today.findByIdAndUpdate(
           req.params.id,
           {
@@ -62,20 +65,23 @@ export const updateToday = async (req, res) => {
                 color,
                 title: activityTitle,
                 schedule,
-                duration,
                 workers: [],
               },
             },
           },
           { new: true }
         )
-          .then((response) => res.status(200).json(response))
+          .then((response) => {
+            console.log("WORKED");
+            res.status(200).json(response);
+          })
           .catch((err) => {
+            console.log("ERROR NOTWOKRED");
             throw new Error(err.message);
           });
         break;
       case "worker":
-        const { name, title, picture } = req.body.newEntry;
+        const { name, title } = req.body.newEntry;
         await Today.findByIdAndUpdate(
           req.params.id,
           {
@@ -83,37 +89,10 @@ export const updateToday = async (req, res) => {
               "activities.$[activity].workers": {
                 name,
                 title,
-                picture,
-                roles: [],
               },
             },
           },
           { arrayFilters: [{ "activity._id": req.body.activityId }], new: true }
-        )
-          .then((response) => res.status(200).json(response))
-          .catch((err) => {
-            throw new Error(err.message);
-          });
-        break;
-      case "role":
-        console.log(req.body);
-        await Today.findByIdAndUpdate(
-          req.params.id,
-          {
-            $push: {
-              "activities.$[activity].workers.$[worker].roles": {
-                name: req.body.newEntry.name,
-                language: req.body.newEntry.language,
-              },
-            },
-          },
-          {
-            arrayFilters: [
-              { "activity._id": req.body.activityId },
-              { "worker._id": req.body.workerId },
-            ],
-            new: true,
-          }
         )
           .then((response) => res.status(200).json(response))
           .catch((err) => {
@@ -148,9 +127,30 @@ export const updateToday = async (req, res) => {
             throw new Error(err.message);
           });
         break;
-      default:
-        console.log("something is not reading properly");
+      case "deleteWorker":
+        const { workerId, actId } = req.body;
+        await Today.findByIdAndUpdate(
+          req.params.id,
+          {
+            $pull: {
+              "activities.$[activity].workers": { _id: workerId },
+            },
+          },
+          {
+            arrayFilters: [
+              { "activity._id": req.body.actId },
+              { "worker._id": req.body.workerId },
+            ],
+            new: true,
+          }
+        )
+          .then((response) => res.status(200).json(response))
+          .catch((err) => {
+            throw new Error(err.message);
+          });
         break;
+      default:
+        throw new Error("something is not reading properly");
     }
   } catch (err) {
     res.status(500).json(err.message);
@@ -172,3 +172,14 @@ export const deleteToday = async (req, res) => {
     throw new Error(err.message);
   }
 };
+
+function getActivitySection(sec) {
+  switch (sec) {
+    case 0:
+      return "08:30-10:30";
+    case 1:
+      return "11:00-13:00";
+    case 2:
+      return "14:30-17:00";
+  }
+}

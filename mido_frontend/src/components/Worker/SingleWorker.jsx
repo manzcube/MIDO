@@ -34,18 +34,11 @@ const SingleWorker = ({ worker }) => {
     }
 
     return (
-        <div className="border p-3 rounded-xl m-4 w-52 h-56 shadow-md bg-gray-800">
-            <div className='w-full flex justify-center mb-2'>
-                <img src={worker.picture ? worker.picture : default_pic}
-                    alt="" 
-                    className='flex rounded-full w-32 h-32 object-cover' 
-                />
-            </div>
-            <div className='flex flex-col items-start overflow-clip'>
-                <p className='uppercase text-sm font-bold text-white'>{worker.name}</p>
-                <p className='text-xs text-gray-300'>{worker.title}</p>
-            </div>                
-            <div className='flex justify-end'>
+        <div className="p-3 rounded-xl m-5 w-44 shadow-md bg-gray-800">
+            <p className='uppercase text-2xl text-gray-100'>{worker.name}</p>
+            <div className='flex justify-between'>
+                <span className='text-sm text-gray-300'>{worker.title}</span>
+                <span className='flex items-center'>
                 {sureToDelete ? (
                     <>
                         <button 
@@ -78,6 +71,8 @@ const SingleWorker = ({ worker }) => {
                         </>
                     )
                 }
+                </span>
+                
             </div>   
         </div>
     )

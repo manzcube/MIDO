@@ -18,6 +18,9 @@ import roleRoutes from "./routes/roleRoutes.js";
 import noteRoutes from "./routes/noteRoutes.js";
 import cors from "cors";
 
+// When deploying and having https certificate
+// Use HSTS in headers, and setting a max-age i.e
+
 // Port configuration
 const PORT = process.env.PORT || 5000;
 
@@ -28,9 +31,9 @@ connectDB();
 const app = express();
 
 const corsOptions = {
-  origin: "https://mido.onrender.com",
+  origin: "http://localhost:3000",
   methods: ["GET", "PUT", "POST", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  allowedHeaders: ["Content-Type", "Authorization", "X-Frame-Options"],
   optionsSuccessStatus: 200, // status for preflights
 };
 app.use(cors(corsOptions));
@@ -42,6 +45,16 @@ app.use(
   urlencoded({
     extended: false,
   })
+);
+
+app.options(
+  ["/", "workers", "activities", "roles", "today", "notes", "healthz"],
+  function (req, res, next) {
+    // Set the allowed HTTP methods and headers
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    res.header("Access-Control-Allow-Headers", "Content-Type");
+    res.send();
+  }
 );
 
 // Routes
