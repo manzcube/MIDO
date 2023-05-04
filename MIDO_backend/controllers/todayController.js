@@ -12,7 +12,6 @@ export const getToday = async (req, res) => {
         activities: [],
       });
       if (newToday) {
-        console.log(newToday);
         res.status(200).json(newToday);
       } else {
         throw new Error("there is no new today");
@@ -49,14 +48,11 @@ export const setToday = async (req, res) => {
 };
 
 export const updateToday = async (req, res) => {
-  console.log(req.body);
   try {
     const { type } = req.body;
     switch (type) {
       case "activity":
         const { color, activityTitle, schedule } = req.body.newEntry;
-        console.log(color, activityTitle, schedule);
-        console.log("params", req.params.id);
         await Today.findByIdAndUpdate(
           req.params.id,
           {
@@ -72,11 +68,9 @@ export const updateToday = async (req, res) => {
           { new: true }
         )
           .then((response) => {
-            console.log("WORKED");
             res.status(200).json(response);
           })
           .catch((err) => {
-            console.log("ERROR NOTWOKRED");
             throw new Error(err.message);
           });
         break;
