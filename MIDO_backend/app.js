@@ -15,7 +15,6 @@ import userRoutes from "./routes/userRoutes.js";
 import todayRoutes from "./routes/todayRoutes.js";
 import activityRoutes from "./routes/activityRoutes.js";
 import roleRoutes from "./routes/roleRoutes.js";
-import noteRoutes from "./routes/noteRoutes.js";
 import cors from "cors";
 
 // When deploying and having https certificate
@@ -63,7 +62,6 @@ app.use("/workers", workerRoutes);
 app.use("/activities", activityRoutes);
 app.use("/roles", roleRoutes);
 app.use("/today", todayRoutes);
-app.use("/notes", noteRoutes);
 app.use("/healthz", (req, res) => {
   res.send("ok").status(204);
 });

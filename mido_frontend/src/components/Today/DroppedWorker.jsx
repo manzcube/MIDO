@@ -6,7 +6,6 @@ import { toast } from 'react-toastify'
 
 const DroppedWorker = ({ worker, dayId, activityId }) => {  
     const [updateDay, { isLoading }] = useUpdateDayMutation()
-    console.log(worker)
     // Handling drop
     async function submitChange(type) {
         if (!isLoading) {

@@ -6,12 +6,12 @@ const DroppingSections = ({ drop, oneDay }) => {
   return (
     <>
         <div className='mt-10 firstDropSection'>
-            <p className='text-lg m-2 text-gray-700'>08:30-10:30</p>
+            <p className='text-lg font-bold m-2 text-gray-700'>08:30-10:30</p>
             <div 
               id='dropDiv' 
               onDrop={e => drop(e, "08:30")} 
               onDragOver={e => e.preventDefault()} 
-              className='flex flex-col items-center p-5 border border-gray-200 rounded bg-white'
+              className='flex flex-col items-center py-20 px-5 mx-20 border border-gray-200 rounded bg-white'
             >
               {oneDay?.activities.map(act => {
                 return act.schedule.startsWith("08") ? 
@@ -21,12 +21,12 @@ const DroppingSections = ({ drop, oneDay }) => {
         </div>
 
         <div className='mt-10 secondDropSection'>
-            <p className='text-lg m-2 text-gray-700'>11:00-13:00</p>
+            <p className='text-lg font-bold m-2 text-gray-700'>11:00-13:00</p>
             <div 
               id='dropDiv' 
               onDrop={e => drop(e, "11:00")} 
               onDragOver={e => e.preventDefault()} 
-              className='flex flex-col items-center p-5 border border-gray-200 rounded bg-white'
+              className='flex flex-col items-center py-20 px-5 mx-20 border border-gray-200 rounded bg-white'
             >
               {oneDay?.activities.map(act => {
                 return act.schedule.startsWith("11") ? 
@@ -36,12 +36,12 @@ const DroppingSections = ({ drop, oneDay }) => {
         </div>
 
         <div className='mt-10 thirdDropSection'>
-            <p className='text-lg m-2 text-gray-700'>14:30-17:00</p>
+            <p className='text-lg font-bold m-2 text-gray-700'>14:30-17:00</p>
             <div 
               id='dropDiv' 
               onDrop={e => drop(e, "14:30")} 
               onDragOver={e => e.preventDefault()} 
-              className='flex flex-col items-center p-5 border border-gray-200 rounded bg-white'
+              className='flex flex-col items-center py-20 px-5 mx-20 border border-gray-200 rounded bg-white'
             >
               {oneDay?.activities.map(act => {
                 return act.schedule.startsWith("14") ? 

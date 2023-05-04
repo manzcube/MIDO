@@ -16,6 +16,7 @@ const Navbar = () => {
     const navigate = useNavigate()
     const [dropDown, setDropDown] = useState(false)
     const user = useSelector(state => state.user.user)
+    const location = window.location.pathname.split("/")[1]
     
     useEffect(() => {
         if (userFromStorage) {
@@ -32,6 +33,10 @@ const Navbar = () => {
         toast.success("Logged out!")
     }
 
+    const isCurrentlyHere = (fact) => {
+        return fact ? "bg-white text-sky-600" : ""
+    }
+
     return (
         <React.Fragment>
             <nav className='drop-shadow-md text-white bg-blue-500 text-sm w-full flex justify-between p-2 fixed top-0 z-20'>
@@ -45,11 +50,10 @@ const Navbar = () => {
                 </div>
                 <div className='mr-3 flex items-center'>
                     <div className='hidden md:flex'>
-                        <Link to="/today" className='mx-3 my-auto p-1 rounded-lg hover:bg-white hover:text-blue-500 transition-all duration-300 focus:underline'>Today</Link>
-                        <Link to="/activities" className='mx-3 my-auto p-1 rounded-lg hover:bg-white hover:text-blue-500 transition-all duration-300 focus:underline'>Activities</Link>
-                        <Link to="/pickups" className='mx-3 my-auto p-1 rounded-lg hover:bg-white hover:text-blue-500 transition-all duration-300 focus:underline'>Pick Ups</Link>
-                        <Link to="/workers" className='mx-3 my-auto p-1 rounded-lg hover:bg-white hover:text-blue-500 transition-all duration-300 focus:underline'>Workers</Link>
-                        <Link to="/notes" className='mx-3 my-auto p-1 rounded-lg hover:bg-white hover:text-blue-500 transition-all duration-300 focus:underline'>Notes</Link>
+                        <Link to="/today" className={`mx-3 my-auto p-1 rounded-lg hover:bg-white hover:text-blue-500 transition-all duration-300 ${isCurrentlyHere(location === "today")}`}>Today</Link>
+                        <Link to="/activities" className={`mx-3 my-auto p-1 rounded-lg hover:bg-white hover:text-blue-500 transition-all duration-300 ${isCurrentlyHere(location === "activities")}`}>Activities</Link>
+                        <Link to="/pickups" className={`mx-3 my-auto p-1 rounded-lg hover:bg-white hover:text-blue-500 transition-all duration-300 ${isCurrentlyHere(location === "pickups")}`}>Pick Ups</Link>
+                        <Link to="/workers" className={`mx-3 my-auto p-1 rounded-lg hover:bg-white hover:text-blue-500 transition-all duration-300 ${isCurrentlyHere(location === "workers")}`}>Workers</Link>
                         
                         {user ? (
                             <button onClick={logout} className='mx-3 my-auto p-1 rounded-lg hover:bg-white hover:text-blue-500 transition-all duration-300 focus:underline'>Logout</button>
@@ -68,7 +72,6 @@ const Navbar = () => {
                 <Link to="/today" className='py-2 px-5 w-full text-end rounded hover:bg-gray-500 hover:text-white'>Today</Link>
                 <Link to="/activities" className='py-2 px-5 w-full text-end rounded hover:bg-gray-500 hover:text-white'>Activities</Link>
                 <Link to="/workers" className='py-2 px-5 w-full text-end rounded hover:bg-gray-500 hover:text-white'>Workers</Link>
-                <Link to="/notes" className='py-2 px-5 w-full text-end rounded hover:bg-gray-500 hover:text-white'>Notes</Link>
                 {user ? (
                     <button onClick={logout} className='py-2 px-5 w-full text-end rounded hover:bg-gray-500 hover:text-white'>Logout</button>
                 ) : (

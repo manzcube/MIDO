@@ -29,14 +29,19 @@ const Register = () => {
         if (canSubmit) {
           localStorage.clear()
           try {
-            const result = await Register(formData)
-            if (result.data.token) {
-              localStorage.setItem("token", result.data.token)
-              localStorage.setItem("user", `${result.data.email}`)
-              dispatch(setUser(result.data.email))
-              navigate("/today")
-              toast.success(`Welcome ${result.data.name}`)
-            }
+            await Register(formData)
+            .then(result => {
+              if (result.data.token) {
+                localStorage.setItem("token", result.data.token)
+                localStorage.setItem("user", `${result.data.email}`)
+                dispatch(setUser(result.data.email))
+                navigate("/today")
+                toast.success(`Welcome ${result.data.name}`)
+              }
+            }).catch(err => {
+              throw new Error(err.message)
+            })
+            
           } catch (err) {
             toast.error(err.message)
           }

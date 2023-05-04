@@ -19,7 +19,6 @@ import Workers from "./views/Workers";
 import EditWorker from "./views/EditWorker";
 import Activities from "./views/Activities"
 import EditActivity from "./views/EditActivity";
-import Notes from "./views/Notes"
 import Dashboard from "./views/Dashboard";
 
 
@@ -50,7 +49,6 @@ function App() {
           <Route path="/workers" element={<Workers />} />
           <Route path="/workers/edit/:id" element={<EditWorker />} />
           <Route path="/today" element={<Today />} />
-          <Route path="/notes" element={<Notes />} />
         </Routes>
       </main>
       <Footer />
