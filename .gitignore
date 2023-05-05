@@ -3,3 +3,6 @@
 
 /MIDO_backend/.env
 /MIDO_frontend/.env
+
+/MIDO_backend/dist
+/MIDO_frontend/build

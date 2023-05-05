@@ -63,7 +63,7 @@ app.use("/activities", activityRoutes);
 app.use("/roles", roleRoutes);
 app.use("/today", todayRoutes);
 app.use("/healthz", (req, res) => {
-  res.send("ok").status(204);
+  res.send("ok").status(200);
 });
 
 // Error handling middleware at the end to catch any error thrown by the routes or other middleware
