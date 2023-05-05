@@ -7,14 +7,14 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import express, { json, urlencoded } from "express";
-import { connectDB } from "./config/db/db.js";
-import { errorHandler } from "./middleware/errorHandler.js";
+import { connectDB } from "../config/db/db.js";
+import { errorHandler } from "../middleware/errorHandler.js";
 
-import workerRoutes from "./routes/workerRoutes.js";
-import userRoutes from "./routes/userRoutes.js";
-import todayRoutes from "./routes/todayRoutes.js";
-import activityRoutes from "./routes/activityRoutes.js";
-import roleRoutes from "./routes/roleRoutes.js";
+import workerRoutes from "../routes/workerRoutes.js";
+import userRoutes from "../routes/userRoutes.js";
+import todayRoutes from "../routes/todayRoutes.js";
+import activityRoutes from "../routes/activityRoutes.js";
+import roleRoutes from "../routes/roleRoutes.js";
 import cors from "cors";
 
 // When deploying and having https certificate
