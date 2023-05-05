@@ -22,7 +22,7 @@ export const protect = async (req, res, next) => {
         throw new Error("You're not authorized");
       }
     } else {
-      throw new Error("There is no authorization");
+      throw new Error("You're not authorized");
     }
   } catch (err) {
     res.status(401).json(err.message);

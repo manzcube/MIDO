@@ -34,12 +34,12 @@ const Navbar = () => {
     }
 
     const isCurrentlyHere = (fact) => {
-        return fact ? "bg-white text-sky-600" : ""
+        return fact ? "bg-white text-blue-500" : ""
     }
 
     return (
         <React.Fragment>
-            <nav className='drop-shadow-md text-white bg-blue-500 text-sm w-full flex justify-between p-2 fixed top-0 z-20'>
+            <nav className='drop-shadow-md text-white bg-blue-500 text-xs w-full flex justify-between p-2 fixed top-0 z-20'>
                 <div className='ml-3 flex items-center'>
                     <Link to="/" className='decoration-0'>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5">
@@ -50,15 +50,17 @@ const Navbar = () => {
                 </div>
                 <div className='mr-3 flex items-center'>
                     <div className='hidden md:flex'>
-                        <Link to="/today" className={`mx-3 my-auto p-1 rounded-lg hover:bg-white hover:text-blue-500 transition-all duration-300 ${isCurrentlyHere(location === "today")}`}>Today</Link>
-                        <Link to="/activities" className={`mx-3 my-auto p-1 rounded-lg hover:bg-white hover:text-blue-500 transition-all duration-300 ${isCurrentlyHere(location === "activities")}`}>Activities</Link>
-                        <Link to="/pickups" className={`mx-3 my-auto p-1 rounded-lg hover:bg-white hover:text-blue-500 transition-all duration-300 ${isCurrentlyHere(location === "pickups")}`}>Pick Ups</Link>
-                        <Link to="/workers" className={`mx-3 my-auto p-1 rounded-lg hover:bg-white hover:text-blue-500 transition-all duration-300 ${isCurrentlyHere(location === "workers")}`}>Workers</Link>
-                        
+                        {userFromStorage ? (
+                            <>
+                                <Link to="/today" className={`mx-3 my-auto p-1 rounded-lg hover:bg-white hover:text-blue-500 transition-all duration-300 ${isCurrentlyHere(location === "today")}`}>Today</Link>
+                                <Link to="/pickups" className={`mx-3 my-auto p-1 rounded-lg hover:bg-white hover:text-blue-500 transition-all duration-300 ${isCurrentlyHere(location === "pickups")}`}>Pick Ups</Link>
+                                <Link to="/activities" className={`mx-3 my-auto p-1 rounded-lg hover:bg-white hover:text-blue-500 transition-all duration-300 ${isCurrentlyHere(location === "activities")}`}>Activities</Link>
+                                <Link to="/workers" className={`mx-3 my-auto p-1 rounded-lg hover:bg-white hover:text-blue-500 transition-all duration-300 ${isCurrentlyHere(location === "workers")}`}>Workers</Link>
+                            </>) : ""}                        
                         {user ? (
                             <button onClick={logout} className='mx-3 my-auto p-1 rounded-lg hover:bg-white hover:text-blue-500 transition-all duration-300 focus:underline'>Logout</button>
                         ) : (
-                            <Link to="/login" className='p-2 mr-2'>Log in</Link>
+                            <Link to="/login" className='p-2 mr-2 p-1 rounded-lg hover:bg-white hover:text-blue-500 transition-all duration-300'>Log in</Link>
                         )}  
                     </div>
                     <button>

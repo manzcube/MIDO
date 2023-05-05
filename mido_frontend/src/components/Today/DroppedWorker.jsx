@@ -19,7 +19,7 @@ const DroppedWorker = ({ worker, dayId, activityId }) => {
     }
 
     return (
-        <div draggable={false} className="w-24 h-24 flex flex-col justify-between p-2 rounded-xl m-3 bg-slate-800">
+        <div draggable={false} className="w-20 h-20 flex flex-col justify-between p-1 rounded-xl m-3 bg-slate-800">
             <p className='text-end'>
                 <button onClick={() => submitChange("deleteWorker")} className="text-white hover:bg-white rounded-full hover:text-gray-700 transition-all duration-200">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
@@ -29,7 +29,7 @@ const DroppedWorker = ({ worker, dayId, activityId }) => {
             </p>
             
             <p className='uppercase text-4xl text-center -mt-4 font-bold text-white'>{worker.name[0]}</p>
-            <p className='text-xs text-gray-300 overflow-x-clip'>{worker.title}</p>              
+            <p className='text-xs text-gray-300 overflow-x-clip ml-1'>{worker.title}</p>              
         </div>
     )
   }

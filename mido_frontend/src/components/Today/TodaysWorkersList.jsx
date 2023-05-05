@@ -6,7 +6,7 @@ import { useGetWorkersQuery } from "../../features/workers/workerSlice.js";
 
 // Components
 import SignInBadge from "../Root/SignInBadge.jsx"
-import SmallWorker from "./SmallWorker";
+import SmallWorker from "../Worker/SmallWorker.jsx";
 
 // Memo
 const MemoizedSmallWorker = memo(SmallWorker)
@@ -25,7 +25,7 @@ const TodaysWorkersList = () => {
   }
     
   return (
-    <div className='flex fixed top-44 -mt-1 z-10 w-full shadow-md bg-white'>
+    <div className='flex fixed top-20 -mt-1 z-10 w-full shadow-md bg-white'>
       {content}
     </div>
   )

@@ -11,7 +11,7 @@ const TodaySelector = ({ oneDay, chooseDate, setChooseDate }) => {
 
   return (
     <div
-      className='bg-gray-50 border-b text-blue-500 w-full flex justify-center items-center gap-10 fixed z-20 top-11'
+      className='bg-gray-50 text-blue-500 w-full flex justify-center items-center gap-10 fixed z-20 top-10 border-b border-black'
       onClick={handleDateClick}
     >
       <input
@@ -21,9 +21,9 @@ const TodaySelector = ({ oneDay, chooseDate, setChooseDate }) => {
         ref={dateRef}
         onChange={(e) => setChooseDate(e.target.value)}
         value={chooseDate}
-        className='py-1 w-44 px-4 my-3 bg-gray-50 text-sm text-gray-700 border border-gray-400 rounded-md leading-tight focus:bg-white focus:outline-none hover:cursor-pointer'
+        className='py-1 w-44 px-4 my-1 bg-gray-50 text-xs text-gray-700 border border-gray-400 rounded-md leading-tight focus:bg-white focus:outline-none hover:cursor-pointer'
       />
-      <p className='font-bold text-md'>
+      <p className='font-bold text-sm'>
         {oneDay?.date.split('-')[2]} {getMonth(oneDay?.date.split('-')[1][1])}{' '}
         {oneDay?.date.split('-')[0]}
       </p>

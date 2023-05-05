@@ -10,11 +10,12 @@ import { toast } from 'react-toastify'
 import { onChange } from '../utils/utilities'
 
 // Endpoint
-import { useCreateWorkerMutation } from '../features/workers/workerSlice'
+import { useCreateWorkerMutation, useGetWorkersQuery } from '../features/workers/workerSlice'
 
 // Components
 import WorkersList from '../components/Worker/WorkersList'
 import WorkerForm from '../components/Worker/WorkerForm'
+import SignInBadge from '../components/Root/SignInBadge'
 
 // Memo
 const MemoizedWorkersList = memo(WorkersList)
@@ -34,6 +35,8 @@ const Workers = () => {
 
   // Mutation
   const [createWorker, { isLoading }] = useCreateWorkerMutation()
+  const { data: workers, isLoading: isQueryLoading, isSuccess, isError, error } = useGetWorkersQuery()
+  let content;
   const canSubmit = [title, name].every(Boolean) && !isLoading;
 
   // Handle worker creation
@@ -55,8 +58,9 @@ const Workers = () => {
     }
   }
 
-  return user ? (
-    <div className='w-full p-10 flex flex-col md:flex-row mt-28'>
+  // Handle req status
+  if (isSuccess) {
+    content = <div className='w-full p-10 flex flex-col md:flex-row mt-28'>
       <div className="lg:w-1/5 w-full mb-10">
         <MemoizedWorkerForm 
           onChange={handleChange} 
@@ -66,10 +70,16 @@ const Workers = () => {
       </div>
       <div className='lg:w-4/5 p-20 w-full'>
         <h4 className='text-xl font-bold text-gray-700'>Workers</h4>
-        <MemoizedWorkersList />
+        <MemoizedWorkersList workers={workers} />
       </div>    
     </div>
-  ) : <Navigate to="/" />
+  } else if (isQueryLoading) {
+    content = <SignInBadge />
+  } else if (isError) {
+    content = <p className='mt-96 w-full text-gray-700 z-20 absolute text-center'>{error.data}</p>
+  }
+
+  return user ? content : <Navigate to="/" />
 }
 
 export default Workers

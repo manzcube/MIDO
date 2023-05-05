@@ -20,7 +20,7 @@ const LoginForm = ({ onChange, onSubmit, inputProps }) => {
         onChange={onChange}  
       />
       <Link to="/register" className='text-xs text-sky-300 underline my-2'>Don't have an account?</Link>
-      <button className='p-2 bg-gray-800 text-white rounded-md mt-3'>Log In</button>
+      <button className='p-2 bg-blue-500 text-white shadow-md rounded-md mt-3 hover:shadow-xl'>Log In</button>
     </form>
   )
 }

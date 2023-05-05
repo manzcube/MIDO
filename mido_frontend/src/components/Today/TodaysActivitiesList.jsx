@@ -1,15 +1,12 @@
 // Lib
 import React, { memo } from 'react';
 
-//Style 
-import "./Activity.css"
-
 // Endpoint
 import { useGetActivitiesQuery } from '../../features/activities/activitySlice';
 
 // Components
 import SignInBadge from "../Root/SignInBadge.jsx"
-import SmallActivity from "./SmallActivity";
+import SmallActivity from "../Activity/SmallActivity";
 
 // Memo
 const MemoizedSmallActivity = memo(SmallActivity)
@@ -37,7 +34,8 @@ const ActivitiesList = () => {
     content = "Sign in please"
   }
   return (
-    <div className='flex fixed top-24 z-10 w-full border-b-2 bg-white grabbable'>
+    <div className='flex flex-col fixed -right-2 h-screen z-20 mt-20 p-5 border-l overflow-y-scroll border-b-2 bg-white grabbable'>
+      <h1 className='text-center'>Activities</h1>
       {content}
     </div>
   )

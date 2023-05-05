@@ -1,6 +1,5 @@
 // Lib
 import React, { useState, memo } from 'react'
-import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
 
 // Endpoint
@@ -11,12 +10,10 @@ import { toast } from 'react-toastify'
 
 // Components
 import DroppingSections from "../components/Today/DroppingSections"
-import Roles from '../components/Role/Roles'
-import TodaysWorkersList from '../components/Worker/TodaysWorkersList'
-import TodaysActivitiesList from '../components/Activity/TodaysActivitiesList'
+import TodaysWorkersList from '../components/Today/TodaysWorkersList'
+import TodaysActivitiesList from '../components/Today/TodaysActivitiesList'
 import TodaySelector from '../components/Today/TodaySelector'
-
-
+import SignInBadge from '../components/Root/SignInBadge'
 
 const MemoizedDayActivitiesList = memo(TodaysActivitiesList)
 const MemoizedDayWorkersList = memo(TodaysWorkersList)
@@ -26,10 +23,25 @@ const Today = () => {
   const date = new Date().toISOString().split("T")[0]
   const [chooseDate, setChooseDate] = useState(date)
   const { data: oneDay, isLoading: isOneDayLoading, isSuccess, isError, error } = useGetTodayQuery(chooseDate)
+  let content;
   const [updateDay, {isLoading: isUpdateLoading }] = useUpdateDayMutation()
 
-  if (isError) {
-    toast.error(error.data)
+  if (isSuccess) {
+    content = <>
+      <TodaySelector oneDay={oneDay} chooseDate={chooseDate} setChooseDate={setChooseDate} />
+      <MemoizedDayWorkersList />
+      <div className="w-full flex">
+        <div className='p-8 pt-44 pr-56 bg-gray-100 flex flex-col w-full'>
+          <DroppingSections oneDay={oneDay} drop={drop} />         
+        </div>
+        <MemoizedDayActivitiesList />
+      </div>
+      
+    </>    
+  } else if (isOneDayLoading) {
+    content = <SignInBadge />
+  } else if (isError) {
+    content = <p className='mt-96 w-full text-gray-700 z-20 absolute text-center'>{error.data}</p>
   } 
 
   // Handle update when dropping activity
@@ -63,16 +75,7 @@ const Today = () => {
   }
 
  
-  return user ? (
-    <div className=''>
-      <TodaySelector oneDay={oneDay} chooseDate={chooseDate} setChooseDate={setChooseDate} />
-      <MemoizedDayWorkersList />
-      <MemoizedDayActivitiesList />
-      <div className='p-10 mt-56 bg-gray-100 flex flex-col w-full'>
-        <DroppingSections oneDay={oneDay} drop={drop} />         
-      </div>
-    </div>
-  ) : <Navigate to="/" />
+  return user ? content : <Navigate to="/" />
 }
 
 export default Today
