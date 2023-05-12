@@ -32,7 +32,7 @@ const RegisterForm = ({ onChange, onSubmit, inputProps }) => {
             value={inputProps.confirm_password} 
             onChange={onChange}
         />
-        <button className='p-2 bg-gray-800 text-white rounded-md mt-3'>Register</button>
+        <button className='p-2 bg-blue-500 text-white rounded-md mt-3'>Register</button>
       </form>
   )
 }

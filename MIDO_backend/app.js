@@ -14,7 +14,7 @@ import workerRoutes from "./routes/workerRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import todayRoutes from "./routes/todayRoutes.js";
 import activityRoutes from "./routes/activityRoutes.js";
-import roleRoutes from "./routes/roleRoutes.js";
+import webhookRoutes from "./routes/webhookRoutes.js";
 import cors from "cors";
 
 // When deploying and having https certificate
@@ -30,7 +30,7 @@ connectDB();
 const app = express();
 
 const corsOptions = {
-  origin: "https://mido.onrender.com",
+  origin: ["http://localhost:3000", "https://fareharbor.com"],
   methods: ["GET", "PUT", "POST", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization", "X-Frame-Options"],
   optionsSuccessStatus: 200, // status for preflights
@@ -58,9 +58,9 @@ app.options(
 
 // Routes
 app.use("/", userRoutes);
+app.use("/fareharbor-webhook", webhookRoutes);
 app.use("/workers", workerRoutes);
 app.use("/activities", activityRoutes);
-app.use("/roles", roleRoutes);
 app.use("/today", todayRoutes);
 app.use("/healthz", (req, res) => {
   res.send("ok").status(200);
