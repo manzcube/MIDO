@@ -1,0 +1,153 @@
+{
+  "booking": {
+    "pk": 167637318,
+    "uuid": "adc75718-fd2b-413c-9617-49a442b923b5",
+    "company": {
+      "name": "Skualo Porto Cristo",
+      "shortname": "skualo",
+      "currency": "eur"
+    },
+    "affiliate_company": null,
+    "display_id": "#167637318",
+    "rebooked_from": "cb4962c4-a196-452f-9872-79be2643654c",
+    "rebooked_to": null,
+    "dashboard_url": "https://fareharbor.com/skualo/dashboard/?overlay=/contacts/139834660/bookings/adc75718-fd2b-413c-9617-49a442b923b5/",
+    "customers": [
+      {
+        "pk": 491224064,
+        "checkin_url": "https://fhchk.co/xf7OM",
+        "checkin_status": null,
+        "customer_type_rate": {
+          "pk": 4390231999,
+          "capacity": 6,
+          "minimum_party_size": null,
+          "maximum_party_size": null,
+          "customer_type": {
+            "pk": 665882,
+            "singular": "CAVE 79\u20ac (TTOO25)",
+            "plural": "CAVE 79\u20ac (TTOO25)",
+            "note": ""
+          },
+          "total": 4897,
+          "total_including_tax": 5925
+        }
+      },
+      {
+        "pk": 491224065,
+        "checkin_url": "https://fhchk.co/xf7ON",
+        "checkin_status": null,
+        "customer_type_rate": {
+          "pk": 4390231999,
+          "capacity": 6,
+          "minimum_party_size": null,
+          "maximum_party_size": null,
+          "customer_type": {
+            "pk": 665882,
+            "singular": "CAVE 79\u20ac (TTOO25)",
+            "plural": "CAVE 79\u20ac (TTOO25)",
+            "note": ""
+          },
+          "total": 4897,
+          "total_including_tax": 5925
+        }
+      },
+      {
+        "pk": 491224066,
+        "checkin_url": "https://fhchk.co/xf7OO",
+        "checkin_status": null,
+        "customer_type_rate": {
+          "pk": 4390231999,
+          "capacity": 6,
+          "minimum_party_size": null,
+          "maximum_party_size": null,
+          "customer_type": {
+            "pk": 665882,
+            "singular": "CAVE 79\u20ac (TTOO25)",
+            "plural": "CAVE 79\u20ac (TTOO25)",
+            "note": ""
+          },
+          "total": 4897,
+          "total_including_tax": 5925
+        }
+      },
+      {
+        "pk": 491224067,
+        "checkin_url": "https://fhchk.co/xf7OP",
+        "checkin_status": null,
+        "customer_type_rate": {
+          "pk": 4390231999,
+          "capacity": 6,
+          "minimum_party_size": null,
+          "maximum_party_size": null,
+          "customer_type": {
+            "pk": 665882,
+            "singular": "CAVE 79\u20ac (TTOO25)",
+            "plural": "CAVE 79\u20ac (TTOO25)",
+            "note": ""
+          },
+          "total": 4897,
+          "total_including_tax": 5925
+        }
+      }
+    ],
+    "invoice_price": 0,
+    "invoice_price_display": "0,00",
+    "confirmation_url": "https://fareharbor.com/embeds/book/skualo/items/263147/booking/adc75718-fd2b-413c-9617-49a442b923b5/",
+    "custom_field_values": [
+      {
+        "pk": 714585299,
+        "name": "Idioma",
+        "value": "7346422",
+        "display_value": "FRE"
+      },
+      {
+        "pk": 714585300,
+        "name": "Swim",
+        "value": "7707151",
+        "display_value": "Si"
+      },
+      {
+        "pk": 714585301,
+        "name": "TTOO",
+        "value": "7351600",
+        "display_value": "EUROPALIA"
+      },
+      {
+        "pk": 714585302,
+        "name": "Vendedor",
+        "value": "7626325",
+        "display_value": "Teresa EUROPALIA (682 854 994)"
+      },
+      {
+        "pk": 714585303,
+        "name": "Pick Up?",
+        "value": "7345708",
+        "display_value": "Si"
+      },
+      {
+        "pk": 714585304,
+        "name": "Hotel",
+        "value": "7283288",
+        "display_value": "Blau Punta Reina"
+      },
+      {
+        "pk": 714585305,
+        "name": "Room",
+        "value": "7749",
+        "display_value": "7749"
+      },
+      {
+        "pk": 714585306,
+        "name": "Pick Up Time",
+        "value": "7343657",
+        "display_value": "11:00"
+      },
+      {
+        "pk": 714585307,
+        "name": "Comentarios",
+        "value": "",
+        "display_value": ""
+      }
+    ]
+  }
+}

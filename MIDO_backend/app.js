@@ -30,7 +30,7 @@ connectDB();
 const app = express();
 
 const corsOptions = {
-  origin: ["http://localhost:3000", "https://fareharbor.com"],
+  origin: ["https://mido.onrender.com", "https://fareharbor.com"],
   methods: ["GET", "PUT", "POST", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization", "X-Frame-Options"],
   optionsSuccessStatus: 200, // status for preflights

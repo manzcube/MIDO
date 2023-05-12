@@ -1,64 +1,36 @@
 [
   {
-    "booking": {
-      "pk": 456,
-      "payments": [
-        {
-          "amount_paid": 1939,
-          "amount_paid_display": "19.39",
-          "created_at": "2020-07-23T14:43:30-1000",
-          "currency": "usd",
-          "initial_amount_paid": 2154,
-          "initial_amount_paid_display": "21.54",
-          "pk": 6234,
-          "refunds": [
-            {
-              "amount_refunded": 215,
-              "amount_refunded_display": "2.15",
-              "created_at": "2020-07-23T14:43:41-1000",
-              "is_cancelled": false,
-              "pk": 1123
-            }
-          ],
-          "status": "succeeded",
-          "type": "affiliate",
-          "in_store_payment_type": {
-            "pk": 137,
-            "name": "Cash"
-          }
-        }
-      ]
-    }
-  },
-  {
-    "booking": {
-      "pk": 789,
-      "payments": [
-        {
-          "amount_paid": 2500,
-          "amount_paid_display": "25.00",
-          "created_at": "2022-03-15T09:30:00-0500",
-          "currency": "eur",
-          "initial_amount_paid": 3000,
-          "initial_amount_paid_display": "30.00",
-          "pk": 4567,
-          "refunds": [
-            {
-              "amount_refunded": 500,
-              "amount_refunded_display": "5.00",
-              "created_at": "2022-03-16T14:15:00-0500",
-              "is_cancelled": true,
-              "pk": 8912
-            }
-          ],
-          "status": "succeeded",
-          "type": "online",
-          "in_store_payment_type": {
-            "pk": 246,
-            "name": "Credit Card"
-          }
-        }
-      ]
-    }
+    "number_of_people": 4,
+    "activity": "CAVE",
+    "bookingURL": "https://fareharbor.com/skualo/dashboard/?overlay=/contacts/139834660/bookings/adc75718-fd2b-413c-9617-49a442b923b5/",
+    "values": [
+      {
+        "Idioma": "FRE"
+      },
+      {
+        "Swim": "Si"
+      },
+      {
+        "TTOO": "EUROPALIA"
+      },
+      {
+        "Vendedor": "Teresa EUROPALIA (682 854 994)"
+      },
+      {
+        "Pick Up?": "Si"
+      },
+      {
+        "Hotel": "Blau Punta Reina"
+      },
+      {
+        "Room": "7749"
+      },
+      {
+        "Pick Up Time": "11:00"
+      },
+      {
+        "Comentarios": ""
+      }
+    ]
   }
 ]
