@@ -32,5 +32,73 @@
         "Comentarios": ""
       }
     ]
+  },
+  {
+    "number_of_people": 2,
+    "activity": "SNK",
+    "bookingURL": "https://fareharbor.com/skualo/dashboard/?overlay=/contacts/139834660/bookings/adc75718-fd2b-fj-9617-49a442b923b5/",
+    "values": [
+      {
+        "Idioma": "ENG"
+      },
+      {
+        "Swim": "Si"
+      },
+      {
+        "TTOO": "EUROPALIA"
+      },
+      {
+        "Vendedor": "Teresa EUROPALIA (682 854 994)"
+      },
+      {
+        "Pick Up?": "Si"
+      },
+      {
+        "Hotel": "Cala Mandia"
+      },
+      {
+        "Room": "280"
+      },
+      {
+        "Pick Up Time": "14:30"
+      },
+      {
+        "Comentarios": ""
+      }
+    ]
+  },
+  {
+    "number_of_people": 3,
+    "activity": "TOUR",
+    "bookingURL": "https://fareharbor.com/skualo/dashboard/?overlay=/contacts/139834660/bookings/adc75718-fd2b-413c-9617-49a442b923b5/",
+    "values": [
+      {
+        "Idioma": "ENG"
+      },
+      {
+        "Swim": "Hay un niño que no"
+      },
+      {
+        "TTOO": "EUROPALIA"
+      },
+      {
+        "Vendedor": "Teresa EUROPALIA (682 854 994)"
+      },
+      {
+        "Pick Up?": "No"
+      },
+      {
+        "Hotel": "Somalia"
+      },
+      {
+        "Room": "280"
+      },
+      {
+        "Pick Up Time": ""
+      },
+      {
+        "Comentarios": ""
+      }
+    ]
   }
 ]

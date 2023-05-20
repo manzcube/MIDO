@@ -7,13 +7,14 @@ import { toast } from 'react-toastify'
 
 // Endpoint
 import { useDeleteActivityMutation } from '../../features/activities/activitySlice'
+import { getTextColor } from '../../utils/utilities'
 
 
 const SingleActivity = ({activity}) => {
     const [sureToDelete, setSureToDelete] = useState(false)
     const [deleteActivity, { isLoading }] = useDeleteActivityMutation()
     const canDelete = activity?._id && !isLoading;
-
+    const textColor = getTextColor(activity.color)
     // Handle activity deletion
     const onDeleteActivty = async() => {
         if(canDelete) {
@@ -27,8 +28,8 @@ const SingleActivity = ({activity}) => {
     }
 
     return (
-        <div className={`${activity.color} p-4 space-y-5 w-44 rounded-md m-4 shadow-md`}>
-            <p className='p-1 uppercase font-bold text-gray-800'>{activity.title}</p>
+        <div className={`${activity.color} p-4 space-y-5 w-36 rounded-md m-4 shadow-md ${textColor}`}>
+            <p className="p-1 uppercase font-bold">{activity.title}</p>
             <div className="w-full text-end">
                 <span className='space-x-3 flex items-center'>
                     <Link to={`/activities/edit/${activity._id}`}>

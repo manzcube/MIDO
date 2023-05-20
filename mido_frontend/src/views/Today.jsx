@@ -12,10 +12,14 @@ import { toast } from 'react-toastify'
 import DroppingSections from "../components/Today/DroppingSections"
 import TodaysWorkersList from '../components/Today/TodaysWorkersList'
 import TodaysActivitiesList from '../components/Today/TodaysActivitiesList'
+import TodayBoatsList from '../components/Today/TodayBoatsList'
+import BookingsList from '../components/Bookings/BookingsList'
 import TodaySelector from '../components/Today/TodaySelector'
 import SignInBadge from '../components/Root/SignInBadge'
 
 const MemoizedDayActivitiesList = memo(TodaysActivitiesList)
+const MemoizedDayBoatsList = memo(TodayBoatsList)
+const MemoBookingsList = memo(BookingsList)
 const MemoizedDayWorkersList = memo(TodaysWorkersList)
 
 const Today = () => {
@@ -31,12 +35,13 @@ const Today = () => {
       <TodaySelector oneDay={oneDay} chooseDate={chooseDate} setChooseDate={setChooseDate} />
       <MemoizedDayWorkersList />
       <div className="w-full flex">
-        <div className='p-8 pt-44 pr-56 bg-gray-100 flex flex-col w-full'>
+        <MemoBookingsList />
+        <div className='p-8 pt-44 pl-64 pr-56 bg-gray-100 flex flex-col w-full'>
           <DroppingSections oneDay={oneDay} drop={drop} />         
         </div>
         <MemoizedDayActivitiesList />
+        {/* <MemoizedDayBoatsList /> */}
       </div>
-      
     </>    
   } else if (isOneDayLoading) {
     content = <SignInBadge />
@@ -73,7 +78,6 @@ const Today = () => {
       }
     }   
   }
-
  
   return user ? content : <Navigate to="/" />
 }

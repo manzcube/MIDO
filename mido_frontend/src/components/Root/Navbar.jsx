@@ -53,7 +53,7 @@ const Navbar = () => {
                         {userFromStorage ? (
                             <>
                                 <Link to="/today" className={`mx-3 my-auto p-1 rounded-lg hover:bg-white hover:text-blue-500 transition-all duration-300 ${isCurrentlyHere(location === "today")}`}>Today</Link>
-                                <Link to="/pickups" className={`mx-3 my-auto p-1 rounded-lg hover:bg-white hover:text-blue-500 transition-all duration-300 ${isCurrentlyHere(location === "pickups")}`}>Pick Ups</Link>
+                                <a href="https://exelbookings.artblau.com/calendario.php" target='_blank' className={`mx-3 my-auto p-1 rounded-lg hover:bg-white hover:text-blue-500 transition-all duration-300`}>Pick Ups</a>
                                 <Link to="/activities" className={`mx-3 my-auto p-1 rounded-lg hover:bg-white hover:text-blue-500 transition-all duration-300 ${isCurrentlyHere(location === "activities")}`}>Activities</Link>
                                 <Link to="/workers" className={`mx-3 my-auto p-1 rounded-lg hover:bg-white hover:text-blue-500 transition-all duration-300 ${isCurrentlyHere(location === "workers")}`}>Workers</Link>
                             </>) : ""}                        

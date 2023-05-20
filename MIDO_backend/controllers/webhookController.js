@@ -45,6 +45,21 @@ export const saveBooking = (req, res) => {
   }
 };
 
+export const getBookings = (req, res) => {
+  try {
+    // Check if the file exists
+    if (existsSync(filePath)) {
+      // Read existing data from JSON file
+      const existingData = JSON.parse(readFileSync(filePath, "utf-8"));
+      res.status(200).json(existingData);
+    } else {
+      throw new Error("File doesn't exist");
+    }
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+};
+
 export const health = async (req, res) => {
   res.status(200).json("The endpoint is healthy");
 };

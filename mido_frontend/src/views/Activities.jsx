@@ -58,16 +58,16 @@ const Activities = () => {
 
   if (isSuccess) {
     content = <div className='w-full p-20 grid grid-cols-2 mt-28'>
-                <div className="pr-20">
-                  <MemoizedActivityForm onChange={handleChange} onSubmit={onSubmit} inputProps={{ title, color }} />
-                </div>
-                <div>
-                  <h4 className='text-xl font-bold mb-3 text-gray-700'>Activities</h4>
-                  <div className='flex flex-wrap gap-8'>
-                    <MemoizedActivitiesList activities={activities} />
-                  </div>
-                </div>    
-              </div>
+      <div className="pr-20">
+        <MemoizedActivityForm onChange={handleChange} title="Create Activity" onSubmit={onSubmit} inputProps={{ title, color }} />
+      </div>
+      <div>
+        <h4 className='text-xl font-bold mb-3 text-gray-700'>Activities</h4>
+        <div className='flex flex-wrap gap-8'>
+          <MemoizedActivitiesList activities={activities} />
+        </div>
+      </div>    
+    </div>
   } else if (isQueryLoading) {
     content = <SignInBadge />
   } else if (isError) {

@@ -12,7 +12,6 @@ import Navbar from "./components/Root/Navbar";
 
 // Views
 import Login from "./views/Login"
-import Register from "./views/Register"
 import Pickups from "./views/Pickups";
 import Today from "./views/Today"
 import Workers from "./views/Workers";
@@ -42,7 +41,6 @@ function App() {
         <Routes>
           <Route path="/*" element={<Dashboard />} />
           <Route exact path="/login" element={<Login />} />
-          <Route exact path="/register" element={<Register />} />
           <Route path="/activities" element={<Activities />} />
           <Route path="/pickups" element={<Pickups />} />
           <Route path="/activities/edit/:id" element={<EditActivity />} />
@@ -51,7 +49,6 @@ function App() {
           <Route path="/today" element={<Today />} />
         </Routes>
       </main>
-      <Footer />
     </div>
   );
 }

@@ -29,14 +29,12 @@ const EditActivity = () => {
     
     const [formData, setFormData] = useState({
         title: '',
-        price: 0,
-        color: "bg-sky-200",
-        schedule: "08:00",
+        color: "bg-sky-200"
     })
-    const { title, duration, price, color, schedule } = formData
+    const { title, color} = formData
     
     const handleChange = onChange(setFormData)
-    const canSubmit = [title, color, schedule].every(Boolean) && !isUpdateLoading;
+    const canSubmit = [title, color].every(Boolean) && !isUpdateLoading;
     let content
     // Re-render for data
     useEffect(() => {
@@ -45,8 +43,6 @@ const EditActivity = () => {
                 ...prevState,
                 title: activity.title,
                 color: activity.color,
-                price: activity.price,
-                schedule: activity.schedule
             }))
         }
     }, [isSuccess])
@@ -56,7 +52,7 @@ const EditActivity = () => {
         e.preventDefault()
         if (canSubmit) {
             try {
-                const updatedData = { title, price, color, schedule }
+                const updatedData = { title, color }
                 await updateActivity({ updatedData, id: activityId }).unwrap()
                 navigate("/activities")
                 toast.success("Activity updated")
@@ -73,7 +69,7 @@ const EditActivity = () => {
     if (isLoading) {
         content = <SignInBadge />
     } else if (isSuccess) {
-        content = <MemoizedActivityForm onChange={handleChange} onSubmit={onSubmit} inputProps={{ title, duration, price, schedule, color }}  />
+        content = <MemoizedActivityForm onChange={handleChange} title="Edit Activity" onSubmit={onSubmit} inputProps={{ title, color }}  />
     } else if (isError) {
         content = "Sign in please"
     }

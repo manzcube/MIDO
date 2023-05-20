@@ -21,9 +21,9 @@ const SmallActivity = ({activity}) => {
             id={activity._id} 
             draggable 
             onDragStart={e => onGrab(e)} 
-            className={`${activity.color} w-32 flex flex-col justify-between p-1 rounded-md m-4 shadow-md cursor-grab hover:shadow-xl hover:scale-105 transition-all duration-200`}
+            className={`${activity.color} w-24 flex flex-col justify-between p-1 rounded-md m-4 shadow-md cursor-grab hover:shadow-xl hover:scale-105 transition-all duration-200`}
         >
-            <p className={`p-1 uppercase text ${textColor}`}>{activity.title}</p>
+            <p className={`p-1 uppercase text-xs ${textColor}`}>{activity.title}</p>
         </div>
     )
 }

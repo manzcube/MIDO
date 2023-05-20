@@ -63,6 +63,7 @@ const Workers = () => {
     content = <div className='w-full p-10 flex flex-col md:flex-row mt-28'>
       <div className="lg:w-1/5 w-full mb-10">
         <MemoizedWorkerForm 
+          title="Create Worker"
           onChange={handleChange} 
           onSubmit={onSubmit} 
           inputProps={{ title, name }} 

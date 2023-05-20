@@ -1,6 +1,6 @@
 // Lib
 import React, { memo } from 'react';
-
+import "./Today.css"
 // Endpoint
 import { useGetWorkersQuery } from "../../features/workers/workerSlice.js";
 
@@ -25,7 +25,7 @@ const TodaysWorkersList = () => {
   }
     
   return (
-    <div className='flex fixed top-20 -mt-1 z-10 w-full shadow-md bg-white'>
+    <div className='flex fixed top-20 -mt-1 z-10 w-full shadow-md bg-white overflow-x-scroll' id='today-workers-list'>
       {content}
     </div>
   )

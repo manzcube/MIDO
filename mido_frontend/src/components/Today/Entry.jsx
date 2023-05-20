@@ -58,10 +58,10 @@ const Entry = ({activity, dayId}) => {
   
   
     return (
-        <div className='flex w-full items-center'>
-            <div className={`${activity.color} flex justify-between p-3 rounded-md my-4 w-full shadow-md`}>
-                <div className='w-full max-w-sm'>
-                    <p className={`p-1 uppercase font-extrabold text-xl ${textColor}`}>{activity.title}</p>
+        <div className={`${activity.color} flex rounded-md my-4 w-full shadow-md`}>
+            <div className='p-2 w-full'>
+                <p className={`uppercase font-bold text-xs lg:text-md ${textColor}`}>{activity.title}</p>
+                <div className='w-full'>
                     <MemoizedComments 
                         onSave={() => submitChange("comments")} 
                         value={commentsData}
@@ -69,24 +69,27 @@ const Entry = ({activity, dayId}) => {
                         changing={changing} 
                     />
                 </div>
-                <div 
-                    onDrop={e => drop(e)} 
-                    onDragOver={e => e.preventDefault()}  
-                    className={`w-full mx-3 border flex flex-wrap items-center rounded-md border-white ${getBgColor(activity.color)}`}
-                >
-                    {activity.workers?.map(worker => (
-                    <DroppedWorker dayId={dayId} activityId={activity._id} key={activity.workers.indexOf(worker)} worker={worker} />
-                    ))}
-                </div>
-                <div>
-                    <button onClick={() => submitChange("deleteActivity")} className={`text-sm ${textColor} hover:bg-red-400 rounded-full hover:text-white transition-all duration-200`}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
             </div>
-            
+            <div 
+                onDrop={e => drop(e)} 
+                onDragOver={e => e.preventDefault()}  
+                className={`w-full my-2 border flex flex-wrap rounded-lg border-white ${getBgColor(activity.color)}`}
+            >
+                <div className='flex gap-4 w-full px-1'>
+                    <p className={`uppercase font-bold text-xs lg:text-md ${textColor}`}>CAPTAIN</p>
+                    <p className={`uppercase font-bold text-xs lg:text-md ${textColor}`}>STAFF</p>  
+                </div>
+                {activity.workers?.map(worker => (
+                <DroppedWorker dayId={dayId} activityId={activity._id} key={activity.workers.indexOf(worker)} worker={worker} />
+                ))}
+            </div>
+            <div className=''>
+                <button onClick={() => submitChange("deleteActivity")} className={`${textColor}`}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 m-1 hover:bg-red-400 hover:rounded-full hover:text-white transition-all duration-200">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
         </div>
     )
 }

@@ -30,7 +30,6 @@ const EditWorker = () => {
     const [formData, setFormData] = useState({
         title: '',
         name: '',
-        picture: '',
     })
     const { title, name, picture } = formData
 
@@ -44,7 +43,6 @@ const EditWorker = () => {
             setFormData({
                 title: worker.title,
                 name: worker.name,
-                picture: worker.picture,
             })
         }
     }, [isSuccess])
@@ -54,7 +52,7 @@ const EditWorker = () => {
         e.preventDefault()
         if (canSubmit) {
             try {
-                const updatedData = { title, name, picture }
+                const updatedData = { title, name }
                 await updateWorker({ updatedData, id: workerId }).unwrap()
                 navigate("/workers")
                 toast.success("Worker updated")
@@ -69,7 +67,7 @@ const EditWorker = () => {
     if (isLoading) {
         content = <SignInBadge />
     } else if (isSuccess) {
-        content = <MemoizedWorkerForm onChange={handleChange} onSubmit={onSubmit} inputProps={{ title, name, picture }}  />
+        content = <MemoizedWorkerForm onChange={handleChange} onSubmit={onSubmit} title="Edit Worker" inputProps={{ title, name }}  />
     } else if (isError) {
         content = "Sign in please"
     }

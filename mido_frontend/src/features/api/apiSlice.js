@@ -1,9 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+const localBackend = "http://localhost:5000";
+const publicBackend = "https://worflow-backend.onrender.com";
+
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://worflow-backend.onrender.com",
+    baseUrl: localBackend,
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("token");
       // If we have a token set in state, let's assume that we should be passing it.

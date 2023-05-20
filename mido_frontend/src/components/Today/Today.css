@@ -9,3 +9,15 @@ input::-webkit-calendar-picker-indicator:hover {
 .grabbable::-webkit-scrollbar {
     height: 5px;
 }
+
+#today-workers-list {
+    overflow-x: scroll;
+}
+
+#today-workers-list::-webkit-scrollbar {
+    height: 5px;
+}
+
+.rightColumn {
+    height: 50vh;
+}

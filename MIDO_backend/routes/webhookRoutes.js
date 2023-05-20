@@ -1,7 +1,12 @@
 import { Router } from "express";
-import { saveBooking, health } from "../controllers/webhookController.js";
+import {
+  saveBooking,
+  health,
+  getBookings,
+} from "../controllers/webhookController.js";
 const router = Router();
 
-router.route("/").get(health).post(saveBooking);
+router.route("/").get(getBookings).post(saveBooking);
+router.route("/health").get(health);
 
 export default router;

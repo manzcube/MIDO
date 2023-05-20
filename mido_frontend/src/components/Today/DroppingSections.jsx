@@ -11,7 +11,7 @@ const DroppingSections = ({ drop, oneDay }) => {
               id='dropDiv' 
               onDrop={e => drop(e, "08:30")} 
               onDragOver={e => e.preventDefault()} 
-              className='flex flex-col items-center p-5 m-5 border border-gray-200 rounded-lg bg-white'
+              className='flex flex-col items-center p-3 m-5 border border-gray-200 rounded-lg bg-white'
             >
               {oneDay?.activities.map(act => {
                 return act.schedule.startsWith("08") ? 
@@ -26,7 +26,7 @@ const DroppingSections = ({ drop, oneDay }) => {
               id='dropDiv' 
               onDrop={e => drop(e, "11:00")} 
               onDragOver={e => e.preventDefault()} 
-              className='flex flex-col items-center p-5 m-5 border border-gray-200 rounded-lg bg-white ${oneDay.act}'
+              className='flex flex-col items-center p-3 m-5 border border-gray-200 rounded-lg bg-white ${oneDay.act}'
             >
               {oneDay?.activities.map(act => {
                 return act.schedule.startsWith("11") ? 
@@ -41,10 +41,25 @@ const DroppingSections = ({ drop, oneDay }) => {
               id='dropDiv' 
               onDrop={e => drop(e, "14:30")} 
               onDragOver={e => e.preventDefault()} 
-              className='flex flex-col items-center p-5 m-5 border border-gray-200 rounded-lg bg-white'
+              className='flex flex-col items-center p-3 m-5 border border-gray-200 rounded-lg bg-white'
             >
               {oneDay?.activities.map(act => {
                 return act.schedule.startsWith("14") ? 
+                  <Entry key={act._id} activity={act} dayId={oneDay.id} /> : ""
+              })}
+            </div>
+        </div> 
+
+        <div className='mt-10'>
+            <p className='text-lg font-bold m-2 text-gray-700'>17:00-19:00</p>
+            <div 
+              id='dropDiv' 
+              onDrop={e => drop(e, "17:00")} 
+              onDragOver={e => e.preventDefault()} 
+              className='flex flex-col items-center p-3 m-5 border border-gray-200 rounded-lg bg-white'
+            >
+              {oneDay?.activities.map(act => {
+                return act.schedule.startsWith("17") ? 
                   <Entry key={act._id} activity={act} dayId={oneDay.id} /> : ""
               })}
             </div>
