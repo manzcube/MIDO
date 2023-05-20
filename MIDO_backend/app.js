@@ -33,7 +33,7 @@ const localFrontend = "http://localhost:3000";
 const publicFrontend = "https://mido.onrender.com";
 
 const corsOptions = {
-  origin: [localFrontend, "https://fareharbor.com"],
+  origin: [publicFrontend, "https://fareharbor.com"],
   methods: ["GET", "PUT", "POST", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization", "X-Frame-Options"],
   optionsSuccessStatus: 200, // status for preflights
