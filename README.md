@@ -1,10 +1,10 @@
 # MIDO
-Workflow coordination application
+Workflow & bookings management application
 
-To test the application, contact me and I will send you some premade credentials.
+Am developing this app for specific usecases of the client. 
 
-Structure and organize activities/tasks, employees and roles with Drag&Drop.
-FullStack application made with react and Reduxjstoolkit, tailwindcss on the frontend. And Node server consuming MongoDB.
+Drag&Drop Aactivities & Employees.
+FullStack application made with ReactJS and Reduxjs/toolkit, tailwindcss for styling. Then the backend is made with Express/NodeJs, communicating to a MongoDB Cluster.
 
 ![React App - Brave 2_6_2023 10_49_57 PM](https://user-images.githubusercontent.com/88792194/217096004-8e1ccdf3-d9da-4f31-8ec8-b777bd3b4461.png)
 ![React App - Brave 2_6_2023 10_50_13 PM](https://user-images.githubusercontent.com/88792194/217096013-00d705e3-76e4-4961-ad9e-a958f8d97e27.png)
