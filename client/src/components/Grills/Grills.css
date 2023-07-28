@@ -1,0 +1,9 @@
+.inner-shadow {
+    transition: box-shadow 0.3s ease-in-out; /* Add a transition effect */
+  }
+  
+  .inner-shadow:focus {
+    border: none;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2);
+  }
+  

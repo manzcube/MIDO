@@ -1,0 +1,20 @@
+input::-webkit-calendar-picker-indicator:hover {
+    cursor: pointer;
+}
+
+.grabbable {
+    overflow-x: scroll;
+}
+
+.grabbable::-webkit-scrollbar {
+    height: 5px;
+}
+
+#today-workers-list {
+    overflow-x: scroll;
+}
+
+#today-workers-list::-webkit-scrollbar {
+    height: 5px;
+}
+

@@ -1,0 +1,16 @@
+.activitiesList {
+    height: 70ch;
+}
+.activitiesList::-webkit-scrollbar {
+    width: 5px;
+    border-radius: 10px;
+    background: #575757;
+}
+
+.grabbable {
+    overflow-x: scroll;
+}
+
+.grabbable::-webkit-scrollbar {
+    height: 5px;
+}

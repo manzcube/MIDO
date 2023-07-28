@@ -1,0 +1,12 @@
+
+.grabbable {
+    overflow-x: scroll;
+}
+
+.grabbable::-webkit-scrollbar {
+    height: 5px;
+}
+
+.small-worker-text { 
+    font-size: 0.9ch;
+}
