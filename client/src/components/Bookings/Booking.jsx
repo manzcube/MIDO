@@ -7,13 +7,14 @@ const Booking = ({ book }) => {
     <div>
       <div className={`m-3 rounded border-black border p-2 text-xs`}>
         <p className="w-full flex justify-between gap-2">
-          <span>{book.activity}</span>
+          <span>{book.activityName}</span>
+          <span>Start At {book.start_at}</span>
           <span>
             {book.number_of_people} {values[0][1]}
           </span>
         </p>
-        {values.map((each) => (
-          <p className="w-full flex justify-between gap-2">
+        {values.map((each, i) => (
+          <p key={i} className="w-full flex justify-between gap-2">
             <span>{each[0]}</span>
             <span>{each[1]}</span>
           </p>

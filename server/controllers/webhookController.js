@@ -4,8 +4,9 @@ export const saveBooking = async (req, res) => {
   try {
     const bookingData = req.body;
     const dashboardUrl = bookingData.booking.dashboard_url;
-    const date = newDate.toISOString().split("T")[0];
-    const newDate = new Date(customers.availability.start_at);
+    const newDate = new Date(bookingData.booking.availability.start_at);
+    const start_at = newDate.getHours();
+    const extractedDate = newDate.toISOString().split("T")[0];
     const activityName =
       bookingData.booking.customers[0].customer_type_rate.customer_type.singular.split(
         " "
@@ -17,14 +18,15 @@ export const saveBooking = async (req, res) => {
 
     // New Input
     const newData = {
-      number_of_people: bookingData.booking.customers.length,
+      number_of_people: bookingData.booking.customer_count,
       activityName,
+      start_at,
       bookingURL: dashboardUrl,
       values,
     };
 
     // Check if is the first booking of the day
-    const bookingExists = await Bookings.findOne({ date: date });
+    const bookingExists = await Bookings.findOne({ date: extractedDate });
     if (bookingExists) {
       // There are some bookings today
       // Push new booking
@@ -41,7 +43,7 @@ export const saveBooking = async (req, res) => {
     } else {
       // If no bookings yet
       const createNewBooking = await Bookings.create({
-        date: date,
+        date: extractedDate,
         bookings_list: [newData],
       });
       // If cannot create first booking of the day

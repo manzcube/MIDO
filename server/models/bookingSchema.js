@@ -7,13 +7,13 @@ const bookingsSchema = Schema(
       required: true,
     },
     bookings_list: [
-        {
-            number_of_people: Number,
-            start_at: String,
-            activity: String,
-            bookingURL: String,
-            values: Array
-        }
+      {
+        number_of_people: Number,
+        activityName: String,
+        start_at: String,
+        bookingURL: String,
+        values: Array,
+      },
     ],
   },
   { timestampsh: true, toJSON: { virtuals: true } }

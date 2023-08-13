@@ -1,6 +1,6 @@
 // Lib
-import React, { memo } from 'react';
-import "./Today.css"
+import React, { memo } from "react";
+import "./Today.css";
 
 // Components
 import SmallWorker from "../Worker/SmallWorker.jsx";
@@ -10,16 +10,21 @@ const DayWorkersList = ({ workers }) => {
   const sortedWorkers = [...workers].sort((a, b) => {
     const titleA = a.title.toUpperCase();
     const titleB = b.title.toUpperCase();
-    return titleA < titleB ? -1 : titleA > titleB ? 1 : 0      
+    return titleA < titleB ? -1 : titleA > titleB ? 1 : 0;
   });
 
-  let content = sortedWorkers.map(worker => <SmallWorker key={worker._id} draggable={true} worker={worker} />)
-    
+  let content = sortedWorkers.map((worker) => (
+    <SmallWorker key={worker._id} draggable={true} worker={worker} />
+  ));
+
   return (
-    <div className='flex fixed top-20 -mt-1 z-20 w-full shadow-md bg-white overflow-x-scroll' id='today-workers-list'>
+    <div
+      className="flex fixed top-20 -mt-1 z-20 w-full shadow-md bg-white overflow-x-scroll"
+      id="today-workers-list"
+    >
       {content}
     </div>
-  )
-}
+  );
+};
 
-export default DayWorkersList
+export default DayWorkersList;
