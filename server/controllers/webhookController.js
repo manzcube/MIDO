@@ -1,4 +1,5 @@
 import Bookings from "../models/bookingSchema.js";
+import Logs from "../models/logSchema.js";
 
 export const saveBooking = async (req, res) => {
   try {
@@ -40,6 +41,9 @@ export const saveBooking = async (req, res) => {
       if (!updatedBooking)
         res.status(400).json(`Could not save new booking, ${dashboardUrl}`);
       res.status(200).json("Bookings Created and Saved successfully!");
+      await Logs.create({
+        message: `A booking entered ${req.body.booking.uuid}`,
+      });
     } else {
       // If no bookings yet
       const createNewBooking = await Bookings.create({
