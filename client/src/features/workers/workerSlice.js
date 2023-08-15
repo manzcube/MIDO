@@ -14,6 +14,7 @@ export const workerSlice = apiSlice.injectEndpoints({
         url: `/workers/${id}`,
         method: "GET",
       }),
+      invalidatesTags: ["whenUpdatingWorker"],
     }),
     createWorker: builder.mutation({
       query: (body) => ({
@@ -29,7 +30,7 @@ export const workerSlice = apiSlice.injectEndpoints({
         method: "PUT",
         body: updatedData,
       }),
-      invalidatesTags: ["whenWorkersListChanged"],
+      invalidatesTags: ["whenWorkersListChanged", "whenUpdatingWorker"],
     }),
     deleteWorker: builder.mutation({
       query: (id) => ({
@@ -37,6 +38,7 @@ export const workerSlice = apiSlice.injectEndpoints({
         method: "DELETE",
       }),
       invalidatesTags: ["whenWorkersListChanged"],
+      providesTags: ["whenUpdatingWorker"],
     }),
   }),
 });
