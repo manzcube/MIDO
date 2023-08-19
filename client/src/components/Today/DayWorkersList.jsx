@@ -60,7 +60,7 @@ const DayWorkersList = ({ workers }) => {
 
   return (
     <div
-      className="flex fixed top-20 z-20 w-full shadow-md bg-white overflow-x-scroll"
+      className="flex fixed top-20 -mt-2 z-20 w-full shadow-md bg-white overflow-x-scroll"
       id="today-workers-list"
     >
       {/* {creatingWorker ? (
