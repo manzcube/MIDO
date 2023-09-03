@@ -6,3 +6,5 @@
 
 /server/dist
 /client/build
+
+/NODE_MODULES
