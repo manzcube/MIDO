@@ -1,20 +1,20 @@
 // Lib
-import React, { memo } from 'react';
-import "./Activity.css"
+import React, { memo } from "react";
+import "./Activity.css";
 
 // Endpoint
-import { useGetActivitiesQuery } from '../../features/activities/activitySlice';
+import { useGetActivitiesQuery } from "../../features/activities/activitySlice";
 
 // Components
-import SingleActivity from './SingleActivity';
-import SignInBadge from '../Root/SignInBadge';
+import SingleActivity from "./SingleActivity";
+import SignInBadge from "../Root/SignInBadge";
 
 // Memo
-const MemoizedSingleActivity = memo(SingleActivity)
+const MemoizedSingleActivity = memo(SingleActivity);
 
 const ActivitiesList = ({ activities }) => {
-  const sorted = [...activities]
-  sorted.sort(function(a, b) {
+  const sorted = [...activities];
+  sorted.sort(function (a, b) {
     if (a.color < b.color) {
       return -1;
     }
@@ -23,8 +23,14 @@ const ActivitiesList = ({ activities }) => {
     }
     return 0;
   });
-    
-  return sorted.map(act => <MemoizedSingleActivity key={act._id} activity={act} />)
-}
 
-export default ActivitiesList
+  return (
+    <div className="flex flex-wrap gap-5">
+      {sorted.map((act) => (
+        <MemoizedSingleActivity key={act._id} activity={act} />
+      ))}
+    </div>
+  );
+};
+
+export default ActivitiesList;

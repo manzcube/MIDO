@@ -38,7 +38,7 @@ const Navbar = () => {
 
   return (
     <React.Fragment>
-      <nav className="drop-shadow-md text-white bg-blue-500 text-xs w-full flex justify-between p-2 fixed top-0 z-20">
+      <nav className="drop-shadow-md text-white bg-sky-700 text-xs w-full flex justify-between p-2 fixed top-0 z-20">
         <div className="ml-3 flex items-center">
           <Link to="/" className="decoration-0">
             <svg
@@ -63,28 +63,28 @@ const Navbar = () => {
             {userFromStorage ? (
               <>
                 <Link
+                  to="/"
+                  className={`mx-3 my-auto p-1 rounded hover:bg-white hover:text-blue-500 transition-all duration-300 ${isCurrentlyHere(
+                    location === ""
+                  )}`}
+                >
+                  Home
+                </Link>
+                <Link
                   to="/today"
                   className={`mx-3 my-auto p-1 rounded hover:bg-white hover:text-blue-500 transition-all duration-300 ${isCurrentlyHere(
                     location === "today"
                   )}`}
                 >
-                  Today
+                  Dashboard
                 </Link>
                 <Link
-                  to="/activities"
+                  to="/assets"
                   className={`mx-3 my-auto p-1 rounded hover:bg-white hover:text-blue-500 transition-all duration-300 ${isCurrentlyHere(
-                    location === "activities"
+                    location === "assets"
                   )}`}
                 >
-                  Activities
-                </Link>
-                <Link
-                  to="/workers"
-                  className={`mx-3 my-auto p-1 rounded hover:bg-white hover:text-blue-500 transition-all duration-300 ${isCurrentlyHere(
-                    location === "workers"
-                  )}`}
-                >
-                  Workers
+                  Assets
                 </Link>
               </>
             ) : (
@@ -93,7 +93,7 @@ const Navbar = () => {
             {user ? (
               <button
                 onClick={logout}
-                className="mx-3 my-auto p-1 rounded hover:bg-white hover:text-blue-500 transition-all duration-300 focus:underline"
+                className="mx-3 my-auto p-1 rounded hover:bg-white hover:text-blue-500 transition-all duration-300"
               >
                 Logout
               </button>

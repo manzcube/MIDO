@@ -31,7 +31,7 @@ export const setWorker = async (req, res) => {
         res.status(200).json(`Worker ${data.name} created`);
       })
       .catch((err) => {
-        throw new Error(err.message);
+        res.status(500).json(err.message);
       });
   } catch (err) {
     res.status(500).json(err.message);

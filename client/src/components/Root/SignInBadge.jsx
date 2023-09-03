@@ -1,13 +1,13 @@
-import React from 'react'
-import './RootComponents.css'
+import React from "react";
+import "./RootComponents.css";
+import { Jelly } from "@uiball/loaders";
 
 const SignInBadge = () => {
   return (
-    <div className='w-full mt-80 flex flex-col items-center justify-center'>
-      <div className="Loader mt-4"></div>
-      
+    <div className="absolute top-50 h-screen">
+      <Jelly size={40} color="#0369A1" />
     </div>
-  )
-}
+  );
+};
 
-export default SignInBadge
+export default SignInBadge;

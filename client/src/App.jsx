@@ -16,6 +16,7 @@ import EditWorker from "./views/EditWorker";
 import Activities from "./views/Activities";
 import EditActivity from "./views/EditActivity";
 import Dashboard from "./views/Dashboard";
+import Assets from "./views/Assets";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Routes>
           <Route path="/*" element={<Dashboard />} />
           <Route exact path="/login" element={<Login />} />
+          <Route path="/assets" element={<Assets />} />
           <Route path="/activities" element={<Activities />} />
           <Route path="/activities/edit/:id" element={<EditActivity />} />
           <Route path="/workers" element={<Workers />} />

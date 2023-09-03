@@ -87,13 +87,9 @@ const Today = () => {
       </>
     );
   } else if (dayError || workersError || bookingsError || activitiesError) {
-    if (workersError) return toast.error(workersErr.data?.message);
-    else if (activitiesError) return toast.error(activitiesErr.data?.message);
-    else if (dayError) return toast.error(dayErr.data?.message);
-    else if (bookingsError) return toast.error(bookingsErr.data?.message);
     content = (
       <p className="mt-96 w-full text-gray-700 z-20 absolute text-center">
-        No Data
+        You're not Authorized
       </p>
     );
   }

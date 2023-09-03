@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;700;800&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,7 +6,7 @@
 
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -16,7 +16,7 @@ body::-webkit-scrollbar {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -25,7 +25,7 @@ code {
   border: none;
   color: #ac2727 !important;
   border-radius: 5px !important;
-  background: #FAE1E2 !important;
+  background: #fae1e2 !important;
 }
 
 .Toastify__toast--success {
@@ -72,4 +72,60 @@ code {
 .notesCanvas::-webkit-scrollbar {
   width: 4px;
   border-radius: 10px;
+}
+
+/* Inputs */
+
+.input-pack {
+  display: flex;
+  flex-direction: column;
+  margin: 3ch auto;
+  text-align: start;
+}
+
+.input-label {
+  font-size: small;
+  text-transform: capitalize;
+  margin: 1ch 0;
+  color: #717171;
+}
+
+.input {
+  padding: 2ch;
+  width: 45ch;
+  border: none;
+  color: #626262;
+  border-bottom: 2px solid rgb(22, 146, 255);
+  background-color: #ececec;
+  border-radius: 3px;
+  outline: none;
+  font-size: small;
+}
+
+.input:focus {
+  outline: none;
+}
+
+/* Button */
+
+.button {
+  text-decoration: none;
+  border: 1px solid #2e2e2e;
+  padding: 1ch;
+  background: white;
+  transition: all 0.3s ease-in-out;
+  color: #2e2e2e;
+  text-transform: uppercase;
+  display: flex;
+  margin: 0 auto;
+}
+
+.button:hover {
+  background: #2e2e2e;
+  color: white;
+  transition: all 0.3s ease-in-out;
+}
+
+.assetColumn::-webkit-scrollbar {
+  width: 0;
 }
