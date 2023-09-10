@@ -88,10 +88,10 @@ export const health = async (req, res) => {
 };
 
 export const saveBooking = async (req, res) => {
-  await Logs.create({
-    message: "Webhook in action",
-  });
   try {
+    await Logs.create({
+      message: "Webhook in action",
+    });
     if (!req.body.booking) {
       await Logs.create({
         message: "There is NO booking object inside req.body",
