@@ -33,39 +33,41 @@ const EditWorker = () => {
     isError,
     isLoading,
     error,
+    refetch,
   } = useGetOneWorkerQuery(workerId);
   const [updateWorker, { isLoading: isUpdateLoading }] =
     useUpdateWorkerMutation();
 
   const [formData, setFormData] = useState({
-    title: "",
+    workerTitle: "",
     name: "",
   });
-  const { title, name } = formData;
+  const { workerTitle, name } = formData;
 
   const handleChange = onChange(setFormData);
-  const canSubmit = [title, name].every(Boolean) && !isUpdateLoading;
+  const canSubmit = [workerTitle, name].every(Boolean) && !isUpdateLoading;
   let content;
 
   // Re-render for data
   useEffect(() => {
-    if (isSuccess) {
+    if (worker) {
       setFormData({
-        title: worker.title,
+        workerTitle: worker.title,
         name: worker.name,
       });
     }
-  }, [isSuccess]);
+  }, [worker]);
 
   // Handle update
   const onSubmit = async (e) => {
     e.preventDefault();
     if (canSubmit) {
       try {
-        const updatedData = { title, name };
+        const updatedData = { workerTitle, name };
         await updateWorker({ updatedData, id: workerId }).unwrap();
-        navigate("/workers");
+        navigate("/assets");
         toast.success("Worker updated");
+        refetch();
       } catch (err) {
         toast.error(err.data);
       }
@@ -81,12 +83,15 @@ const EditWorker = () => {
       <MemoizedWorkerForm
         onChange={handleChange}
         onSubmit={onSubmit}
-        title="Edit Worker"
-        inputProps={{ title, name }}
+        inputProps={{ workerTitle, name }}
       />
     );
   } else if (isError) {
-    content = "Sign in please";
+    content = (
+      <p className="mt-96 w-full text-gray-700 z-20 absolute text-center">
+        {error.data}
+      </p>
+    );
   }
 
   return user ? (

@@ -1,4 +1,5 @@
 import React, { memo, useState } from "react";
+import { Link, Navigate } from "react-router-dom";
 
 // Toast
 import { toast } from "react-toastify";
@@ -13,17 +14,26 @@ import {
   useGetActivitiesQuery,
 } from "../features/activities/activitySlice";
 
+// Utils
+import { onChange } from "../utils/utilities";
+
 // Components
 import WorkersList from "../components/Worker/WorkersList";
 import WorkerForm from "../components/Worker/WorkerForm";
 import ActivitiesList from "../components/Activity/ActivitiesList";
 import ActivityForm from "../components/Activity/ActivityForm";
-import { onChange } from "../utils/utilities";
+import SignInBadge from "../components/Root/SignInBadge";
+import PlusButton from "../components/Root/PlusButton";
 
 const MemoizedActivityForm = memo(ActivityForm);
 const MemoizedWorkerForm = memo(WorkerForm);
 
 const Assets = () => {
+  // State
+  const [create, setCreate] = useState({
+    addEmployee: false,
+    addService: false,
+  });
   const [actvityData, setActivityData] = useState({
     title: "",
     color: "",
@@ -32,14 +42,13 @@ const Assets = () => {
     workerTitle: "",
     name: "",
   });
-
   const { color, title } = actvityData;
   const { name, workerTitle } = workerData;
 
-  const handleActChange = onChange(setActivityData);
-  const handleWorkerChange = onChange(setWorkerData);
-
-  let content;
+  // APIs
+  const [createActivity, { isCreateActivityLoading }] =
+    useCreateActivityMutation();
+  const [createWorker, { isCreateWorkerLoading }] = useCreateWorkerMutation();
   const {
     data: workers,
     isLoading: isWorkersLoading,
@@ -47,7 +56,6 @@ const Assets = () => {
     isError: isWorkersError,
     error: workersError,
   } = useGetWorkersQuery();
-  const [createWorker, { isCreateWorkerLoading }] = useCreateWorkerMutation();
   const {
     data: activities,
     isLoading: isActivitiesLoading,
@@ -56,15 +64,20 @@ const Assets = () => {
     error: activitiesError,
   } = useGetActivitiesQuery();
 
-  const [createActivity, { isCreateActivityLoading }] =
-    useCreateActivityMutation();
-
+  // Variables
+  const user = localStorage.getItem("user");
+  let content;
   const canWorkerSubmit =
     [workerTitle, name].every(Boolean) && !isCreateWorkerLoading;
   const canActivtySubmit =
     [title, color].every(Boolean) && !isCreateActivityLoading;
 
-  const onActivitySubmit = async (e) => {
+  // Func
+  const handleActChange = onChange(setActivityData);
+  const handleWorkerChange = onChange(setWorkerData);
+
+  // Handle Service creation
+  const onServiceSubmit = async (e) => {
     e.preventDefault();
     if (canActivtySubmit) {
       try {
@@ -73,17 +86,18 @@ const Assets = () => {
           title: "",
           color: "bg-sky-200",
         });
+        setCreate({ addService: false });
         toast.success(`Activity  created`);
       } catch (err) {
         toast.error(err.message);
       }
     } else {
-      toast.error("Check inputs");
+      return toast.error("Check inputs");
     }
   };
 
-  // Handle worker creation
-  const onWorkerSubmit = async (e) => {
+  // Handle employee creation
+  const onEmployeeSubmit = async (e) => {
     e.preventDefault();
     if (canWorkerSubmit) {
       try {
@@ -92,46 +106,87 @@ const Assets = () => {
           workerTitle: "",
           name: "",
         });
+        setCreate({ addEmployee: false });
         toast.success(`Worker created`);
       } catch (err) {
         toast.error(err.data);
       }
     } else {
       toast.error("Check inputs");
-      console.log(canWorkerSubmit, workerTitle, name, isCreateWorkerLoading);
     }
   };
 
+  // Response cases
   if (isActivitiesSuccess && isWorkersSuccess) {
+    // If everythings fetched correctly
     content = (
       <div className="flex w-full pt-20">
         <div className="h-screen overflow-y-scroll w-1/2 assetColumn">
-          Services
-          <MemoizedActivityForm
-            onChange={handleActChange}
-            onSubmit={onActivitySubmit}
-            inputProps={{ title, color }}
-          />
+          <div className="m-2 p-2 bg-gray-100 text-gray-600 font-bold rounded">
+            <p className="flex justify-between">
+              Services
+              <PlusButton
+                onClick={(prev) =>
+                  setCreate({ ...prev, addService: !create.addService })
+                }
+              />
+            </p>
+            {create.addService ? (
+              <MemoizedActivityForm
+                onChange={handleActChange}
+                onSubmit={onServiceSubmit}
+                inputProps={{ title, color }}
+              />
+            ) : (
+              ""
+            )}
+          </div>
           <ActivitiesList activities={activities} />
         </div>
         <div className="h-screen overflow-y-scroll w-1/2 assetColumn">
-          Employees
-          <MemoizedWorkerForm
-            onChange={handleWorkerChange}
-            onSubmit={onWorkerSubmit}
-            inputProps={{ workerTitle, name }}
-          />
+          <div className="m-2 p-2 bg-gray-100 text-gray-600 font-bold rounded">
+            <p className="flex justify-between">
+              Employees
+              <PlusButton
+                onClick={(prev) =>
+                  setCreate({ ...prev, addEmployee: !create.addEmployee })
+                }
+              />
+            </p>
+            {create.addEmployee ? (
+              <MemoizedWorkerForm
+                onChange={handleWorkerChange}
+                onSubmit={onEmployeeSubmit}
+                inputProps={{ workerTitle, name }}
+              />
+            ) : (
+              ""
+            )}
+          </div>
           <WorkersList workers={workers} />
         </div>
       </div>
     );
   } else if (isWorkersLoading || isActivitiesLoading) {
-    content = "Loading";
+    // While loading
+    content = <SignInBadge />;
   } else {
-    content = "error";
+    // When error
+    content = (
+      <p className="mt-96 w-full text-gray-700 z-20 absolute text-center">
+        {isActivitiesError
+          ? activitiesError.data
+          : isWorkersError
+          ? workersError.data
+          : "Unkown Error"}
+        <p className="text-center">
+          <Link to="/login">Go to Login Page</Link>
+        </p>
+      </p>
+    );
   }
 
-  return content;
+  return user ? content : <Navigate to="/" />;
 };
 
 export default Assets;

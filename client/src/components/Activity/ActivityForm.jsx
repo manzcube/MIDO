@@ -1,12 +1,14 @@
 import React from "react";
 
 // Components
-import Input from "../Root/Input";
 import Button from "../Root/Button";
 
 const ActivityForm = ({ onChange, onSubmit, inputProps }) => {
   return (
-    <form className="flex flex-col border shadow-xl rounded py-5 px-8 max-w-sm">
+    <form className="flex flex-col gap-2 py-2 max-w-sm">
+      <label htmlFor="color" className="text-xs text-gray-700">
+        Title
+      </label>
       <input
         type="text"
         value={inputProps.title}
@@ -19,7 +21,7 @@ const ActivityForm = ({ onChange, onSubmit, inputProps }) => {
         Color
       </label>
       <select
-        className="p-1 px-3 mb-3 bg-gray-50 text-sm text-gray-700 border border-gray-300 rounded-md leading-tight focus:bg-gray-100 focus:outline-none"
+        className="p-1 outline-none border rounded text-xs"
         placeholder="Color"
         name="color"
         id="color"

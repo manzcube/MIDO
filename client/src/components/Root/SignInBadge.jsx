@@ -4,8 +4,8 @@ import { Jelly } from "@uiball/loaders";
 
 const SignInBadge = () => {
   return (
-    <div className="absolute top-50 h-screen">
-      <Jelly size={40} color="#0369A1" />
+    <div className="h-screen w-full flex items-center justify-center">
+      <Jelly size={50} color="#0369A1" />
     </div>
   );
 };

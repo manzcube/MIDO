@@ -11,9 +11,7 @@ import Navbar from "./components/Root/Navbar";
 // Views
 import Login from "./views/Login";
 import Today from "./views/Today";
-import Workers from "./views/Workers";
 import EditWorker from "./views/EditWorker";
-import Activities from "./views/Activities";
 import EditActivity from "./views/EditActivity";
 import Dashboard from "./views/Dashboard";
 import Assets from "./views/Assets";
@@ -39,9 +37,7 @@ function App() {
           <Route path="/*" element={<Dashboard />} />
           <Route exact path="/login" element={<Login />} />
           <Route path="/assets" element={<Assets />} />
-          <Route path="/activities" element={<Activities />} />
           <Route path="/activities/edit/:id" element={<EditActivity />} />
-          <Route path="/workers" element={<Workers />} />
           <Route path="/workers/edit/:id" element={<EditWorker />} />
           <Route path="/today" element={<Today />} />
         </Routes>

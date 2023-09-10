@@ -47,6 +47,7 @@ const Today = () => {
     data: day,
     isLoading: dayLoading,
     isSuccess: dayLoaded,
+    isFetching,
     isError: dayError,
     error: dayErr,
   } = useGetTodayQuery(currentDate);
@@ -89,7 +90,13 @@ const Today = () => {
   } else if (dayError || workersError || bookingsError || activitiesError) {
     content = (
       <p className="mt-96 w-full text-gray-700 z-20 absolute text-center">
-        You're not Authorized
+        {dayError
+          ? dayErr.data
+          : workersError
+          ? workersErr.data
+          : activitiesError
+          ? activitiesErr.data
+          : bookingsErr.data}
       </p>
     );
   }
@@ -125,7 +132,15 @@ const Today = () => {
     }
   }
 
-  return localStorage.getItem("user") ? content : <Navigate to="/" />;
+  return localStorage.getItem("user") ? (
+    isFetching ? (
+      <SignInBadge />
+    ) : (
+      content
+    )
+  ) : (
+    <Navigate to="/" />
+  );
 };
 
 export default Today;
