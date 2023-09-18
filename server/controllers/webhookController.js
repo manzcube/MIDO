@@ -95,7 +95,6 @@ export const saveBooking = async (req, res) => {
       });
       throw new Error("there is no booking");
     }
-    console.log("The body has a booking");
     // If there is a booking object in req.body, grab data
     const {
       uuid,
@@ -136,30 +135,27 @@ export const saveBooking = async (req, res) => {
       dashboard_url,
       values,
     };
-    console.log("Object NEW Data", newData);
 
-    // Check if it's the first booking
-    const some_booking = await Bookings.find({ date });
+    // Check if it's the first booking of that day
+    const some_booking = await Bookings.findOne({ date });
 
-    // If there is some booking
+    // If there is some booking in the selected day
     if (some_booking) {
-      console.log("There is some booking", some_booking);
       const newBooking = await Bookings.findByIdAndUpdate(
         some_booking._id,
         { $push: { bookings_list: newData } },
         { new: true }
       );
 
-      console.log("updated", newBooking); // WHEN ARRVING HERE IT STOPS AND PENDING
-      // If there is no booking today yet
-      res.status(200).json("updated", newBooking);
+      // Return successful message
+      res.status(200).json("The booking has been saved correctly");
     } else {
+      // If there is no bookings yet in the selected day
       const newBooking = await Bookings.create({
         date,
         bookings_list: [newData],
       });
-      console.log("created", newBooking);
-      res.status(200).json("created", newBooking);
+      res.status(200).json("The booking has been saved correctly");
     }
   } catch (err) {
     res

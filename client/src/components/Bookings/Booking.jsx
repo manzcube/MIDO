@@ -7,7 +7,7 @@ const Booking = ({ book }) => {
     <div>
       <div className={`m-3 rounded border-black border p-2 text-xs`}>
         <p className="w-full flex justify-between gap-2">
-          <span>{book.activityName}</span>
+          <span>{book.activity}</span>
           <span>Start At {book.start_at}</span>
           <span>
             {book.number_of_people} {values[0][1]}

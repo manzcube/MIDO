@@ -9,7 +9,7 @@ const bookingsSchema = Schema(
     bookings_list: [
       {
         number_of_people: Number,
-        activityName: String,
+        activity: String,
         start_at: String,
         bookingURL: String,
         values: Array,
