@@ -11,7 +11,7 @@ const bookingsSchema = Schema(
         number_of_people: Number,
         activity: String,
         start_at: String,
-        bookingURL: String,
+        dashboard_url: String,
         values: Array,
       },
     ],

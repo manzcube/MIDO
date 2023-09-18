@@ -19,6 +19,7 @@ const Booking = ({ book }) => {
             <span>{each[1]}</span>
           </p>
         ))}
+        <p>{book.dashboard_url}</p>
       </div>
     </div>
   );
