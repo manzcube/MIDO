@@ -24,7 +24,7 @@ const Entry = ({ activity, dayId, bookings }) => {
   const [commentsData, setCommentsData] = useState(activity.comments);
   const [updateDay, { isLoading: isUpdateLoading }] = useUpdateDayMutation();
   const filteredBookings = bookings?.filter(
-    (book) => book.activityName === activity.title.toUpperCase()
+    (book) => book.activity.split(" ")[0] === activity.title.toUpperCase()
   );
   const textColor = getTextColor(activity.color);
   const onChange = (e) => {
