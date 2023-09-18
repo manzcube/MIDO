@@ -112,7 +112,9 @@ export const saveBooking = async (req, res) => {
     });
 
     // Date
+    const timezoneOffset = 2 * 60 * 60 * 1000; // 2 hours in milliseconds
     const getDateInFormat = new Date(availability.start_at);
+    getDateInFormat.setTime(getDateInFormat.getTime() + timezoneOffset); // Adjust by 2 hours
     const date = getDateInFormat.toISOString().split("T")[0];
     const start_at = getDateInFormat.getHours();
 
