@@ -88,9 +88,6 @@ export const health = async (req, res) => {
 };
 
 export const saveBooking = async (req, res) => {
-  Logs.create({
-    message: "Webhook arrived",
-  });
   try {
     if (!req.body.booking) {
       await Logs.create({
