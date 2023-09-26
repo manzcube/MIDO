@@ -16,6 +16,8 @@ export const registerUser = async (req, res) => {
       .validate()
       .then(async () => {
         const { name, email, password, confirm_password } = req.body;
+
+        name = `${name}`;
         // Check fields
         if (password !== confirm_password)
           throw new Error(`Passwords don't match`);
@@ -54,6 +56,9 @@ export const loginUser = async (req, res) => {
     const { email, password } = req.body;
     if (!email) throw new Error("Add an email");
     if (!password) throw new Error("Add a password");
+
+    email = `${email}`;
+    password = `${password}`;
 
     // Check if the user exists
     const user = await User.findOne({ email });
