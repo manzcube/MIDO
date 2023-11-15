@@ -63,7 +63,7 @@ const EditWorker = () => {
     e.preventDefault();
     if (canSubmit) {
       try {
-        const updatedData = { workerTitle, name };
+        const updatedData = { title: workerTitle, name };
         await updateWorker({ updatedData, id: workerId }).unwrap();
         navigate("/assets");
         toast.success("Worker updated");

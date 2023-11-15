@@ -87,17 +87,17 @@ code {
   font-size: small;
   text-transform: capitalize;
   margin: 1ch 0;
-  color: #717171;
+  color: #e4e4e4;
 }
 
 .input {
   padding: 2ch;
   width: 45ch;
   border: none;
-  color: #626262;
+  color: #b2b2b2;
   border-bottom: 2px solid rgb(22, 146, 255);
   background-color: #ececec;
-  border-radius: 3px;
+  border-radius: 6px;
   outline: none;
   font-size: small;
 }

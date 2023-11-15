@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 
 // Endpoint
 import { useDeleteWorkerMutation } from "../../features/workers/workerSlice";
+import { Ring } from "@uiball/loaders";
 
 const SingleWorker = ({ worker }) => {
   // State
@@ -35,10 +36,10 @@ const SingleWorker = ({ worker }) => {
 
   return (
     <div className="p-3 rounded-xl m-5 flex flex-col justify-between h-32 w-32 shadow-md bg-gray-800">
-      <p className="overflow-x-hidden uppercase text-xl font-bold text-gray-100">
+      <p className="overflow-x-hidden uppercase text-sm font-bold text-gray-100">
         {worker.name}
       </p>
-      <p className="uppercase text-xs text-gray-100">{worker.title}</p>
+      <p className="uppercase text-xs text-gray-400">{worker.title}</p>
       <div className="flex justify-between">
         {!sureToDelete ? (
           <div className="flex justify-end w-full">
@@ -84,7 +85,11 @@ const SingleWorker = ({ worker }) => {
               className="py-1 px-2 rounded-md bg-red-500 text-white text-xs"
               onBlur={() => setSureToDelete(false)}
             >
-              Sure?
+              {isLoading ? (
+                <Ring color="white" size={17} speed={1.5} />
+              ) : (
+                "Sure?"
+              )}
             </button>
             <button
               className="py-1 px-2 ml-1 rounded-md bg-gray-500 text-white text-xs"

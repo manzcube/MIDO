@@ -36,7 +36,7 @@ const Assets = () => {
   });
   const [actvityData, setActivityData] = useState({
     title: "",
-    color: "",
+    color: "bg-sky-200",
   });
   const [workerData, setWorkerData] = useState({
     workerTitle: "",
@@ -122,7 +122,7 @@ const Assets = () => {
     content = (
       <div className="flex w-full pt-20">
         <div className="h-screen overflow-y-scroll w-1/2 assetColumn">
-          <div className="m-2 p-2 bg-gray-100 text-gray-600 font-bold rounded">
+          <div className="m-2 p-2 bg-sky-900 text-gray-100 font-bold rounded">
             <p className="flex justify-between">
               Services
               <PlusButton
@@ -144,7 +144,7 @@ const Assets = () => {
           <ActivitiesList activities={activities} />
         </div>
         <div className="h-screen overflow-y-scroll w-1/2 assetColumn">
-          <div className="m-2 p-2 bg-gray-100 text-gray-600 font-bold rounded">
+          <div className="m-2 p-2 bg-sky-900 text-gray-100 font-bold rounded">
             <p className="flex justify-between">
               Employees
               <PlusButton

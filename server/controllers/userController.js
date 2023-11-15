@@ -57,9 +57,6 @@ export const loginUser = async (req, res) => {
     if (!email) throw new Error("Add an email");
     if (!password) throw new Error("Add a password");
 
-    email = `${email}`;
-    password = `${password}`;
-
     // Check if the user exists
     let user = await User.findOne({ email });
     if (!user) throw new Error("The user doesn't exist");

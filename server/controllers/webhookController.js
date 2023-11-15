@@ -76,7 +76,7 @@ export const getBookings = async (req, res) => {
       const data = await Bookings.create({
         date: req.params.id,
       });
-      return res.status(200).json(data);
+      return res.status(200).json([]);
     }
   } catch (err) {
     res.status(400).json(err.message);

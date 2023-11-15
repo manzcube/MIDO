@@ -132,15 +132,7 @@ const Today = () => {
     }
   }
 
-  return localStorage.getItem("user") ? (
-    isFetching ? (
-      <SignInBadge />
-    ) : (
-      content
-    )
-  ) : (
-    <Navigate to="/" />
-  );
+  return localStorage.getItem("user") ? content : <Navigate to="/" />;
 };
 
 export default Today;
