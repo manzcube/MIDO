@@ -4,7 +4,7 @@ import Grill from "./Grill";
 
 const DoubleShiftGrill = ({ drop, oneDay, bookings }) => {
   const filteredBookings = (schedule) =>
-    bookings.bookings_list.filter((book) => book.start_at === schedule);
+    bookings.bookings_list?.filter((book) => book.start_at === schedule);
 
   return (
     <>
