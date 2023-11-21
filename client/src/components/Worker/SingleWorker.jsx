@@ -39,7 +39,7 @@ const SingleWorker = ({ worker }) => {
       <p className="overflow-x-hidden uppercase text-sm font-bold text-gray-100">
         {worker.name}
       </p>
-      <p className="uppercase text-xs text-gray-400">{worker.title}</p>
+      <p className="capitalize text-xs text-gray-400">{worker.title}</p>
       <div className="flex justify-between">
         {!sureToDelete ? (
           <div className="flex justify-end w-full">

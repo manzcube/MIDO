@@ -5,9 +5,12 @@ import React from "react";
 import Booking from "../Bookings/Booking.jsx";
 
 const DayBookingsList = ({ bookings }) => {
-  let content = bookings?.bookings_list.map((book, i) => (
-    <Booking key={i} book={book} />
-  ));
+  let content;
+  if (bookings) {
+    content = bookings.bookings_list?.map((book, i) => (
+      <Booking key={i} book={book} />
+    ));
+  }
 
   return (
     <div className={`p-20 ${content.length ? "flex" : "hidden"} flex-wrap`}>

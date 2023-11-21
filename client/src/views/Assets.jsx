@@ -126,6 +126,7 @@ const Assets = () => {
             <p className="flex justify-between">
               Services
               <PlusButton
+                open={create.addService}
                 onClick={(prev) =>
                   setCreate({ ...prev, addService: !create.addService })
                 }
@@ -148,6 +149,7 @@ const Assets = () => {
             <p className="flex justify-between">
               Employees
               <PlusButton
+                open={create.addEmployee}
                 onClick={(prev) =>
                   setCreate({ ...prev, addEmployee: !create.addEmployee })
                 }
