@@ -12,7 +12,7 @@ const DashboardText = () => {
       <p className="text-xs flex gap-2 text-slate-400 lg:text-sm">
         Drag and Drop employees to services the easiest way!
       </p>
-      <p className="text-xs flex gap-2 text-slate-400 lg:text-sm">
+      <p className="text-xs  flex gap-2 text-slate-400 lg:text-sm">
         FareHarbor's best enhancement tool
       </p>
     </>
