@@ -1,20 +1,26 @@
 input::-webkit-calendar-picker-indicator:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .grabbable {
-    overflow-x: scroll;
+  overflow-x: scroll;
 }
 
 .grabbable::-webkit-scrollbar {
-    height: 5px;
+  height: 5px;
 }
 
 #today-workers-list {
-    overflow-x: scroll;
+  overflow-x: scroll;
 }
 
 #today-workers-list::-webkit-scrollbar {
-    height: 5px;
+  height: 5px;
+}
+.deleteDroppedWorkerButton {
+  display: none;
 }
 
+.droppedWorker:hover .deleteDroppedWorkerButton {
+  display: block;
+}
