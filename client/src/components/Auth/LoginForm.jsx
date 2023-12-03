@@ -1,8 +1,9 @@
 import React from "react";
 import Input from "../Root/Input";
 import SignInBadge from "../Root/SignInBadge";
+import { Ring } from "@uiball/loaders";
 
-const LoginForm = ({ onChange, onSubmit, inputProps }) => {
+const LoginForm = ({ onChange, onSubmit, inputProps, isLoading }) => {
   return inputProps.loading ? (
     <SignInBadge />
   ) : (
@@ -25,7 +26,7 @@ const LoginForm = ({ onChange, onSubmit, inputProps }) => {
         onChange={onChange}
       />
       <button className="p-1 py-3 bg-blue-500 text-white text-xs shadow-md rounded-md mt-3 hover:shadow-xl">
-        Log In
+        {isLoading ? <Ring /> : "Log In"}
       </button>
     </form>
   );

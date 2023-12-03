@@ -44,20 +44,23 @@ const Grill = ({ bookings, oneDay, schedule, drop, group }) => {
             />
           ))
         ) : (
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-6 h-6 text-gray-500 my-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 4.5v15m7.5-7.5h-15"
-            />
-          </svg>
+          <div className="p-3 text-xs text-gray-400 my-6 border border-gray-400 border-dashed rounded border-4">
+            drop
+          </div>
+          // <svg
+          //   xmlns="http://www.w3.org/2000/svg"
+          //   fill="none"
+          //   viewBox="0 0 24 24"
+          //   strokeWidth={1.5}
+          //   stroke="currentColor"
+          //   className="w-6 h-6 text-gray-500 my-6"
+          // >
+          //   <path
+          //     strokeLinecap="round"
+          //     strokeLinejoin="round"
+          //     d="M12 4.5v15m7.5-7.5h-15"
+          //   />
+          // </svg>
         )}
       </div>
     </div>

@@ -11,7 +11,7 @@ const TodaySelector = ({ currentDate, setCurrentDate }) => {
 
   return (
     <div
-      className="bg-gray-50 text-blue-500 w-full flex justify-center items-center gap-10 fixed z-30 top-10 border-b border-black"
+      className="bg-white text-blue-500 w-full flex justify-center items-center gap-10 fixed z-30 top-10 border-b border-gray-400"
       onClick={handleDateClick}
     >
       <input

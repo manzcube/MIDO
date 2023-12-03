@@ -13,7 +13,7 @@ const DayBookingsList = ({ bookings }) => {
   }
 
   return (
-    <div className={`p-20 ${content.length ? "flex" : "hidden"} flex-wrap`}>
+    <div className={`p-20 ${content?.length ? "flex" : "hidden"} flex-wrap`}>
       {content}
     </div>
   );

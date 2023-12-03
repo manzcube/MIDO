@@ -28,7 +28,10 @@ const Login = () => {
       if (canSubmit) {
         await Login(formData)
           .then((result) => {
-            if (result.error) throw new Error(result.error.data);
+            if (result.error) {
+              setLoading(false);
+              throw new Error(result.error.data);
+            }
             if (result.data?.token) {
               localStorage.setItem("token", result.data.token);
               localStorage.setItem("user", `${result.data.email}`);
@@ -45,6 +48,7 @@ const Login = () => {
       }
     } catch (err) {
       toast.error(err.message);
+      return;
     }
   };
 
@@ -71,6 +75,7 @@ const Login = () => {
         <LoginForm
           onSubmit={onSubmit}
           onChange={onChange}
+          isLoading={isLoading}
           setLoading={setLoading}
           inputProps={{ email, password, loading }}
         />

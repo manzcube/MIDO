@@ -17,7 +17,6 @@ export const registerUser = async (req, res) => {
       .then(async () => {
         const { name, email, password, confirm_password } = req.body;
 
-        name = `${name}`;
         // Check fields
         if (password !== confirm_password)
           throw new Error(`Passwords don't match`);

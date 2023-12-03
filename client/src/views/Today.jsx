@@ -78,8 +78,19 @@ const Today = () => {
           setCurrentDate={setCurrentDate}
         />
         <DayWorkersList workers={workers} />
-        <div className="w-full flex pt-28">
-          <div className="p-10 pr-44 bg-gray-100 flex flex-col w-full">
+        {workers?.length ? (
+          ""
+        ) : (
+          <p className="pt-28 bg-gray-50 text-center w-full text-xs text-gray-400">
+            No workers were created yet
+          </p>
+        )}
+        <div className={`w-full flex ${workers?.length ? "pt-28" : ""}`}>
+          <div
+            className={`p-10 ${
+              workers?.length ? "pr-44" : ""
+            } bg-gray-50 flex flex-col w-full`}
+          >
             <DoubleShiftGrill bookings={bookings} oneDay={day} drop={drop} />
           </div>
           <DayActivitiesList activities={activities} />

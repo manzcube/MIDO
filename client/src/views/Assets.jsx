@@ -122,8 +122,8 @@ const Assets = () => {
     content = (
       <div className="flex w-full pt-20">
         <div className="h-screen overflow-y-scroll w-1/2 assetColumn">
-          <div className="m-2 p-2 bg-sky-900 text-gray-100 font-bold rounded">
-            <p className="flex justify-between">
+          <div className="m-2 p-2 bg-sky-900 text-gray-100 text-xs rounded">
+            <p className="flex justify-between items-center">
               Services
               <PlusButton
                 open={create.addService}
@@ -145,8 +145,8 @@ const Assets = () => {
           <ActivitiesList activities={activities} />
         </div>
         <div className="h-screen overflow-y-scroll w-1/2 assetColumn">
-          <div className="m-2 p-2 bg-sky-900 text-gray-100 font-bold rounded">
-            <p className="flex justify-between">
+          <div className="m-2 p-2 bg-sky-900 text-gray-100 text-xs rounded">
+            <p className="flex justify-between items-center">
               Employees
               <PlusButton
                 open={create.addEmployee}
