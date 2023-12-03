@@ -6,7 +6,7 @@ const publicBackend = "https://workflow-backend-z4e5.onrender.com";
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: localBackend,
+    baseUrl: publicBackend,
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("token");
       // If we have a token set in state, let's assume that we should be passing it.
