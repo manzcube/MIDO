@@ -88,7 +88,7 @@ const Today = () => {
         <div className={`w-full flex ${workers?.length ? "pt-28" : ""}`}>
           <div
             className={`p-10 ${
-              workers?.length ? "pr-44" : ""
+              workers?.length ? "pr-56" : ""
             } bg-gray-50 flex flex-col w-full`}
           >
             <DoubleShiftGrill bookings={bookings} oneDay={day} drop={drop} />
