@@ -3,7 +3,7 @@ import React from "react";
 const PlusButton = ({ onClick, open }) => {
   return (
     <button
-      className="rounded text-white bg-sky-900 hover:text-sky-900 hover:bg-white transition-all duration-200"
+      className="rounded p-2 text-white bg-gray-900 hover:text-gray-900 hover:bg-white transition-all duration-200"
       onClick={onClick}
     >
       {open ? (

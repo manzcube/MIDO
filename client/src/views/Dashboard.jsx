@@ -21,6 +21,9 @@ const Dashboard = () => {
       />
       <DashboardText />
       <GetStartedButton />
+      <p className="text-sm flex gap-2 text-slate-400 lg:text-xl">
+        Contact Me to get some credentials and test the app!
+      </p>
     </div>
   );
 };

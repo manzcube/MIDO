@@ -122,49 +122,46 @@ const Assets = () => {
     content = (
       <div className="flex w-full pt-20">
         <div className="h-screen overflow-y-scroll w-1/2 assetColumn">
-          <div className="m-2 p-2 bg-sky-900 text-gray-100 text-xs rounded">
-            <p className="flex justify-between items-center">
-              Services
-              <PlusButton
-                open={create.addService}
-                onClick={(prev) =>
-                  setCreate({ ...prev, addService: !create.addService })
-                }
-              />
-            </p>
-            {create.addService ? (
-              <MemoizedActivityForm
-                onChange={handleActChange}
-                onSubmit={onServiceSubmit}
-                inputProps={{ title, color }}
-              />
-            ) : (
-              ""
-            )}
-          </div>
+          <p className="ml-10 flex gap-2 items-center">
+            Services
+            <PlusButton
+              open={create.addService}
+              onClick={(prev) =>
+                setCreate({ ...prev, addService: !create.addService })
+              }
+            />
+          </p>
+          {create.addService ? (
+            <MemoizedActivityForm
+              onChange={handleActChange}
+              onSubmit={onServiceSubmit}
+              inputProps={{ title, color }}
+            />
+          ) : (
+            ""
+          )}
           <ActivitiesList activities={activities} />
         </div>
         <div className="h-screen overflow-y-scroll w-1/2 assetColumn">
-          <div className="m-2 p-2 bg-sky-900 text-gray-100 text-xs rounded">
-            <p className="flex justify-between items-center">
-              Employees
-              <PlusButton
-                open={create.addEmployee}
-                onClick={(prev) =>
-                  setCreate({ ...prev, addEmployee: !create.addEmployee })
-                }
-              />
-            </p>
-            {create.addEmployee ? (
-              <MemoizedWorkerForm
-                onChange={handleWorkerChange}
-                onSubmit={onEmployeeSubmit}
-                inputProps={{ workerTitle, name }}
-              />
-            ) : (
-              ""
-            )}
-          </div>
+          <p className="ml-10 flex items-center gap-2 items-center">
+            Employees
+            <PlusButton
+              open={create.addEmployee}
+              onClick={(prev) =>
+                setCreate({ ...prev, addEmployee: !create.addEmployee })
+              }
+            />
+          </p>
+
+          {create.addEmployee ? (
+            <MemoizedWorkerForm
+              onChange={handleWorkerChange}
+              onSubmit={onEmployeeSubmit}
+              inputProps={{ workerTitle, name }}
+            />
+          ) : (
+            ""
+          )}
           <WorkersList workers={workers} />
         </div>
       </div>
